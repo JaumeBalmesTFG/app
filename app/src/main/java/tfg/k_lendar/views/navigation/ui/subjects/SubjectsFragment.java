@@ -1,4 +1,4 @@
-package tfg.k_lendar.views.navigation.ui.home;
+package tfg.k_lendar.views.navigation.ui.subjects;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import tfg.k_lendar.views.navigation.R;
-import tfg.k_lendar.views.navigation.databinding.FragmentHomeBinding;
+import tfg.k_lendar.databinding.SubjectsFragmentBinding;
 
-public class HomeFragment extends Fragment {
+public class SubjectsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private SubjectsViewModel subjectsViewModel;
+    private SubjectsFragmentBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        subjectsViewModel =
+                new ViewModelProvider(this).get(SubjectsViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = SubjectsFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textSubjects;
+        subjectsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

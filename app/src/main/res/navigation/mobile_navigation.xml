@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="tfg.k_lendar.views.navigation.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="tfg.k_lendar.views.navigation.ui.subjects.SubjectsFragment"
+        android:label="SUBJECTS"
+        tools:layout="@layout/subjects_fragment" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="tfg.k_lendar.views.navigation.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="tfg.k_lendar.views.navigation.ui.calendar.CalendarFragment"
+        android:label="CALENDAR"
+        tools:layout="@layout/calendar_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="tfg.k_lendar.views.navigation.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="tfg.k_lendar.views.navigation.ui.marks.MarksFragment"
+        android:label="NOTIFICATIONS"
+        tools:layout="@layout/marks_fragment" />
 </navigation>

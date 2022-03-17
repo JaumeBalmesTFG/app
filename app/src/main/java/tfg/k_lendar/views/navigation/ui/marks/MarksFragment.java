@@ -1,4 +1,4 @@
-package tfg.k_lendar.views.navigation.ui.dashboard;
+package tfg.k_lendar.views.navigation.ui.marks;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,25 +11,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import tfg.k_lendar.databinding.MarksFragmentBinding;
 
-import tfg.k_lendar.views.navigation.R;
-import tfg.k_lendar.views.navigation.databinding.FragmentDashboardBinding;
+public class MarksFragment extends Fragment {
 
-public class DashboardFragment extends Fragment {
-
-    private DashboardViewModel dashboardViewModel;
-    private FragmentDashboardBinding binding;
+    private MarksViewModel marksViewModel;
+    private MarksFragmentBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        marksViewModel =
+                new ViewModelProvider(this).get(MarksViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = MarksFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textMarks;
+        marksViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
