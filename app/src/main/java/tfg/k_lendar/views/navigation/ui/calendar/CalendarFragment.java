@@ -12,12 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+
 import tfg.k_lendar.databinding.CalendarFragmentBinding;
 
 public class CalendarFragment extends Fragment {
 
     private CalendarViewModel calendarViewModel;
     private CalendarFragmentBinding binding;
+    private MaterialDatePicker datePicker;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -27,13 +30,19 @@ public class CalendarFragment extends Fragment {
         binding = CalendarFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textCalendar;
+        //final TextView textView = binding.textCalendar;
+         /*datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                        .setTitleText("Select date")
+                        .build();
+
+         datePicker.show(getActivity().getSupportFragmentManager(), "tag");
         calendarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        }); */
         return root;
     }
 
