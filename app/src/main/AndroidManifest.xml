@@ -10,31 +10,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Klendar">
         <activity
+            android:name=".views.truancy.EditTruancyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.task.EditTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.shared.TaskTruancyActivity"
             android:exported="true"
             android:label="@string/title_activity_task_truancy"
             android:theme="@style/Theme.Klendar.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".views.navigation.NavigationActivity"
             android:exported="true"
-            android:label="@string/title_activity_navigation">
-        </activity>
+            android:label="@string/title_activity_navigation" />
         <activity
             android:name=".views.auth.AuthActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
