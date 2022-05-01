@@ -9,12 +9,10 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
-import tfg.k_lendar.views.shared.ui.main.SectionsPagerAdapter;
 import tfg.k_lendar.databinding.ActivityTaskTruancyBinding;
+import tfg.k_lendar.views.shared.ui.main.SectionsPagerAdapter;
 
 public class TaskTruancyActivity extends AppCompatActivity {
 

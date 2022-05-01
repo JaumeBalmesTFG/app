@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_calendar">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_subjects"
         android:name="tfg.k_lendar.views.navigation.ui.subjects.SubjectsFragment"
         android:label="SUBJECTS"
         tools:layout="@layout/subjects_fragment" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_calendar"
         android:name="tfg.k_lendar.views.navigation.ui.calendar.CalendarFragment"
         android:label="CALENDAR"
         tools:layout="@layout/calendar_fragment" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_marks"
         android:name="tfg.k_lendar.views.navigation.ui.marks.MarksFragment"
         android:label="NOTIFICATIONS"
         tools:layout="@layout/marks_fragment" />
