@@ -24,6 +24,7 @@ public class AuthActivity extends AppCompatActivity {
     TextInputEditText firstNameInput;
     TextInputEditText lastNameInput;
     TextInputEditText newPasswordInput;
+    TextView actionTextLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,79 +33,62 @@ public class AuthActivity extends AppCompatActivity {
 
         authButton = findViewById(R.id.nextButton);
         emailInput = findViewById(R.id.emailInput);
-        TextView emailNotValid = findViewById(R.id.emailNotValid);
 
         authButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!validateEmail(String.valueOf(emailInput.getText()))){
-                    emailInput.setError("Email no válido");
+                    emailInput.setError("Email empty or not valid");
                     return;
                 }
                 showRegisterForm();
+                //Send to auth function
                 Log.d("email", String.valueOf(emailInput.getText()));
 
-                //emailInput.setFocusable(false);
-                //emailInput.setEnabled(false);
-                //emailInput.setInputType(InputType.TYPE_NULL);
 
-
-            /*switch ("login"){
+            /*switch ("LOGIN"){
                 case "login":
                     showLoginForm();
                     break;
-                case "register":
+                case "REGISTER":
                     showRegisterForm();
                     break;
             }*/
-            }
-
-            private void testFunction() {
-                Log.d("BUTTON", "ESTA SI FUNCIONA");
             }
         });
     }
 
 
     private void showLoginForm() {
-        Log.d("ENTRO AL LOGIN","ENTRO AL LOGIN");
-        TextView loginLabel = findViewById(R.id.loginSignInText);
+        TextView actionTextLabel = findViewById(R.id.loginSignInText);
         LinearLayoutCompat passwordLayout = findViewById(R.id.passwordContainer);
         TextInputEditText passwordInput = findViewById(R.id.passwordInput);
 
-        loginLabel.setVisibility(View.VISIBLE);
-        loginLabel.setText("Login");
+        actionTextLabel.setVisibility(View.VISIBLE);
+        actionTextLabel.setText("Login");
 
         passwordLayout.setVisibility(View.VISIBLE);
 
         authButton.setOnClickListener(view ->
+                //Send email and password to function
                 Log.d("password", String.valueOf(passwordInput.getText())));
     }
 
     private void showRegisterForm() {
-        Log.d("ENTRO AL REGISTER","ENTRO AL REGISTER");
-
-
-
         LinearLayoutCompat registerLayout = findViewById(R.id.signInContainer);
-        TextView registerLabel = findViewById(R.id.loginSignInText);
+        actionTextLabel = findViewById(R.id.loginSignInText);
         TextInputEditText firstNameInput = findViewById(R.id.firstNameInput);
         TextInputEditText lastNameInput = findViewById(R.id.lastNameInput);
         TextInputEditText newPasswordInput = findViewById(R.id.newPasswordInput);
 
-
-
         registerLayout.setVisibility(View.VISIBLE);
-        registerLabel.setVisibility(View.VISIBLE);
-        registerLabel.setText("Sign in");
-
-
+        actionTextLabel.setVisibility(View.VISIBLE);
+        actionTextLabel.setText("Sign in");
 
         authButton.setOnClickListener(view ->
                 Log.d("firstName", String.valueOf(firstNameInput.getText())));
                 Log.d("lastName",String.valueOf(lastNameInput.getText()));
                 Log.d("newPassword",String.valueOf(newPasswordInput.getText()));
-
     }
 
 
