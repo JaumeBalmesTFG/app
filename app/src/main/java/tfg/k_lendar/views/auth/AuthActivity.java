@@ -25,6 +25,7 @@ public class AuthActivity extends AppCompatActivity {
     TextInputEditText lastNameInput;
     TextInputEditText newPasswordInput;
     TextView actionTextLabel;
+    TextInputEditText passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class AuthActivity extends AppCompatActivity {
                     emailInput.setError("Email empty or not valid");
                     return;
                 }
-                showRegisterForm();
+                showLoginForm();
                 //Send to auth function
                 Log.d("email", String.valueOf(emailInput.getText()));
 
@@ -60,9 +61,9 @@ public class AuthActivity extends AppCompatActivity {
 
 
     private void showLoginForm() {
-        TextView actionTextLabel = findViewById(R.id.loginSignInText);
+        actionTextLabel = findViewById(R.id.loginSignInText);
         LinearLayoutCompat passwordLayout = findViewById(R.id.passwordContainer);
-        TextInputEditText passwordInput = findViewById(R.id.passwordInput);
+        passwordInput = findViewById(R.id.passwordInput);
 
         actionTextLabel.setVisibility(View.VISIBLE);
         actionTextLabel.setText("Login");
@@ -71,22 +72,25 @@ public class AuthActivity extends AppCompatActivity {
 
         authButton.setOnClickListener(view ->
                 //Send email and password to function
-                Log.d("password", String.valueOf(passwordInput.getText())));
+                validateForm("LOGIN", passwordInput));
+                Log.d("password", String.valueOf(passwordInput.getText()));
     }
 
     private void showRegisterForm() {
         LinearLayoutCompat registerLayout = findViewById(R.id.signInContainer);
         actionTextLabel = findViewById(R.id.loginSignInText);
-        TextInputEditText firstNameInput = findViewById(R.id.firstNameInput);
-        TextInputEditText lastNameInput = findViewById(R.id.lastNameInput);
-        TextInputEditText newPasswordInput = findViewById(R.id.newPasswordInput);
+        firstNameInput = findViewById(R.id.firstNameInput);
+        lastNameInput = findViewById(R.id.lastNameInput);
+        newPasswordInput = findViewById(R.id.newPasswordInput);
 
         registerLayout.setVisibility(View.VISIBLE);
         actionTextLabel.setVisibility(View.VISIBLE);
         actionTextLabel.setText("Sign in");
 
         authButton.setOnClickListener(view ->
-                Log.d("firstName", String.valueOf(firstNameInput.getText())));
+
+                validateForm("REGISTER", newPasswordInput));
+                Log.d("firstName", String.valueOf(firstNameInput.getText()));
                 Log.d("lastName",String.valueOf(lastNameInput.getText()));
                 Log.d("newPassword",String.valueOf(newPasswordInput.getText()));
     }
@@ -96,27 +100,31 @@ public class AuthActivity extends AppCompatActivity {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
-    private boolean validateForm(String action){
+    private boolean validateForm(String action, TextInputEditText password){
+        boolean isCorrect = true;
         if (!validateEmail(String.valueOf(emailInput.getText()))){
             emailInput.setError("Email not valid");
-            return false;
+            isCorrect = false;
         }
-        if (!validatePassword(String.valueOf(newPasswordInput.getText()))){
-            newPasswordInput.setError("Password not valid");
-            return false;
+        if (!validatePassword(String.valueOf(password.getText()))){
+            password.setError("Password must have lowercase, uppercase and a number");
+            isCorrect = false;
         }
-        if (!validateInput(String.valueOf(firstNameInput.getText()))){
+        if (!action.equals("REGISTER")) {
+            return isCorrect;
+        }
+        if (TextUtils.isEmpty(firstNameInput.getText())){
             firstNameInput.setError("First name not valid");
-            return false;
+            isCorrect = false;
         }
-        if (!validateInput(String.valueOf(lastNameInput.getText()))){
+        if (TextUtils.isEmpty(lastNameInput.getText())){
             lastNameInput.setError("Last name not valid");
-            return false;
+            isCorrect = false;
         }
-        return true;
+        return isCorrect;
     }
     private boolean validatePassword(String password) {
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        Pattern pattern = Pattern.compile("/(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*?]{6,30}/");
         return pattern.matcher(password).matches();
     }
     private boolean validateInput(String input) {
