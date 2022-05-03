@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
+
     tools:context=".views.auth.AuthActivity">
 
     <LinearLayout
@@ -26,6 +27,7 @@
     <!-- Esto cambia dependiendo del estado del auth, para ello,
     aplicaremos 2 string resources @string -->
     <TextView
+        android:visibility="gone"
         android:id="@+id/loginSignInText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,19 +43,29 @@
         android:layout_height="wrap_content"
         android:text="Email"
         android:textSize="18sp"
-    />
+        />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email"
+        android:id="@+id/emailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-        />
+            />
+        <TextView
+            android:id="@+id/emailNotValid"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email not valid">
+        </TextView>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,15 +88,16 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password"
+            android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -95,6 +108,7 @@
     <!-- REGISTER CONTAINER -->
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:visibility="gone"
         android:id="@+id/signInContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,7 +117,7 @@
 
 
 
-    <!-- FIRST NAME -->
+        <!-- FIRST NAME -->
 
         <TextView
             android:layout_marginTop="15dp"
@@ -113,12 +127,13 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstName"
+            android:id="@+id/firstNameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -126,9 +141,9 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- FINISH FIRST NAME -->
+        <!-- FINISH FIRST NAME -->
 
-    <!-- LAST NAME -->
+        <!-- LAST NAME -->
 
         <TextView
             android:layout_marginTop="15dp"
@@ -138,12 +153,13 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastName"
+            android:id="@+id/lastNameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -151,9 +167,9 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- FINISH LAST NAME -->
+        <!-- FINISH LAST NAME -->
 
-    <!-- CHOOSE PASSWORD -->
+        <!-- CHOOSE PASSWORD -->
 
         <TextView
             android:layout_marginTop="15dp"
@@ -163,12 +179,13 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/newPassword"
+            android:id="@+id/newPasswordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/newPasswordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -176,7 +193,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- FINISH CHOOSE PASSWORD -->
+        <!-- FINISH CHOOSE PASSWORD -->
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -190,11 +207,12 @@
 
         <!-- Esto cambiara con string resource @string -->
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Next | Login | Register"/>
+            android:text="Next" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>
