@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
 
@@ -23,23 +27,33 @@ public class AuthActivity extends AppCompatActivity {
     TextInputEditText emailInput;
     TextInputEditText firstNameInput;
     TextInputEditText lastNameInput;
-    TextInputEditText newPasswordInput;
-    TextView actionTextLabel;
     TextInputEditText passwordInput;
+    TextInputEditText newPasswordInput;
+    TextInputLayout emailLayout;
+    TextInputLayout firstNameLayout;
+    TextInputLayout lastNameLayout;
+    TextInputLayout passwordLayout;
+    TextInputLayout newPasswordLayout;
+    LinearLayoutCompat passwordContainer;
+    TextView actionTextLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
+        actionTextLabel = findViewById(R.id.loginSignInText);
         authButton = findViewById(R.id.nextButton);
         emailInput = findViewById(R.id.emailInput);
+        TextInputLayout emailLayout = findViewById(R.id.emailLayout);
 
         authButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!validateEmail(String.valueOf(emailInput.getText()))){
-                    emailInput.setError("Email empty or not valid");
+                    // Set error text
+                    emailLayout.setError("Email empty or not valid");
+                    //emailInput.setError("Email empty or not valid");
                     return;
                 }
                 showLoginForm();
@@ -61,14 +75,12 @@ public class AuthActivity extends AppCompatActivity {
 
 
     private void showLoginForm() {
-        actionTextLabel = findViewById(R.id.loginSignInText);
-        LinearLayoutCompat passwordLayout = findViewById(R.id.passwordContainer);
+        passwordContainer = findViewById(R.id.passwordContainer);
+        passwordLayout = findViewById(R.id.passwordLayout);
         passwordInput = findViewById(R.id.passwordInput);
-
-        actionTextLabel.setVisibility(View.VISIBLE);
         actionTextLabel.setText("Login");
-
-        passwordLayout.setVisibility(View.VISIBLE);
+        actionTextLabel.setVisibility(View.VISIBLE);
+        passwordContainer.setVisibility(View.VISIBLE);
 
         authButton.setOnClickListener(view ->
                 //Send email and password to function
@@ -78,10 +90,13 @@ public class AuthActivity extends AppCompatActivity {
 
     private void showRegisterForm() {
         LinearLayoutCompat registerLayout = findViewById(R.id.signInContainer);
-        actionTextLabel = findViewById(R.id.loginSignInText);
+
         firstNameInput = findViewById(R.id.firstNameInput);
+        firstNameLayout = findViewById(R.id.firstNameLayout);
         lastNameInput = findViewById(R.id.lastNameInput);
+        lastNameLayout = findViewById(R.id.lastNameLayout);
         newPasswordInput = findViewById(R.id.newPasswordInput);
+        newPasswordLayout = findViewById(R.id.newPasswordLayout);
 
         registerLayout.setVisibility(View.VISIBLE);
         actionTextLabel.setVisibility(View.VISIBLE);
@@ -103,31 +118,55 @@ public class AuthActivity extends AppCompatActivity {
     private boolean validateForm(String action, TextInputEditText password){
         boolean isCorrect = true;
         if (!validateEmail(String.valueOf(emailInput.getText()))){
-            emailInput.setError("Email not valid");
+            emailLayout.setError("Email not valid");
+            setTextWatcher(emailInput, emailLayout);
             isCorrect = false;
         }
         if (!validatePassword(String.valueOf(password.getText()))){
-            password.setError("Password must have lowercase, uppercase and a number");
+            passwordLayout.setError("Password must have lowercase, uppercase and a number");
             isCorrect = false;
         }
         if (!action.equals("REGISTER")) {
             return isCorrect;
         }
         if (TextUtils.isEmpty(firstNameInput.getText())){
-            firstNameInput.setError("First name not valid");
+            firstNameLayout.setError("First name not valid");
             isCorrect = false;
         }
         if (TextUtils.isEmpty(lastNameInput.getText())){
-            lastNameInput.setError("Last name not valid");
+            lastNameLayout.setError("Last name not valid");
+            isCorrect = false;
+        }
+        if (!validatePassword(String.valueOf(newPasswordInput.getText()))){
+            newPasswordLayout.setError("Password must have lowercase, uppercase and a number");
             isCorrect = false;
         }
         return isCorrect;
     }
     private boolean validatePassword(String password) {
-        Pattern pattern = Pattern.compile("/(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*?]{6,30}/");
-        return pattern.matcher(password).matches();
+        //Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\\\S+$).{4,}$");
+        return !password.equals("");
     }
     private boolean validateInput(String input) {
         return !input.equals("");
+    }
+
+    private void setTextWatcher(TextInputEditText textInputEditText, TextInputLayout textInputLayout) {
+        textInputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            public void onTextChanged(CharSequence cs, int s, int b, int c) {
+                textInputLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+        });
     }
 }

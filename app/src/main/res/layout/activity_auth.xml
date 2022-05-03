@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
+
     tools:context=".views.auth.AuthActivity">
 
     <LinearLayout
@@ -42,20 +43,22 @@
         android:layout_height="wrap_content"
         android:text="Email"
         android:textSize="18sp"
-    />
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-        />
+            />
         <TextView
             android:id="@+id/emailNotValid"
             android:visibility="gone"
@@ -85,7 +88,7 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password"
+            android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -114,7 +117,7 @@
 
 
 
-    <!-- FIRST NAME -->
+        <!-- FIRST NAME -->
 
         <TextView
             android:layout_marginTop="15dp"
@@ -124,7 +127,7 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstName"
+            android:id="@+id/firstNameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -138,9 +141,9 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- FINISH FIRST NAME -->
+        <!-- FINISH FIRST NAME -->
 
-    <!-- LAST NAME -->
+        <!-- LAST NAME -->
 
         <TextView
             android:layout_marginTop="15dp"
@@ -150,7 +153,7 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastName"
+            android:id="@+id/lastNameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -164,9 +167,9 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- FINISH LAST NAME -->
+        <!-- FINISH LAST NAME -->
 
-    <!-- CHOOSE PASSWORD -->
+        <!-- CHOOSE PASSWORD -->
 
         <TextView
             android:layout_marginTop="15dp"
@@ -176,7 +179,7 @@
             android:textSize="18sp"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/newPassword"
+            android:id="@+id/newPasswordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -190,7 +193,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- FINISH CHOOSE PASSWORD -->
+        <!-- FINISH CHOOSE PASSWORD -->
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
