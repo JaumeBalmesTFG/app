@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    //Colors Floating Action Botton
+    <color name="colorPrimary">#00796B</color>
+    <color name="colorPrimaryDark">#2EC4B6</color>
+    <color name="colorAccent">#ef5350</color>
+    <color name="negro_semitransparente">#B2000000</color>
+    <color name="blanco">#fafafa</color>
+
+    //Colors App
+    <color name="primaryOrange">#FF9F1C</color>
+    <color name="secondaryOrange">#FFBF69</color>
+    <color name="primaryBlue">#2EC4B6</color>
+    <color name="secondaryBlue">#CBF3F0</color>
 </resources>
