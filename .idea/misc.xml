@@ -3,37 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/drawable/background_label_fab.xml" value="0.1" />
-        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/drawable/book.xml" value="0.15" />
-        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/drawable/edit.xml" value="0.151" />
-        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/drawable/trash.xml" value="0.15" />
         <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/activity_auth.xml" value="0.184375" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/activity_edit_task.xml" value="0.22" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/activity_edit_truancy.xml" value="0.22" />
         <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/activity_navigation.xml" value="0.184375" />
         <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/activity_splash.xml" value="0.184375" />
-        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/add_edit_subject_fragment.xml" value="0.18297101449275363" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/activity_task_truancy.xml" value="0.184375" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/add_edit_subject_fragment.xml" value="0.184375" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/calendar_fragment.xml" value="0.184375" />
         <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/fragment_dashboard.xml" value="0.184375" />
-        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/new_edit_subject_dialog.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/fragment_new_task.xml" value="0.22" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/fragment_new_truancy.xml" value="0.22" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/fragment_remove_uf.xml" value="0.184375" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/fragment_task_truancy.xml" value="0.13496376811594202" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/marks_fragment.xml" value="0.13496376811594202" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/new_edit_subject_dialog.xml" value="0.22" />
         <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/remove_uf_dialog.xml" value="0.184375" />
-        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/subjects_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/layout/subjects_fragment.xml" value="0.184375" />
         <entry key="..\:/Users/Maik/AndroidStudioProjects/Klendar/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20052083333333334" />
-        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/layout/activity_edit_task.xml" value="0.29583333333333334" />
-        <entry key="app/src/main/res/layout/activity_edit_truancy.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.16770833333333332" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/activity_task_truancy.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/add_edit_subject_fragment.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16770833333333332" />
-        <entry key="app/src/main/res/layout/fragment_new_task.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/fragment_new_truancy.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_remove_uf.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_task_truancy.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/marks_fragment.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/new_edit_subject_dialog.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/remove_uf_dialog.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/subjects_fragment.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>
     </option>
