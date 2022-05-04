@@ -21,7 +21,7 @@
             android:layout_gravity="left|top"
             android:layout_marginStart="20dp"
             android:text="Subject 1"
-            android:textSize="38dp"></TextView>
+            android:textSize="38dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/more_horiz"
-                android:backgroundTint="@color/primaryOrange"></Button>
+                android:backgroundTint="@color/primaryOrange" />
 
         </LinearLayout>
 
@@ -56,15 +56,15 @@
         <Button
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/book"
-            ></Button>
+            android:background="@drawable/outline_book_24"
+            android:backgroundTint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UF-1"
             android:textSize="18dp"
-            android:layout_marginStart="20dp"></TextView>
+            android:layout_marginStart="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,20 +73,19 @@
             android:gravity="right|top">
 
             <Button
+                android:id="@+id/buttonEdit"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="15dp"
-                android:background="@drawable/edit"></Button>
+                android:background="@drawable/edit"
+                android:backgroundTint="@color/primaryOrange" />
 
             <Button
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/trash"
-                android:drawableTint="@color/primaryOrange"
-                android:backgroundTint="@color/primaryOrange"
-                android:drawableTintMode="@color/primaryOrange"
-                ></Button>
+                android:backgroundTint="@color/primaryOrange" />
 
 
         </LinearLayout>
@@ -96,18 +95,20 @@
     </LinearLayout>
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
 
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/menu_fab"
+        android:id="@+id/menuFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         app:fab_labelStyle="@style/Etiquetas"
         app:fab_addButtonSize="mini"
         app:fab_labelsPosition="left"
+        android:visibility="invisible"
         app:fab_addButtonColorNormal="@color/primaryBlue">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
