@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +15,8 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,6 +37,7 @@ import tfg.k_lendar.http.api.services.auth.AuthPlaceHolderApi;
 import tfg.k_lendar.http.models.auth.Auth;
 import tfg.k_lendar.http.models.auth.Login;
 import tfg.k_lendar.http.models.auth.Register;
+import tfg.k_lendar.views.navigation.NavigationActivity;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -50,6 +54,7 @@ public class AuthActivity extends AppCompatActivity {
     TextInputLayout newPasswordLayout;
     LinearLayoutCompat passwordContainer;
     TextView actionTextLabel;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,10 +171,7 @@ public class AuthActivity extends AppCompatActivity {
         //Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\\\S+$).{4,}$");
         return !password.equals("");
     }
-    private boolean validateInput(String input) {
-        return !input.equals("");
-    }
-
+    
     public void authService(String email){
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -200,9 +202,7 @@ public class AuthActivity extends AppCompatActivity {
 
             }
             @Override
-            public void onFailure(Call<Auth> call, Throwable t) {
-                //textViewResult.setText(t.getMessage());
-            }
+            public void onFailure(Call<Auth> call, Throwable t) {}
         });
     }
 
@@ -217,17 +217,18 @@ public class AuthActivity extends AppCompatActivity {
         call.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
-                Login login = response.body();
-                System.out.println(login.getBody().get("token"));
-                //saveTokenOnSharedPreferences(login.getBody());
-                System.out.println(response);
-
-                //TODO If response.code() === 406 show password error
+                if (response.isSuccessful()) {
+                    Login login = response.body();
+                    saveTokenOnSharedPreferences(login.getBody().get("token"));
+                }  else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
             }
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {
-                //textViewResult.setText(t.getMessage());
-            }
+            public void onFailure(Call<Login> call, Throwable t) {}
         });
     }
 
@@ -244,21 +245,18 @@ public class AuthActivity extends AppCompatActivity {
         call.enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {
-                //TODO SHOW ERROR HERE
-               /* if(!response.isSuccessful()){
-                    textViewResult.setText("Code: "+ response.code());
-                    return;
-                }*/
-
                 if (response.isSuccessful()) {
                     Register register = response.body();
                     saveTokenOnSharedPreferences(register.getToken());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
                 }
             }
             @Override
-            public void onFailure(Call<Register> call, Throwable t) {
-                //textViewResult.setText(t.getMessage());
-            }
+            public void onFailure(Call<Register> call, Throwable t) {}
         });
     }
 

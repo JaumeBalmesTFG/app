@@ -20,11 +20,11 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String token = sharedPref.getString("token", "");
         Intent intent;
-        /*if (!token.equals("")) {
+        if (!token.equals("")) {
             intent = new Intent(this, NavigationActivity.class);
-        } else {*/
+        } else {
             intent = new Intent(this, AuthActivity.class);
-        //}
+        }
         startActivity(intent);
     }
 }
