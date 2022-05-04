@@ -3,15 +3,11 @@ package tfg.k_lendar.views.auth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
@@ -60,7 +56,7 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-
+        intent = new Intent(this, NavigationActivity.class);
         actionTextLabel = findViewById(R.id.loginSignInText);
         authButton = findViewById(R.id.nextButton);
         emailInput = findViewById(R.id.emailInput);
@@ -124,9 +120,6 @@ public class AuthActivity extends AppCompatActivity {
                         String.valueOf(newPasswordInput.getText()))
                     );
                 }
-                Log.d("firstName", String.valueOf(firstNameInput.getText()));
-                Log.d("lastName",String.valueOf(lastNameInput.getText()));
-                Log.d("newPassword",String.valueOf(newPasswordInput.getText()));
             }
         });
     }
@@ -220,6 +213,7 @@ public class AuthActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Login login = response.body();
                     saveTokenOnSharedPreferences(login.getBody().get("token"));
+                    startActivity(intent);
                 }  else {
                     Toast toast;
                     toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
@@ -248,6 +242,7 @@ public class AuthActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Register register = response.body();
                     saveTokenOnSharedPreferences(register.getToken());
+                    startActivity(intent);
                 } else {
                     Toast toast;
                     toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
