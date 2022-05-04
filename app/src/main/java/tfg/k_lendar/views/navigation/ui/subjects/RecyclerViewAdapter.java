@@ -12,10 +12,6 @@ import java.util.List;
 import tfg.k_lendar.R;
 import tfg.k_lendar.http.models.modules.ufs.BaseBody;
 
-/**
- * Created by Dumadu on 26-Oct-17.
- */
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
     List<BaseBody> modules;
     hospitalClickListener hospitalClickListener;

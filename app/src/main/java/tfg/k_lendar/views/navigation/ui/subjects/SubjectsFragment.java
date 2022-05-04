@@ -12,16 +12,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import tfg.k_lendar.R;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
+import tfg.k_lendar.http.models.modules.ufs.BaseBody;
 
 public class SubjectsFragment extends Fragment {
 
     private SubjectsViewModel subjectsViewModel;
     private SubjectsFragmentBinding binding;
-
+    private ArrayList<BaseBody> dataList;
+    private RecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
     Button points, buttonEdit;
     FloatingActionsMenu fabMenu;
     //FloatingActionButton add, edit, archive;
@@ -30,10 +40,39 @@ public class SubjectsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+        //initialize the list
+        dataList = new ArrayList<>();
+
+        // initialize the home adapter passing the list and the context
+        adapter = new RecyclerViewAdapter(dataList, this);
+
+        // defining the layout manager for the recycler view
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        //get reference to android views
+        recyclerView = findViewById(R.id.rv_main);
+
+        //set up main recvycler view
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+
+
+
+
+
+
+
+
+
+
         view = inflater.inflate(R.layout.subjects_fragment, container, false);
         points = view.findViewById(R.id.buttonPoints);
         fabMenu = view.findViewById(R.id.menuFab);
         buttonEdit = view.findViewById(R.id.buttonEdit);
+
+
 
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,11 +87,11 @@ public class SubjectsFragment extends Fragment {
         binding = SubjectsFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSubjects;
+        //final TextView textView = binding.textSubjects;
         subjectsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                //textView.setText(s);
             }
         });
         return root;
