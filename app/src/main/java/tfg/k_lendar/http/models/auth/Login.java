@@ -12,4 +12,7 @@ public class Login {
     @SerializedName("body")
     private HashMap<String,String> body;
 
+    public HashMap<String, String> getBody() {
+        return body;
+    }
 }
