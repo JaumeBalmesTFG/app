@@ -2,14 +2,17 @@ package tfg.k_lendar.views.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,9 +25,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.R;
+import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
 import tfg.k_lendar.http.api.requests.auth.AuthRequest;
+import tfg.k_lendar.http.api.requests.auth.LoginRequest;
+import tfg.k_lendar.http.api.requests.auth.RegisterRequest;
 import tfg.k_lendar.http.api.services.auth.AuthPlaceHolderApi;
 import tfg.k_lendar.http.models.auth.Auth;
+import tfg.k_lendar.http.models.auth.Login;
+import tfg.k_lendar.http.models.auth.Register;
+import tfg.k_lendar.views.navigation.NavigationActivity;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -41,12 +50,13 @@ public class AuthActivity extends AppCompatActivity {
     TextInputLayout newPasswordLayout;
     LinearLayoutCompat passwordContainer;
     TextView actionTextLabel;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-
+        intent = new Intent(this, NavigationActivity.class);
         actionTextLabel = findViewById(R.id.loginSignInText);
         authButton = findViewById(R.id.nextButton);
         emailInput = findViewById(R.id.emailInput);
@@ -58,23 +68,10 @@ public class AuthActivity extends AppCompatActivity {
                 if (!validateEmail(String.valueOf(emailInput.getText()))){
                     // Set error text
                     emailLayout.setError("Email empty or not valid");
-                    //emailInput.setError("Email empty or not valid");
+                    emailInput.addTextChangedListener(new RemoveErrorTextWatcher(emailLayout));
                     return;
                 }
                 authService(String.valueOf(emailInput.getText()));
-                //showLoginForm();
-                //Send to auth function
-                Log.d("email", String.valueOf(emailInput.getText()));
-
-
-            /*switch ("LOGIN"){
-                case "login":
-                    showLoginForm();
-                    break;
-                case "REGISTER":
-                    showRegisterForm();
-                    break;
-            }*/
             }
         });
     }
@@ -88,10 +85,14 @@ public class AuthActivity extends AppCompatActivity {
         actionTextLabel.setVisibility(View.VISIBLE);
         passwordContainer.setVisibility(View.VISIBLE);
 
-        authButton.setOnClickListener(view ->
-                //Send email and password to function
-                validateForm("LOGIN", passwordInput));
-                Log.d("password", String.valueOf(passwordInput.getText()));
+        authButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (validateForm("LOGIN", passwordInput)){
+                    loginService(new LoginRequest(String.valueOf(emailInput.getText()), String.valueOf(passwordInput.getText())));
+                }
+            }
+        });
     }
 
     private void showRegisterForm() {
@@ -106,14 +107,21 @@ public class AuthActivity extends AppCompatActivity {
 
         registerLayout.setVisibility(View.VISIBLE);
         actionTextLabel.setVisibility(View.VISIBLE);
-        actionTextLabel.setText("Sign in");
+        actionTextLabel.setText("Register");
 
-        authButton.setOnClickListener(view ->
-
-                validateForm("REGISTER", newPasswordInput));
-                Log.d("firstName", String.valueOf(firstNameInput.getText()));
-                Log.d("lastName",String.valueOf(lastNameInput.getText()));
-                Log.d("newPassword",String.valueOf(newPasswordInput.getText()));
+        authButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (validateForm("REGISTER", newPasswordInput)) {
+                    registerService(new RegisterRequest(
+                        String.valueOf(firstNameInput.getText()),
+                        String.valueOf(lastNameInput.getText()),
+                        String.valueOf(emailInput.getText()),
+                        String.valueOf(newPasswordInput.getText()))
+                    );
+                }
+            }
+        });
     }
 
 
@@ -125,11 +133,11 @@ public class AuthActivity extends AppCompatActivity {
         boolean isCorrect = true;
         if (!validateEmail(String.valueOf(emailInput.getText()))){
             emailLayout.setError("Email not valid");
-            setTextWatcher(emailInput, emailLayout);
             isCorrect = false;
         }
-        if (!validatePassword(String.valueOf(password.getText()))){
+        if (!validatePassword(String.valueOf(password.getText())) && !action.equals("REGISTER")){
             passwordLayout.setError("Password must have lowercase, uppercase and a number");
+            password.addTextChangedListener(new RemoveErrorTextWatcher(passwordLayout));
             isCorrect = false;
         }
         if (!action.equals("REGISTER")) {
@@ -137,14 +145,17 @@ public class AuthActivity extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(firstNameInput.getText())){
             firstNameLayout.setError("First name not valid");
+            firstNameInput.addTextChangedListener(new RemoveErrorTextWatcher(firstNameLayout));
             isCorrect = false;
         }
         if (TextUtils.isEmpty(lastNameInput.getText())){
             lastNameLayout.setError("Last name not valid");
+            lastNameInput.addTextChangedListener(new RemoveErrorTextWatcher(lastNameLayout));
             isCorrect = false;
         }
         if (!validatePassword(String.valueOf(newPasswordInput.getText()))){
             newPasswordLayout.setError("Password must have lowercase, uppercase and a number");
+            newPasswordInput.addTextChangedListener(new RemoveErrorTextWatcher(newPasswordLayout));
             isCorrect = false;
         }
         return isCorrect;
@@ -153,29 +164,7 @@ public class AuthActivity extends AppCompatActivity {
         //Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\\\S+$).{4,}$");
         return !password.equals("");
     }
-    private boolean validateInput(String input) {
-        return !input.equals("");
-    }
-
-    private void setTextWatcher(TextInputEditText textInputEditText, TextInputLayout textInputLayout) {
-        textInputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            public void onTextChanged(CharSequence cs, int s, int b, int c) {
-                textInputLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-
-        });
-    }
-
+    
     public void authService(String email){
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -192,21 +181,84 @@ public class AuthActivity extends AppCompatActivity {
         call.enqueue(new Callback<Auth>() {
             @Override
             public void onResponse(Call<Auth> call, Response<Auth> response) {
-               /* if(!response.isSuccessful()){
-                    textViewResult.setText("Code: "+ response.code());
-                    return;
-                }*/
+                if (response.isSuccessful()) {
+                    Auth auth = response.body();
+                    switch (auth.getMessage()){
+                        case "LOGIN":
+                            showLoginForm();
+                            break;
+                        case "REGISTER":
+                            showRegisterForm();
+                            break;
+                    }
+                }
 
-                Auth auth = response.body();
-
-                Log.d("AQUI", auth.getMessage());
             }
-
             @Override
-            public void onFailure(Call<Auth> call, Throwable t) {
-                //textViewResult.setText(t.getMessage());
-            }
+            public void onFailure(Call<Auth> call, Throwable t) {}
         });
     }
 
+    public void loginService(LoginRequest loginRequest){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AuthPlaceHolderApi authPlaceHolderApi = retrofit.create(AuthPlaceHolderApi.class);
+        Call<Login> call = authPlaceHolderApi.createPost(loginRequest);
+        call.enqueue(new Callback<Login>() {
+            @Override
+            public void onResponse(Call<Login> call, Response<Login> response) {
+                if (response.isSuccessful()) {
+                    Login login = response.body();
+                    saveTokenOnSharedPreferences(login.getBody().get("token"));
+                    startActivity(intent);
+                }  else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Login> call, Throwable t) {}
+        });
+    }
+
+    public void registerService(RegisterRequest registerRequest){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AuthPlaceHolderApi authPlaceHolderApi = retrofit.create(AuthPlaceHolderApi.class);
+
+        Call<Register> call = authPlaceHolderApi.createPost(registerRequest);
+
+        call.enqueue(new Callback<Register>() {
+            @Override
+            public void onResponse(Call<Register> call, Response<Register> response) {
+                if (response.isSuccessful()) {
+                    Register register = response.body();
+                    saveTokenOnSharedPreferences(register.getToken());
+                    startActivity(intent);
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Register> call, Throwable t) {}
+        });
+    }
+
+    public void saveTokenOnSharedPreferences(String token){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("token", token);
+        editor.apply();
+    }
 }
