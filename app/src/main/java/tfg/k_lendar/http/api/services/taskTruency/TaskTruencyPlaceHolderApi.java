@@ -13,8 +13,8 @@ import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 
 public interface TaskTruencyPlaceHolderApi {
 
-    @GET("modules/all/ufs")
-    Call<HomeModules> getAllUfs();
+    @GET("module/all/ufs")
+    Call<HomeModules> getAllUfs(@Header("Authorization") String token);
 
     @POST("task/create")
     Call<PostTask> postUf(@Body PostTaskRequest postTaskRequest);

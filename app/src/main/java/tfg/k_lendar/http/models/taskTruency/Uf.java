@@ -46,4 +46,15 @@ public class Uf {
     public int getTruancy_percentage() {
         return truancy_percentage;
     }
+
+    @Override
+    public String toString() {
+        return "Uf{" +
+                "id='" + id + '\'' +
+                ", moduleId='" + moduleId + '\'' +
+                ", name='" + name + '\'' +
+                ", hours=" + hours +
+                ", truancy_percentage=" + truancy_percentage +
+                '}';
+    }
 }

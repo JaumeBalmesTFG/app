@@ -35,6 +35,8 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String token = sharedPref.getString("token", "");
         Intent intent;
+        Log.d("AQUI", "CASDASDS");
+        getAllUfsFromModulesService();
         /*if (!token.equals("")) {
             intent = new Intent(this, NavigationActivity.class);
         } else {
@@ -72,7 +74,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    public void getAllUfsService(int moduloSeleccionado){
+    public void getAllUfsFromModulesService(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.klendar.es/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -80,17 +82,24 @@ public class SplashActivity extends AppCompatActivity {
 
         TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
 
-        Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs();
+        Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms");
 
         call.enqueue(new Callback<HomeModules>() {
             @Override
             public void onResponse(Call<HomeModules> call, Response<HomeModules> response) {
+                Log.d("RESPONSE SIUSPLAU", response.toString());
                 if (response.isSuccessful()) {
+                    Log.d("AQUI 2", "AQUI ENTRO");
+
                     HomeModules homeModules = response.body();
+
+                    Log.d("AQUI 2", response.body().toString());
+
                     List<Modules> modules = homeModules.getBody();
-                    List<Uf> ufs = modules.get(moduloSeleccionado).getUfs();
-                    for(Uf uf: ufs){
-                        Log.d("AQUI","name: "+uf.getName() +",  id: "+uf.getId());
+                    //List<Uf> ufs = modules.get(moduloSeleccionado).getUfs();
+                    for (int i = 0; i < modules.size(); i++) {
+                        Log.d("AQUI","name: "+modules.get(i).getName() +",  id: "+modules.get(i).getId());
+                        Log.d("FIESTA", modules.get(i).getUfs().toString());
                     }
                 } else {
                     Toast toast;
@@ -100,7 +109,9 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<HomeModules> call, Throwable t) {}
+            public void onFailure(Call<HomeModules> call, Throwable t) {
+                Log.d("FAIL", t.getMessage());
+            }
         });
     }
 }
