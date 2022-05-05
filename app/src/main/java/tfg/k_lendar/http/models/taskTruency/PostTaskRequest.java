@@ -2,6 +2,8 @@ package tfg.k_lendar.http.models.taskTruency;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class PostTaskRequest {
@@ -21,16 +23,16 @@ public class PostTaskRequest {
     @SerializedName("description")
     private String description;
 
-    @SerializedName("dueData")
-    private Date dueData;
+    @SerializedName("dueDate")
+    private String dueDate;
 
-    public PostTaskRequest(String ufId, String ruleId, String name, int grade, String description, Date dueData) {
+    public PostTaskRequest(String ufId, String ruleId, String name, int grade, String description, String dueDate) {
         this.ufId = ufId;
         this.ruleId = ruleId;
         this.name = name;
         this.grade = grade;
         this.description = description;
-        this.dueData = dueData;
+        this.dueDate = dueDate;
     }
 
     public String getUfId() {
@@ -53,7 +55,7 @@ public class PostTaskRequest {
         return description;
     }
 
-    public Date getDueData() {
-        return dueData;
+    public String getDueDate() {
+        return dueDate;
     }
 }

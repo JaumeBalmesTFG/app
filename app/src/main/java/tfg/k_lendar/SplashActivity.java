@@ -9,6 +9,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Interceptor;
@@ -36,7 +39,13 @@ public class SplashActivity extends AppCompatActivity {
         String token = sharedPref.getString("token", "");
         Intent intent;
         Log.d("AQUI", "CASDASDS");
-        getAllUfsFromModulesService();
+        postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
+                "6273f2aba0cccb5b1687bc29",
+                "ANDRII",
+                9,
+                "EXAMPLE DESCRIPTION",
+                "2022-05-04"
+                ));
         /*if (!token.equals("")) {
             intent = new Intent(this, NavigationActivity.class);
         } else {
@@ -54,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
 
         TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
 
-        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf(postTaskRequest);
+        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms", postTaskRequest);
 
         call.enqueue(new Callback<PostTask>() {
             @Override
