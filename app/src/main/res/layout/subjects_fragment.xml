@@ -108,14 +108,23 @@
         app:fab_labelStyle="@style/Etiquetas"
         app:fab_addButtonSize="mini"
         app:fab_labelsPosition="left"
-        android:visibility="invisible"
         app:fab_addButtonColorNormal="@color/primaryBlue">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionClose"
+            android:layout_width="wrap_content"
+            app:fab_icon="@drawable/outline_close_24"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primaryBlue"
+            app:fab_size="mini"
+            app:fab_title="Close" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/accionAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/primaryBlue"
+            app:fab_icon="@drawable/outline_add_24"
             app:fab_size="normal"
             app:fab_title="Add" />
 
@@ -123,6 +132,7 @@
             android:id="@+id/accionEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_icon="@drawable/edit"
             app:fab_colorNormal="@color/primaryBlue"
             app:fab_size="normal"
             app:fab_title="Edit" />
@@ -132,6 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/primaryBlue"
+            app:fab_icon="@drawable/outline_archive_24"
             app:fab_size="normal"
             app:fab_title="Archive" />
 
