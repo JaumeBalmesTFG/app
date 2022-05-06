@@ -15,10 +15,10 @@ public interface UfPlaceHolderApi {
     @POST("uf/create")
     Call<PostUf> postUf(@Body UfRequest ufRequest);
 
-    @PUT("uf/{uf_id}/edit")
+    @PUT("uf/{uf_id}/edit") // RUTA CORRECTA????
     Call<PostUf> editUf(@Body UfRequest ufRequest);
 
-    @DELETE("uf/{uf_id}/delete")
+    @DELETE("uf/{uf_id}/delete") // RUTA CORRECTA?
     Call<PostUf> deleteUf(@Body UfRequest ufRequest);
 
 

@@ -16,8 +16,5 @@ public interface TaskTruencyPlaceHolderApi {
     @GET("module/all/ufs")
     Call<HomeModules> getAllUfs(@Header("Authorization") String token);
 
-    @POST("task/create")
-    Call<PostTask> postUf(@Header("Authorization") String token, @Body PostTaskRequest postTaskRequest);
-
 }
 

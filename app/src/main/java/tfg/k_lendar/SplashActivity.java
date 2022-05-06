@@ -15,8 +15,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tfg.k_lendar.http.api.services.task.TaskPlaceHolderApi;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
 import tfg.k_lendar.http.api.services.uf.UfPlaceHolderApi;
+import tfg.k_lendar.http.models.task.Task;
+import tfg.k_lendar.http.models.task.TaskRequest;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
@@ -56,9 +59,9 @@ public class SplashActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
+        TaskPlaceHolderApi taskPlaceHolderApi = retrofit.create(TaskPlaceHolderApi.class);
 
-        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms", postTaskRequest);
+        Call<PostTask> call = taskPlaceHolderApi.postTask("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms", postTaskRequest);
 
         call.enqueue(new Callback<PostTask>() {
             @Override
@@ -208,6 +211,37 @@ public class SplashActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<PostUf> call, Throwable t) {}
+        });
+    }
+
+    public void editPutTaskService(TaskRequest taskRequest){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TaskPlaceHolderApi taskPlaceHolderApi = retrofit.create(TaskPlaceHolderApi.class);
+
+        Call<Task> call = taskPlaceHolderApi.editTask(taskRequest);
+
+        call.enqueue(new Callback<Task>() {
+            @Override
+            public void onResponse(Call<Task> call, Response<Task> response) {
+                if (response.isSuccessful()) {
+                    Task task = response.body();
+                    Log.d("AQUI", "METHOD PUT");
+                    Log.d("AQUI", "MESSAGE: "+task.getMessage());
+                    Log.d("AQUI", "MESSAGE: "+task.getBody().toString());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Task> call, Throwable t) {}
         });
     }
 
