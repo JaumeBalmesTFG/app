@@ -8,26 +8,21 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
+import tfg.k_lendar.http.api.services.uf.UfPlaceHolderApi;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
-import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.http.models.uf.PostUf;
+import tfg.k_lendar.http.models.uf.UfRequest;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -123,4 +118,97 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void postCreateUfService(UfRequest ufRequest){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UfPlaceHolderApi ufPlaceHolderApi = retrofit.create(UfPlaceHolderApi.class);
+
+        Call<PostUf> call = ufPlaceHolderApi.postUf(ufRequest);
+
+        call.enqueue(new Callback<PostUf>() {
+            @Override
+            public void onResponse(Call<PostUf> call, Response<PostUf> response) {
+                if (response.isSuccessful()) {
+                    PostUf postUf = response.body();
+                    Log.d("AQUI", "METHOD POST");
+                    Log.d("AQUI", "MESSAGE: "+postUf.getMessage());
+                    Log.d("AQUI",postUf.getBody().toString());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PostUf> call, Throwable t) {}
+        });
+    }
+
+    public void putEditUfService(UfRequest ufRequest){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UfPlaceHolderApi ufPlaceHolderApi = retrofit.create(UfPlaceHolderApi.class);
+
+        Call<PostUf> call = ufPlaceHolderApi.editUf(ufRequest);
+
+        call.enqueue(new Callback<PostUf>() {
+            @Override
+            public void onResponse(Call<PostUf> call, Response<PostUf> response) {
+                if (response.isSuccessful()) {
+                    PostUf postUf = response.body();
+                    Log.d("AQUI", "METHOD PUT");
+                    Log.d("AQUI", "MESSAGE: "+postUf.getMessage());
+                    Log.d("AQUI",postUf.getBody().toString());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PostUf> call, Throwable t) {}
+        });
+    }
+
+    public void deleteDelUfService(UfRequest ufRequest){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UfPlaceHolderApi ufPlaceHolderApi = retrofit.create(UfPlaceHolderApi.class);
+
+        Call<PostUf> call = ufPlaceHolderApi.deleteUf(ufRequest);
+
+        call.enqueue(new Callback<PostUf>() {
+            @Override
+            public void onResponse(Call<PostUf> call, Response<PostUf> response) {
+                if (response.isSuccessful()) {
+                    PostUf postUf = response.body();
+                    Log.d("AQUI", "METHOD DELETE");
+                    Log.d("AQUI", "MESSAGE: "+postUf.getMessage());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PostUf> call, Throwable t) {}
+        });
+    }
+
 }
