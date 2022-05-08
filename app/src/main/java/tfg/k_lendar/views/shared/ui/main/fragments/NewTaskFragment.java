@@ -35,6 +35,8 @@ import tfg.k_lendar.http.models.rule.ResponseRulesFromUf;
 import tfg.k_lendar.http.models.rule.Rule;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
+import tfg.k_lendar.http.models.taskTruency.PostTask;
+import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 
 public class NewTaskFragment extends Fragment {
@@ -123,7 +125,18 @@ public class NewTaskFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validateFormAndSaveTask();
+                if (validateFormAndSaveTask()) {
+                    PostTaskRequest postTaskRequest = new PostTaskRequest(
+                        selectedModule.getId(),
+                        selectedUf.getId(),
+                            selectedRule.getId(),
+                            selectedRule.getTitle(),
+                            titleInput.getText(),
+                            //TODO description and date
+
+
+                    )
+                }
             }
         });
 
@@ -229,6 +242,35 @@ public class NewTaskFragment extends Fragment {
             public void onFailure(Call<ResponseRulesFromUf> call, Throwable t) {
                 Log.d("FAIL", t.getMessage());
             }
+        });
+    }
+
+    public void saveTaskService(PostTaskRequest postTaskRequest){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
+
+        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms", postTaskRequest);
+
+        call.enqueue(new Callback<PostTask>() {
+            @Override
+            public void onResponse(Call<PostTask> call, Response<PostTask> response) {
+                if (response.isSuccessful()) {
+                    PostTask postTask = response.body();
+                    Log.d("AQUI",postTask.getMessage());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<PostTask> call, Throwable t) {}
         });
     }
 

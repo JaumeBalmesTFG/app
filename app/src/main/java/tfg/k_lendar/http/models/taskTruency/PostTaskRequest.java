@@ -8,6 +8,9 @@ import java.util.Date;
 
 public class PostTaskRequest {
 
+    @SerializedName("moduleId")
+    private String moduleId;
+
     @SerializedName("ufId")
     private String ufId;
 
@@ -26,11 +29,11 @@ public class PostTaskRequest {
     @SerializedName("dueDate")
     private String dueDate;
 
-    public PostTaskRequest(String ufId, String ruleId, String name, int grade, String description, String dueDate) {
+    public PostTaskRequest(String moduleId, String ufId, String ruleId, String name, String description, String dueDate) {
+        this.moduleId = moduleId;
         this.ufId = ufId;
         this.ruleId = ruleId;
         this.name = name;
-        this.grade = grade;
         this.description = description;
         this.dueDate = dueDate;
     }
