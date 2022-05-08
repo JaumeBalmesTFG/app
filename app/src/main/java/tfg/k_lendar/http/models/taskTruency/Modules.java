@@ -40,4 +40,9 @@ public class Modules {
     public List<Uf> getUfs() {
         return ufs;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

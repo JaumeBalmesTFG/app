@@ -28,6 +28,8 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.auth.AuthActivity;
+import tfg.k_lendar.views.navigation.NavigationActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -39,88 +41,18 @@ public class SplashActivity extends AppCompatActivity {
         String token = sharedPref.getString("token", "");
         Intent intent;
         Log.d("AQUI", "CASDASDS");
-        postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
+        /*postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
                 "6273f2aba0cccb5b1687bc29",
                 "ANDRII",
                 9,
                 "EXAMPLE DESCRIPTION",
                 "2022-05-04"
-                ));
-        /*if (!token.equals("")) {
+                ));*/
+        if (!token.equals("")) {
             intent = new Intent(this, NavigationActivity.class);
         } else {
             intent = new Intent(this, AuthActivity.class);
         }
-        startActivity(intent);*/
-    }
-
-    public void postSaveTaskService(PostTaskRequest postTaskRequest){
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.klendar.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
-
-        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms", postTaskRequest);
-
-        call.enqueue(new Callback<PostTask>() {
-            @Override
-            public void onResponse(Call<PostTask> call, Response<PostTask> response) {
-                if (response.isSuccessful()) {
-                    PostTask postTask = response.body();
-                    Log.d("AQUI",postTask.getMessage());
-                } else {
-                    Toast toast;
-                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
-                    toast.setMargin(50,50);
-                    toast.show();
-                }
-            }
-            @Override
-            public void onFailure(Call<PostTask> call, Throwable t) {}
-        });
-    }
-
-    public void getAllUfsFromModulesService(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.klendar.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
-
-        Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms");
-
-        call.enqueue(new Callback<HomeModules>() {
-            @Override
-            public void onResponse(Call<HomeModules> call, Response<HomeModules> response) {
-                Log.d("RESPONSE SIUSPLAU", response.toString());
-                if (response.isSuccessful()) {
-                    Log.d("AQUI 2", "AQUI ENTRO");
-
-                    HomeModules homeModules = response.body();
-
-                    Log.d("AQUI 2", response.body().toString());
-
-                    List<Modules> modules = homeModules.getBody();
-                    //List<Uf> ufs = modules.get(moduloSeleccionado).getUfs();
-                    for (int i = 0; i < modules.size(); i++) {
-                        Log.d("AQUI","name: "+modules.get(i).getName() +",  id: "+modules.get(i).getId());
-                        Log.d("FIESTA", modules.get(i).getUfs().toString());
-                    }
-                } else {
-                    Toast toast;
-                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
-                    toast.setMargin(50,50);
-                    toast.show();
-                }
-            }
-            @Override
-            public void onFailure(Call<HomeModules> call, Throwable t) {
-                Log.d("FAIL", t.getMessage());
-            }
-        });
+        startActivity(intent);
     }
 }
