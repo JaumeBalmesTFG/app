@@ -32,7 +32,6 @@ import tfg.k_lendar.core.helpers.ToastError;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
 import tfg.k_lendar.http.api.services.truancy.TruancyPlaceHolderApi;
-import tfg.k_lendar.http.models.rule.Rule;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
@@ -47,7 +46,8 @@ public class NewTruancyFragment extends Fragment {
     AutoCompleteTextView ufsDropdown;
     TextInputLayout ufsMenu;
 
-    TextInputLayout hoursMenu;
+    LinearLayoutCompat inputsLayout;
+
     LinearLayoutCompat hoursContainer;
 
     LinearLayoutCompat ufsContainer;
@@ -58,7 +58,6 @@ public class NewTruancyFragment extends Fragment {
     List<Modules> modules;
     Modules selectedModule;
     Uf selectedUf;
-    Rule selectedRule;
     Button saveButton;
 
     @Nullable
@@ -69,17 +68,18 @@ public class NewTruancyFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        subjectsMenu = view.findViewById(R.id.menuSubjects);
-        subjectsDropdown = view.findViewById(R.id.subjectsDropdown);
-        ufsMenu = view.findViewById(R.id.menuUfs);
-        ufsDropdown = view.findViewById(R.id.ufsDropdown);
-        ufsContainer = view.findViewById(R.id.ufsContainer);
-        hoursContainer = view.findViewById(R.id.hoursContainer);
-        hoursLayout = view.findViewById(R.id.hoursLayout);
-        hoursInput = view.findViewById(R.id.hoursInput);
-        reasonLayout = view.findViewById(R.id.reasonLayout);
-        reasonInput = view.findViewById(R.id.reasonInput);
-        saveButton = view.findViewById(R.id.saveButton);
+        subjectsMenu = view.findViewById(R.id.menuSubjectsT);
+        subjectsDropdown = view.findViewById(R.id.subjectsDropdownT);
+        ufsMenu = view.findViewById(R.id.menuUfsT);
+        ufsDropdown = view.findViewById(R.id.ufsDropdownT);
+        ufsContainer = view.findViewById(R.id.ufsContainerT);
+        inputsLayout = view.findViewById(R.id.inputsLayoutT);
+        hoursContainer = view.findViewById(R.id.hoursContainerT);
+        hoursLayout = view.findViewById(R.id.hoursLayoutT);
+        hoursInput = view.findViewById(R.id.hoursInputT);
+        reasonLayout = view.findViewById(R.id.reasonLayoutT);
+        reasonInput = view.findViewById(R.id.reasonInputT);
+        saveButton = view.findViewById(R.id.saveButtonT);
         getAllUfsFromModulesService();
         subjectsDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -100,40 +100,22 @@ public class NewTruancyFragment extends Fragment {
                 Object item = parent.getItemAtPosition(position);
                 if (item instanceof Uf) {
                     selectedUf = (Uf) item;
-                    hoursContainer.setVisibility(View.VISIBLE);
+                    inputsLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
-
-
-
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validateFormAndSaveTask()) {
-                    /*PostTaskRequest postTaskRequest = new PostTaskRequest(
-                            selectedModule.getId(),
-                            selectedUf.getId(),
-                            selectedRule.getId(),
-                            String.valueOf(hoursInput.getText()),
-                            String.valueOf(reasonInput.getText()),
-                            "2022-04-04"
-                    );
-                    saveTaskService(postTaskRequest);*/
-                    postTruancyService(new TruancyRequest(selectedModule.getId(),"2022-04-04",reasonInput.getText().toString(),Integer.parseInt(hoursInput.getText().toString())));
-                    System.out.println(selectedModule.getId() + "\n" +
-                            selectedUf.getId() + "\n" +
-                            String.valueOf(hoursInput.getText()) + "\n" +
-                            String.valueOf(reasonInput.getText()));
-
+                if (validateTruancyForm()) {
+                    postTruancyService(new TruancyRequest(selectedModule.getId(),"2022-04-04",String.valueOf(reasonInput.getText()),Integer.parseInt(String.valueOf(hoursInput.getText()))));
                 }
             }
         });
-
     }
 
-    private boolean validateFormAndSaveTask() {
+    private boolean validateTruancyForm() {
         if (selectedModule == null) {
             subjectsMenu.setError("Select a valid subject");
             subjectsDropdown.addTextChangedListener(new RemoveErrorTextWatcher(subjectsMenu));
@@ -149,11 +131,6 @@ public class NewTruancyFragment extends Fragment {
             hoursInput.addTextChangedListener(new RemoveErrorTextWatcher(hoursLayout));
             return false;
         }
-        /*if (TextUtils.isEmpty(reasonInput.getText())) {
-            reasonLayout.setError("Select a valid title");
-            reasonInput.addTextChangedListener(new RemoveErrorTextWatcher(reasonLayout));
-            return false;
-        }*/
         return true;
     }
 
@@ -164,14 +141,9 @@ public class NewTruancyFragment extends Fragment {
     }
 
     public void setUfsInDropdown(Modules module){
-        ufsAdapter = new ArrayAdapter<Uf>(this.getContext(), R.layout.dropdown_item, module.getUfs());
+        ufsAdapter = new ArrayAdapter<>(this.getContext(), R.layout.dropdown_item, module.getUfs());
         ufsDropdown.setAdapter(ufsAdapter);
     }
-
-    /*public void setRulesInDropdown(List<Rule> rules) {
-        rulesAdapter = new ArrayAdapter<>(this.getContext(), R.layout.dropdown_item, rules);
-        hoursInput.setAdapter(rulesAdapter);
-    }*/
 
     public void getAllUfsFromModulesService(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -180,7 +152,6 @@ public class NewTruancyFragment extends Fragment {
                 .build();
 
         TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
-
         Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs(AuthBearerToken.getAuthBearerToken(getContext()));
 
         call.enqueue(new Callback<HomeModules>() {
@@ -201,8 +172,6 @@ public class NewTruancyFragment extends Fragment {
             }
         });
     }
-
-
 
     public void postTruancyService(TruancyRequest truancyRequest){
 

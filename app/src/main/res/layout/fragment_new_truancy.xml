@@ -17,14 +17,14 @@
             android:textSize="25dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/menuSubjects"
+            android:id="@+id/menuSubjectsT"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Select a subject">
 
             <AutoCompleteTextView
-                android:id="@+id/subjectsDropdown"
+                android:id="@+id/subjectsDropdownT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -32,7 +32,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ufsContainer"
+            android:id="@+id/ufsContainerT"
             android:orientation="vertical"
             android:visibility="invisible"
             android:layout_width="match_parent"
@@ -46,14 +46,14 @@
                 android:layout_marginTop="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menuUfs"
+                android:id="@+id/menuUfsT"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Select an UF">
 
                 <AutoCompleteTextView
-                    android:id="@+id/ufsDropdown"
+                    android:id="@+id/ufsDropdownT"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -62,72 +62,80 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/inputsLayoutT"
+            android:visibility="invisible"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/hoursContainer"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hours"
-                    android:textSize="25dp"
-                    android:layout_marginTop="20dp"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/hoursLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/hoursInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/reasonContainer"
+                android:id="@+id/hoursContainerT"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reason"
-                    android:textSize="25dp"
-                    android:layout_marginTop="20dp"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hours"
+                        android:textSize="25dp"
+                        android:layout_marginTop="20dp"/>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/reasonLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/hoursLayoutT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:inputType="numberDecimal"
+                            android:id="@+id/hoursInputT"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Write a description">
+                    android:id="@+id/reasonContainerT"
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/reasonInput"
+                    <TextView
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reason"
+                        android:textSize="25dp"
+                        android:layout_marginTop="20dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/reasonLayoutT"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:inputType="textMultiLine"
-                        android:lines="4"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_height="wrap_content"
+                        android:hint="Write a description">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/reasonInputT"
+                            android:layout_width="match_parent"
+                            android:inputType="textMultiLine"
+                            android:lines="4"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -138,7 +146,7 @@
             android:layout_gravity="right">
 
             <Button
-                android:id="@+id/saveButton"
+                android:id="@+id/saveButtonT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="save"
@@ -146,7 +154,7 @@
                 />
 
             <Button
-                android:id="@+id/cancelButton"
+                android:id="@+id/cancelButtonT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
