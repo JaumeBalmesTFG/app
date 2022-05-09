@@ -30,15 +30,14 @@ import tfg.k_lendar.R;
 import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
 import tfg.k_lendar.core.helpers.ToastError;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
-import tfg.k_lendar.http.api.services.rule.RulePlaceHolderApi;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
-import tfg.k_lendar.http.models.rule.ResponseRulesFromUf;
+import tfg.k_lendar.http.api.services.truancy.TruancyPlaceHolderApi;
 import tfg.k_lendar.http.models.rule.Rule;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
-import tfg.k_lendar.http.models.taskTruency.PostTask;
-import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.http.models.truancy.Truancy;
+import tfg.k_lendar.http.models.truancy.TruancyRequest;
 
 public class NewTruancyFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -122,7 +121,7 @@ public class NewTruancyFragment extends Fragment {
                             "2022-04-04"
                     );
                     saveTaskService(postTaskRequest);*/
-
+                    postTruancyService(new TruancyRequest(selectedModule.getId(),"2022-04-04",reasonInput.getText().toString(),Integer.parseInt(hoursInput.getText().toString())));
                     System.out.println(selectedModule.getId() + "\n" +
                             selectedUf.getId() + "\n" +
                             String.valueOf(hoursInput.getText()) + "\n" +
@@ -205,29 +204,29 @@ public class NewTruancyFragment extends Fragment {
 
 
 
-    public void saveTaskService(PostTaskRequest postTaskRequest){
+    public void postTruancyService(TruancyRequest truancyRequest){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.klendar.es/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
+        TruancyPlaceHolderApi truancyPlaceHolderApi = retrofit.create(TruancyPlaceHolderApi.class);
 
-        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf(AuthBearerToken.getAuthBearerToken(getContext()), postTaskRequest);
+        Call<Truancy> call = truancyPlaceHolderApi.postTruancy(AuthBearerToken.getAuthBearerToken(getContext()), truancyRequest);
 
-        call.enqueue(new Callback<PostTask>() {
+        call.enqueue(new Callback<Truancy>() {
             @Override
-            public void onResponse(Call<PostTask> call, Response<PostTask> response) {
+            public void onResponse(Call<Truancy> call, Response<Truancy> response) {
                 if (response.isSuccessful()) {
-                    PostTask postTask = response.body();
-                    Log.d("AQUI",postTask.getMessage());
+                    Truancy truancy = response.body();
+                    Log.d("AQUI",truancy.getMessage());
                 } else {
                     ToastError.execute(getContext(), response.toString());
                 }
             }
             @Override
-            public void onFailure(Call<PostTask> call, Throwable t) {
+            public void onFailure(Call<Truancy> call, Throwable t) {
                 ToastError.execute(getContext(), t.getMessage());
             }
         });
