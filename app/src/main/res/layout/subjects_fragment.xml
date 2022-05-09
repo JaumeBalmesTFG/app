@@ -7,4 +7,145 @@
     tools:context=".views.navigation.ui.subjects.SubjectsFragment"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textSubjects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_marginStart="20dp"
+            android:text="Subject 1"
+            android:textSize="38dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|center"
+            android:layout_marginEnd="20dp">
+
+            <Button
+                android:id="@+id/buttonPoints"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/more_horiz"
+                android:backgroundTint="@color/primaryOrange" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/outline_book_24"
+            android:backgroundTint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UF-1"
+            android:textSize="18dp"
+            android:layout_marginStart="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right|top">
+
+            <Button
+                android:id="@+id/buttonEdit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/edit"
+                android:backgroundTint="@color/primaryOrange" />
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/trash"
+                android:backgroundTint="@color/primaryOrange" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/menuFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        app:fab_labelStyle="@style/Etiquetas"
+        app:fab_addButtonSize="mini"
+        app:fab_labelsPosition="left"
+        app:fab_addButtonColorNormal="@color/primaryBlue">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionClose"
+            android:layout_width="wrap_content"
+            app:fab_icon="@drawable/outline_close_24"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primaryBlue"
+            app:fab_size="mini"
+            app:fab_title="Close" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primaryBlue"
+            app:fab_icon="@drawable/outline_add_24"
+            app:fab_size="normal"
+            app:fab_title="Add" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/edit"
+            app:fab_colorNormal="@color/primaryBlue"
+            app:fab_size="normal"
+            app:fab_title="Edit" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/accionArchive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primaryBlue"
+            app:fab_icon="@drawable/outline_archive_24"
+            app:fab_size="normal"
+            app:fab_title="Archive" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
 </LinearLayout>

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,13 +23,17 @@
             android:exported="true"
             android:label="@string/title_activity_task_truancy"
             android:theme="@style/Theme.Klendar.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".views.navigation.NavigationActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight"
             android:exported="true"
             android:label="@string/title_activity_navigation" >
-
         </activity>
         <activity
             android:name=".views.auth.AuthActivity"
@@ -37,11 +42,6 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

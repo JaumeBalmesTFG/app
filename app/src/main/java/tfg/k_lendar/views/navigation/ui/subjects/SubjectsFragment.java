@@ -1,6 +1,7 @@
 package tfg.k_lendar.views.navigation.ui.subjects;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,74 +13,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import tfg.k_lendar.R;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
-import tfg.k_lendar.http.models.modules.ufs.BaseBody;
 
 public class SubjectsFragment extends Fragment {
 
     private SubjectsViewModel subjectsViewModel;
     private SubjectsFragmentBinding binding;
-    private ArrayList<BaseBody> dataList;
-    private RecyclerViewAdapter adapter;
-    private RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
+
     Button points, buttonEdit;
+    FloatingActionButton close, add, archive, edit;
     FloatingActionsMenu fabMenu;
-    //FloatingActionButton add, edit, archive;
     View view;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        //initialize the list
-        dataList = new ArrayList<>();
-
-        // initialize the home adapter passing the list and the context
-        adapter = new RecyclerViewAdapter(dataList, this);
-
-        // defining the layout manager for the recycler view
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        //get reference to android views
-        recyclerView = findViewById(R.id.rv_main);
-
-        //set up main recvycler view
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-
-
-
-
-
-
-
-
-
-
-
         view = inflater.inflate(R.layout.subjects_fragment, container, false);
-        points = view.findViewById(R.id.buttonPoints);
-        fabMenu = view.findViewById(R.id.menuFab);
-        buttonEdit = view.findViewById(R.id.buttonEdit);
 
-
-
-        buttonEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fabMenu.performClick();
-            }
-        });
 
         subjectsViewModel =
                 new ViewModelProvider(this).get(SubjectsViewModel.class);
@@ -87,11 +42,43 @@ public class SubjectsFragment extends Fragment {
         binding = SubjectsFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //final TextView textView = binding.textSubjects;
+        fabMenu = binding.menuFab;
+
+        buttonEdit = binding.buttonEdit;
+        points = binding.buttonPoints;
+        close = binding.accionClose;
+        add = binding.accionAdd;
+        archive = binding.accionArchive;
+        edit = binding.accionEdit;
+
+
+
+        points.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fabMenu.expand();
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fabMenu.collapse();
+            }
+        });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        final TextView textView = binding.textSubjects;
         subjectsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                //textView.setText(s);
+                textView.setText(s);
             }
         });
         return root;
