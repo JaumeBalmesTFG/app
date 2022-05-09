@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +30,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.R;
 import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
+import tfg.k_lendar.core.helpers.ToastError;
+import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.rule.RulePlaceHolderApi;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
 import tfg.k_lendar.http.models.rule.ResponseRulesFromUf;
@@ -56,6 +59,8 @@ public class NewTaskFragment extends Fragment {
     LinearLayoutCompat titleContainer;
     TextInputLayout titleLayout;
     TextInputEditText titleInput;
+    TextInputLayout descriptionLayout;
+    TextInputEditText descriptionInput;
     List<Modules> modules;
     Modules selectedModule;
     Uf selectedUf;
@@ -82,7 +87,10 @@ public class NewTaskFragment extends Fragment {
         titleContainer = view.findViewById(R.id.titleContainer);
         titleLayout = view.findViewById(R.id.titleLayout);
         titleInput = view.findViewById(R.id.titleInput);
+        descriptionLayout = view.findViewById(R.id.descriptionLayout);
+        descriptionInput = view.findViewById(R.id.descriptionInput);
         saveButton = view.findViewById(R.id.saveButton);
+        System.out.println(AuthBearerToken.getAuthBearerToken(getContext()));
         getAllUfsFromModulesService();
         subjectsDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -130,12 +138,11 @@ public class NewTaskFragment extends Fragment {
                         selectedModule.getId(),
                         selectedUf.getId(),
                             selectedRule.getId(),
-                            selectedRule.getTitle(),
-                            titleInput.getText(),
-                            //TODO description and date
-
-
-                    )
+                            String.valueOf(titleInput.getText()),
+                            String.valueOf(descriptionInput.getText()),
+                            "2022-04-04"
+                    );
+                    saveTaskService(postTaskRequest);
                 }
             }
         });
@@ -161,6 +168,11 @@ public class NewTaskFragment extends Fragment {
         if (TextUtils.isEmpty(titleInput.getText())) {
             titleLayout.setError("Select a valid title");
             titleInput.addTextChangedListener(new RemoveErrorTextWatcher(titleLayout));
+            return false;
+        }
+        if (TextUtils.isEmpty(descriptionInput.getText())) {
+            descriptionLayout.setError("Select a valid title");
+            descriptionInput.addTextChangedListener(new RemoveErrorTextWatcher(descriptionLayout));
             return false;
         }
         return true;
@@ -190,7 +202,7 @@ public class NewTaskFragment extends Fragment {
 
         TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
 
-        Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtsZW5kYXJAZ21haWwuY29tIiwiX2lkIjoiNjI3N2YzNmQ0YzQyODZlZmNkNDI3ODA3IiwiaWF0IjoxNjUyMDI4MjY5fQ.6ADGlunrzNHV4Dg59rgQUrjH4HEJav8y5XJCs_u_F8s");
+        Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs(AuthBearerToken.getAuthBearerToken(getContext()));
 
         call.enqueue(new Callback<HomeModules>() {
             @Override
@@ -200,15 +212,16 @@ public class NewTaskFragment extends Fragment {
                     List<Modules> modules = homeModules.getBody();
                     setSubjectsInDropdown(modules);
                 } else {
-                    Toast toast;
-                    toast = Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT);
-                    toast.setMargin(50,50);
-                    toast.show();
+                    ToastError.execute(getContext(), response.toString());
+
+                    System.out.println(response);
                 }
             }
             @Override
             public void onFailure(Call<HomeModules> call, Throwable t) {
-                Log.d("FAIL", t.getMessage());
+                ToastError.execute(getContext(), t.getMessage());
+                System.out.println(t.getCause());
+                System.out.println(t.getMessage());
             }
         });
     }
@@ -221,7 +234,8 @@ public class NewTaskFragment extends Fragment {
 
         RulePlaceHolderApi rulePlaceHolderApi = retrofit.create(RulePlaceHolderApi.class);
 
-        Call<ResponseRulesFromUf> call = rulePlaceHolderApi.getRulesFromUf("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtsZW5kYXJAZ21haWwuY29tIiwiX2lkIjoiNjI3N2YzNmQ0YzQyODZlZmNkNDI3ODA3IiwiaWF0IjoxNjUyMDI4MjY5fQ.6ADGlunrzNHV4Dg59rgQUrjH4HEJav8y5XJCs_u_F8s", ufId);
+
+        Call<ResponseRulesFromUf> call = rulePlaceHolderApi.getRulesFromUf(AuthBearerToken.getAuthBearerToken(getContext()), ufId);
 
         call.enqueue(new Callback<ResponseRulesFromUf>() {
             @Override
@@ -232,15 +246,12 @@ public class NewTaskFragment extends Fragment {
                     List<Rule> rules = responseRulesFromUf.getBody();
                     setRulesInDropdown(rules);
                 } else {
-                    Toast toast;
-                    toast = Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT);
-                    toast.setMargin(50,50);
-                    toast.show();
+                    ToastError.execute(getContext(), response.toString());
                 }
             }
             @Override
             public void onFailure(Call<ResponseRulesFromUf> call, Throwable t) {
-                Log.d("FAIL", t.getMessage());
+                ToastError.execute(getContext(), t.getMessage());
             }
         });
     }
@@ -254,7 +265,7 @@ public class NewTaskFragment extends Fragment {
 
         TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
 
-        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms", postTaskRequest);
+        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf(AuthBearerToken.getAuthBearerToken(getContext()), postTaskRequest);
 
         call.enqueue(new Callback<PostTask>() {
             @Override
@@ -263,14 +274,13 @@ public class NewTaskFragment extends Fragment {
                     PostTask postTask = response.body();
                     Log.d("AQUI",postTask.getMessage());
                 } else {
-                    Toast toast;
-                    toast = Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT);
-                    toast.setMargin(50,50);
-                    toast.show();
+                    ToastError.execute(getContext(), response.toString());
                 }
             }
             @Override
-            public void onFailure(Call<PostTask> call, Throwable t) {}
+            public void onFailure(Call<PostTask> call, Throwable t) {
+                ToastError.execute(getContext(), t.getMessage());
+            }
         });
     }
 
