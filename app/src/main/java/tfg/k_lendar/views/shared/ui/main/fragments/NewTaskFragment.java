@@ -90,7 +90,6 @@ public class NewTaskFragment extends Fragment {
         descriptionLayout = view.findViewById(R.id.descriptionLayout);
         descriptionInput = view.findViewById(R.id.descriptionInput);
         saveButton = view.findViewById(R.id.saveButton);
-        System.out.println(AuthBearerToken.getAuthBearerToken(getContext()));
         getAllUfsFromModulesService();
         subjectsDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -214,14 +213,11 @@ public class NewTaskFragment extends Fragment {
                 } else {
                     ToastError.execute(getContext(), response.toString());
 
-                    System.out.println(response);
                 }
             }
             @Override
             public void onFailure(Call<HomeModules> call, Throwable t) {
                 ToastError.execute(getContext(), t.getMessage());
-                System.out.println(t.getCause());
-                System.out.println(t.getMessage());
             }
         });
     }
@@ -242,7 +238,6 @@ public class NewTaskFragment extends Fragment {
             public void onResponse(Call<ResponseRulesFromUf> call, Response<ResponseRulesFromUf> response) {
                 if (response.isSuccessful()) {
                     ResponseRulesFromUf responseRulesFromUf = response.body();
-                    System.out.println(response.body());
                     List<Rule> rules = responseRulesFromUf.getBody();
                     setRulesInDropdown(rules);
                 } else {
@@ -283,7 +278,4 @@ public class NewTaskFragment extends Fragment {
             }
         });
     }
-
-
-
 }

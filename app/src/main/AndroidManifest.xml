@@ -34,7 +34,6 @@
             android:theme="@style/Theme.MaterialComponents.DayNight"
             android:exported="true"
             android:label="@string/title_activity_navigation" >
-
         </activity>
         <activity
             android:name=".views.auth.AuthActivity"
