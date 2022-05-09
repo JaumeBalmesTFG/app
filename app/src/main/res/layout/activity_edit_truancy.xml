@@ -70,10 +70,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/plusButton"
+            android:id="@+id/minusButton"
             android:layout_height="wrap_content"
             android:layout_width="40dp"
-            android:text="+"
+            android:text="-"
             android:textSize="20dp"></Button>
 
         <TextView
@@ -87,10 +87,10 @@
             android:layout_marginEnd="10dp"></TextView>
 
         <Button
-            android:id="@+id/minusButton"
+            android:id="@+id/plusButton"
             android:layout_height="wrap_content"
             android:layout_width="40dp"
-            android:text="-"
+            android:text="+"
             android:textSize="20dp"></Button>
 
     </LinearLayout>

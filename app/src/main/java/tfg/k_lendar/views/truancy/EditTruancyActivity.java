@@ -45,38 +45,18 @@ public class EditTruancyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_truancy);
-    }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        menuSubject = view.findViewById(R.id.menuSubjects);
-        subjectDropDown = view.findViewById(R.id.subjectsDropdown);
-        ufTextView = view.findViewById(R.id.ufTextView);
-        menuUf = view.findViewById(R.id.menuUf);
-        ufDropDown = view.findViewById(R.id.ufDropdown);
-        hours = view.findViewById(R.id.hoursTextView);
-        hoursLayout = view.findViewById(R.id.hoursLayout);
-        plus = view.findViewById(R.id.plusButton);
-        minus = view.findViewById(R.id.minusButton);
-        hoursText = view.findViewById(R.id.hoursText);
-        reasonsTextView = view.findViewById(R.id.reasonTextView);
-        reasonsLayout = view.findViewById(R.id.reasonLayout);
-        reasonsInput = view.findViewById(R.id.reasonInput);
-
-
-
-        subjectDropDown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
-                Object item = parent.getItemAtPosition(position);
-                if (item instanceof Modules) {
-                    selectedModule = (Modules) item;
-                    ufsContainer.setVisibility(View.VISIBLE);
-                    setUfsInDropdown(selectedModule);
-                }
-            }
-        });
-
-
+        menuSubject = findViewById(R.id.menuSubjects);
+        subjectDropDown = findViewById(R.id.subjectsDropdown);
+        ufTextView = findViewById(R.id.ufTextView);
+        menuUf = findViewById(R.id.menuUf);
+        ufDropDown = findViewById(R.id.ufDropdown);
+        hours = findViewById(R.id.hoursTextView);
+        hoursLayout = findViewById(R.id.hoursLayout);
+        plus = findViewById(R.id.plusButton);
+        minus = findViewById(R.id.minusButton);
+        hoursText = findViewById(R.id.hoursText);
+        reasonsTextView = findViewById(R.id.reasonTextView);
+        reasonsLayout = findViewById(R.id.reasonLayout);
+        reasonsInput = findViewById(R.id.reasonInput);
     }
 }
