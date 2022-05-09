@@ -56,9 +56,7 @@ public class SubjectsFragment extends Fragment {
         points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("AQUIII", "CULO");
                 fabMenu.expand();
-                System.out.println("CULOCULO: " + fabMenu.isExpanded());
             }
         });
 
