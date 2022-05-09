@@ -25,16 +25,18 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuSubjects"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:text="Select subject"
-        />
+        android:hint="Select a subject">
+
+        <AutoCompleteTextView
+            android:id="@+id/subjectsDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -44,16 +46,18 @@
         android:textSize="25dp">
     </TextView>
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuUfs"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:text="Select UF"
-        />
+        android:hint="Select a subject">
+
+        <AutoCompleteTextView
+            android:id="@+id/ufDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -99,9 +103,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:text="9 / 10"
-            
             />
 
     </com.google.android.material.textfield.TextInputLayout>

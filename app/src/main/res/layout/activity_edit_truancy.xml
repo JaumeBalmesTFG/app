@@ -17,18 +17,22 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuSubjects"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-        <com.google.android.material.textfield.TextInputEditText
+        android:hint="Select a subject">
+
+        <AutoCompleteTextView
+            android:id="@+id/subjectsDropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select subject"
             />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/ufTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="UF"
@@ -37,18 +41,22 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuUf"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-        <com.google.android.material.textfield.TextInputEditText
+        android:hint="Select a subject">
+
+        <AutoCompleteTextView
+            android:id="@+id/ufDropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select UF"
             />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/hoursTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hours"
@@ -57,16 +65,19 @@
     </TextView>
 
     <LinearLayout
+        android:id="@+id/hoursLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/plusButton"
             android:layout_height="wrap_content"
             android:layout_width="40dp"
             android:text="+"
             android:textSize="20dp"></Button>
 
         <TextView
+            android:id="@+id/hoursText"
             android:layout_height="match_parent"
             android:layout_width="wrap_content"
             android:text="6"
@@ -76,6 +87,7 @@
             android:layout_marginEnd="10dp"></TextView>
 
         <Button
+            android:id="@+id/minusButton"
             android:layout_height="wrap_content"
             android:layout_width="40dp"
             android:text="-"
@@ -84,6 +96,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/reasonTextView"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,11 +105,13 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reasonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginEnd="20dp">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reasonEditText"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             />
