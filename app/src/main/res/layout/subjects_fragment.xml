@@ -7,7 +7,11 @@
     tools:context=".views.navigation.ui.subjects.SubjectsFragment"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -146,6 +150,6 @@
             app:fab_size="normal"
             app:fab_title="Archive" />
 
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    </com.getbase.floatingactionbutton.FloatingActionsMenu> -->
 
 </LinearLayout>

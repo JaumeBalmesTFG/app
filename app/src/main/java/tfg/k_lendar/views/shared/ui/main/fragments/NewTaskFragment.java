@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,17 +31,17 @@ import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
 import tfg.k_lendar.core.helpers.ToastError;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.rule.RulePlaceHolderApi;
-import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
+import tfg.k_lendar.http.api.services.taskTruancy.TaskTruancyPlaceHolderApi;
 import tfg.k_lendar.http.models.rule.ResponseRulesFromUf;
 import tfg.k_lendar.http.models.rule.Rule;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
-import tfg.k_lendar.http.models.taskTruency.Modules;
+import tfg.k_lendar.http.models.taskTruency.Module;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 
 public class NewTaskFragment extends Fragment {
-    ArrayAdapter<Modules> subjectsAdapter;
+    ArrayAdapter<Module> subjectsAdapter;
     ArrayAdapter<Uf> ufsAdapter;
     ArrayAdapter<Rule> rulesAdapter;
     TextInputLayout subjectsMenu;
@@ -61,8 +59,8 @@ public class NewTaskFragment extends Fragment {
     TextInputEditText titleInput;
     TextInputLayout descriptionLayout;
     TextInputEditText descriptionInput;
-    List<Modules> modules;
-    Modules selectedModule;
+    List<Module> modules;
+    Module selectedModule;
     Uf selectedUf;
     Rule selectedRule;
     Button saveButton;
@@ -96,8 +94,8 @@ public class NewTaskFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
                 Object item = parent.getItemAtPosition(position);
-                if (item instanceof Modules) {
-                    selectedModule = (Modules) item;
+                if (item instanceof Module) {
+                    selectedModule = (Module) item;
                     ufsContainer.setVisibility(View.VISIBLE);
                     setUfsInDropdown(selectedModule);
                 }
@@ -177,13 +175,13 @@ public class NewTaskFragment extends Fragment {
         return true;
     }
 
-    public void setSubjectsInDropdown(List<Modules> modules){
+    public void setSubjectsInDropdown(List<Module> modules){
         this.modules = modules;
         subjectsAdapter = new ArrayAdapter<>(this.getContext(), R.layout.dropdown_item, modules);
         subjectsDropdown.setAdapter(subjectsAdapter);
     }
 
-    public void setUfsInDropdown(Modules module){
+    public void setUfsInDropdown(Module module){
         ufsAdapter = new ArrayAdapter<Uf>(this.getContext(), R.layout.dropdown_item, module.getUfs());
         ufsDropdown.setAdapter(ufsAdapter);
     }
@@ -199,16 +197,16 @@ public class NewTaskFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
+        TaskTruancyPlaceHolderApi TaskTruancyPlaceHolderApi = retrofit.create(TaskTruancyPlaceHolderApi.class);
 
-        Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs(AuthBearerToken.getAuthBearerToken(getContext()));
+        Call<HomeModules> call = TaskTruancyPlaceHolderApi.getAllUfs(AuthBearerToken.getAuthBearerToken(getContext()));
 
         call.enqueue(new Callback<HomeModules>() {
             @Override
             public void onResponse(Call<HomeModules> call, Response<HomeModules> response) {
                 if (response.isSuccessful()) {
                     HomeModules homeModules = response.body();
-                    List<Modules> modules = homeModules.getBody();
+                    List<Module> modules = homeModules.getBody();
                     setSubjectsInDropdown(modules);
                 } else {
                     ToastError.execute(getContext(), response.toString());
@@ -258,9 +256,9 @@ public class NewTaskFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
+        TaskTruancyPlaceHolderApi TaskTruancyPlaceHolderApi = retrofit.create(TaskTruancyPlaceHolderApi.class);
 
-        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf(AuthBearerToken.getAuthBearerToken(getContext()), postTaskRequest);
+        Call<PostTask> call = TaskTruancyPlaceHolderApi.postUf(AuthBearerToken.getAuthBearerToken(getContext()), postTaskRequest);
 
         call.enqueue(new Callback<PostTask>() {
             @Override

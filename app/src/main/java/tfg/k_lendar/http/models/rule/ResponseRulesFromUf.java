@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import tfg.k_lendar.http.models.taskTruency.Modules;
-
 public class ResponseRulesFromUf {
 
     @SerializedName("message")

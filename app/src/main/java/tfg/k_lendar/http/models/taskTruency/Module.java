@@ -6,31 +6,49 @@ import java.util.List;
 
 public class Module {
 
-        @SerializedName("name")
-        private String name;
+    @SerializedName("_id")
+    private String id;
 
-        @SerializedName("color")
-        private String color;
+    @SerializedName("name")
+    private String name;
 
-        @SerializedName("ufs")
-        private List<PostTaskRequest> postTaskRequest;
+    @SerializedName("color")
+    private String color;
 
-        @SerializedName("globalModuleGrade")
-        private int globalModuleGrade;
+    @SerializedName("ufs")
+    private List<Uf> ufs;
 
-        public String getName() {
-            return name;
-        }
+    public Module(String id, String name, String color, List<Uf> ufs) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+        this.ufs = ufs;
+    }
 
-        public String getColor() {
-            return color;
-        }
+    public Module(String id, String name, String color) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+    }
 
-        public List<PostTaskRequest> getuf() {
-            return postTaskRequest;
-        }
+    public String getId() {
+        return id;
+    }
 
-        public int getGlobalModuleGrade() {
-            return globalModuleGrade;
-        }
+    public String getName() {
+        return name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public List<Uf> getUfs() {
+        return ufs;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

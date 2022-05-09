@@ -13,12 +13,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.R;
+import tfg.k_lendar.core.helpers.ToastError;
+import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
+import tfg.k_lendar.http.api.services.taskTruancy.TaskTruancyPlaceHolderApi;
+import tfg.k_lendar.http.models.recyclerView.modules.ChildUf;
+import tfg.k_lendar.http.models.recyclerView.modules.ParentModule;
+import tfg.k_lendar.http.models.taskTruency.HomeModules;
+import tfg.k_lendar.http.models.taskTruency.HomeModulesAggregate;
+import tfg.k_lendar.http.models.taskTruency.Module;
+import tfg.k_lendar.views.navigation.ui.subjects.adapter.ChildUfAdapter;
+import tfg.k_lendar.views.navigation.ui.subjects.adapter.ParentModuleAdapter;
 
 public class SubjectsFragment extends Fragment {
 
@@ -29,6 +48,7 @@ public class SubjectsFragment extends Fragment {
     FloatingActionButton close, add, archive, edit;
     FloatingActionsMenu fabMenu;
     View view;
+    RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,24 +56,29 @@ public class SubjectsFragment extends Fragment {
         view = inflater.inflate(R.layout.subjects_fragment, container, false);
 
 
-        subjectsViewModel =
-                new ViewModelProvider(this).get(SubjectsViewModel.class);
-
         binding = SubjectsFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        fabMenu = binding.menuFab;
+        getAllUfsFromModulesService();
+
+        /*fabMenu = binding.menuFab;
 
         buttonEdit = binding.buttonEdit;
         points = binding.buttonPoints;
         close = binding.accionClose;
         add = binding.accionAdd;
         archive = binding.accionArchive;
-        edit = binding.accionEdit;
+        edit = binding.accionEdit; */
 
 
 
-        points.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+
+
+/*        points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fabMenu.expand();
@@ -72,16 +97,47 @@ public class SubjectsFragment extends Fragment {
             public void onClick(View view) {
 
             }
-        });
+        });*/
+        return root;
+    }
 
-        final TextView textView = binding.textSubjects;
-        subjectsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    public void getAllUfsFromModulesService() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TaskTruancyPlaceHolderApi TaskTruancyPlaceHolderApi = retrofit.create(TaskTruancyPlaceHolderApi.class);
+
+        Call<HomeModulesAggregate> call = TaskTruancyPlaceHolderApi.getAllUfsAggregate(AuthBearerToken.getAuthBearerToken(getContext()));
+
+        call.enqueue(new Callback<HomeModulesAggregate>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onResponse(Call<HomeModulesAggregate> call, Response<HomeModulesAggregate> response) {
+                if (response.isSuccessful()) {
+                    HomeModulesAggregate homeModules = response.body();
+                    List<ParentModule> modules = homeModules.getBody();
+                    System.out.println(modules);
+                    System.out.println(modules.get(0).getName());
+                    setRecyclerViewData(modules);
+                } else {
+                    ToastError.execute(getContext(), response.toString());
+
+                }
+            }
+            @Override
+            public void onFailure(Call<HomeModulesAggregate> call, Throwable t) {
+                ToastError.execute(getContext(), t.getMessage());
             }
         });
-        return root;
+    }
+
+    public void setRecyclerViewData(List<ParentModule> modules) {
+        System.out.println(modules);
+        recyclerView = view.findViewById(R.id.mainRecyclerView);
+        System.out.println(recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(new ParentModuleAdapter(modules));
     }
 
     @Override

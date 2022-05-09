@@ -4,15 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class HomeModules {
+import tfg.k_lendar.http.models.recyclerView.modules.ParentModule;
+
+public class HomeModulesAggregate {
 
     @SerializedName("message")
     private String message;
 
     @SerializedName("body")
-    private List<Module> body;
+    private List<ParentModule> body;
 
-    public HomeModules(String message, List<Module> body) {
+    public HomeModulesAggregate(String message, List<ParentModule> body) {
         this.message = message;
         this.body = body;
     }
@@ -21,7 +23,7 @@ public class HomeModules {
         return message;
     }
 
-    public List<Module> getBody() {
+    public List<ParentModule> getBody() {
         return body;
     }
 }
