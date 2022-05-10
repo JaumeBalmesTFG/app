@@ -17,9 +17,9 @@ public interface TaskPlaceHolderApi {
     Call<PostTask> postTask(@Header("Authorization") String token, @Body PostTaskRequest postTaskRequest);
 
     @PUT("task/{uf_id}") //RUTA asi o task/{task_id}????
-    Call<Task> editTask(@Body TaskRequest taskRequest);
+    Call<Task> editTask(@Header("Authorization") String token, @Body TaskRequest taskRequest);
 
     @GET("task/{uf_id}")
-    Call<Task> getTask();
+    Call<Task> getTask(@Header("Authorization") String token);
 
 }
