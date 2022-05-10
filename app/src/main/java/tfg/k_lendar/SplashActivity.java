@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         String token = sharedPref.getString("token", "");
         Intent intent;
         Log.d("AQUI", "CASDASDS");
-        getTruancyService("624f06f1f655ffec45ea93ae");
+        //getTruancyService("624f06f1f655ffec45ea93ae");
         /*postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
                 "6273f2aba0cccb5b1687bc29",
                 "ANDRII",
@@ -342,6 +342,37 @@ public class SplashActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<TruancyGetRecieve> call, Throwable t) {}
+        });
+    }
+
+    public void deleteTruancyService(String id){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TruancyPlaceHolderApi truancyPlaceHolderApi = retrofit.create(TruancyPlaceHolderApi.class);
+
+        Call<Truancy> call = truancyPlaceHolderApi.deleteTruancy(id,"Bearer"+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtsZW5kYXJAZ21haWwuY29tIiwiX2lkIjoiNjI3YTc4YjU0M2U5NjQ1MmUxZmNkYmMxIiwiaWF0IjoxNjUyMTkzNDYxfQ.72d4aELj4YrCIEZdDDp0WntH_VbP_5k3qSFUr0u7ZIk");
+
+        call.enqueue(new Callback<Truancy>() {
+            @Override
+            public void onResponse(Call<Truancy> call, Response<Truancy> response) {
+                if (response.isSuccessful()) {
+                    Truancy truancy = response.body();
+                    Log.d("AQUI", "METHOD DELETE");
+                    Log.d("AQUI", "MESSAGE: "+truancy.getMessage());
+
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Truancy> call, Throwable t) {}
         });
     }
 
