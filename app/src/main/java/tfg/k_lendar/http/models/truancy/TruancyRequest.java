@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class TruancyRequest {
 
+    @SerializedName("moduleId")
+    private String moduleId;
+
     @SerializedName("ufId")
     private String ufId;
 
@@ -16,7 +19,8 @@ public class TruancyRequest {
     @SerializedName("hours")
     private int hours;
 
-    public TruancyRequest(String ufId, String date, String reason, int hours) {
+    public TruancyRequest(String moduleId, String ufId, String date, String reason, int hours) {
+        this.moduleId = moduleId;
         this.ufId = ufId;
         this.date = date;
         this.reason = reason;

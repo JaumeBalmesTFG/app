@@ -40,7 +40,6 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String token = sharedPref.getString("token", "");
         Intent intent;
-        Log.d("AQUI", "CASDASDS");
         /*postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
                 "6273f2aba0cccb5b1687bc29",
                 "ANDRII",

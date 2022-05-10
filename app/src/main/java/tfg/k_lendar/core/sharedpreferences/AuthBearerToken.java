@@ -6,8 +6,8 @@ import android.preference.PreferenceManager;
 
 public class AuthBearerToken {
      public static String getAuthBearerToken(Context context) {
-         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-         String token = sharedPref.getString("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtsZW5kYXJAZ21haWwuY29tIiwiX2lkIjoiNjI3OTI1ZTFiOTgzNGY5ZGVhYTdhY2M4IiwiaWF0IjoxNjUyMTA2NzIxfQ.gNGUmUKsMP0V6aGUgJQkA2O58dXKvAH-XK-QzvrCYAc");
-         return "Bearer " + token;
+         //SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+         //String token = sharedPref.getString("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtsZW5kYXJAZ21haWwuY29tIiwiX2lkIjoiNjI3YTc4YjU0M2U5NjQ1MmUxZmNkYmMxIiwiaWF0IjoxNjUyMTkzNDYxfQ.72d4aELj4YrCIEZdDDp0WntH_VbP_5k3qSFUr0u7ZIk");
+         return "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtsZW5kYXJAZ21haWwuY29tIiwiX2lkIjoiNjI3YTc4YjU0M2U5NjQ1MmUxZmNkYmMxIiwiaWF0IjoxNjUyMTkzNDYxfQ.72d4aELj4YrCIEZdDDp0WntH_VbP_5k3qSFUr0u7ZIk";
      }
 }

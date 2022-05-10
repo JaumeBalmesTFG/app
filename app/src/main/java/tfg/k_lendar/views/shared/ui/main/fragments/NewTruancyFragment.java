@@ -109,7 +109,7 @@ public class NewTruancyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (validateTruancyForm()) {
-                    postTruancyService(new TruancyRequest(selectedModule.getId(),"2022-04-04",String.valueOf(reasonInput.getText()),Integer.parseInt(String.valueOf(hoursInput.getText()))));
+                    postTruancyService(new TruancyRequest(selectedModule.getId(), selectedUf.getId(), "04-04-2022",String.valueOf(reasonInput.getText()),Integer.parseInt(String.valueOf(hoursInput.getText()))));
                 }
             }
         });
@@ -189,7 +189,6 @@ public class NewTruancyFragment extends Fragment {
             public void onResponse(Call<Truancy> call, Response<Truancy> response) {
                 if (response.isSuccessful()) {
                     Truancy truancy = response.body();
-                    Log.d("AQUI",truancy.getMessage());
                 } else {
                     ToastError.execute(getContext(), response.toString());
                 }

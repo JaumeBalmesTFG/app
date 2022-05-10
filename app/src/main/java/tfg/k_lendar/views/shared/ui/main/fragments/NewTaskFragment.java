@@ -267,7 +267,6 @@ public class NewTaskFragment extends Fragment {
             public void onResponse(Call<PostTask> call, Response<PostTask> response) {
                 if (response.isSuccessful()) {
                     PostTask postTask = response.body();
-                    Log.d("AQUI",postTask.getMessage());
                 } else {
                     ToastError.execute(getContext(), response.toString());
                 }
