@@ -16,7 +16,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.http.api.services.task.TaskPlaceHolderApi;
-import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
+import tfg.k_lendar.http.api.services.taskTruancy.TaskTruancyPlaceHolderApi;
+import tfg.k_lendar.http.api.services.truancy.TruancyPlaceHolderApi;
 import tfg.k_lendar.http.api.services.uf.UfPlaceHolderApi;
 import tfg.k_lendar.http.models.task.Task;
 import tfg.k_lendar.http.models.task.TaskRequest;
@@ -24,6 +25,11 @@ import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
+import tfg.k_lendar.http.models.truancy.Truancy;
+import tfg.k_lendar.http.models.truancy.TruancyGet;
+import tfg.k_lendar.http.models.truancy.TruancyGetRecieve;
+import tfg.k_lendar.http.models.truancy.TruancyGetRequest;
+import tfg.k_lendar.http.models.truancy.TruancyRequest;
 import tfg.k_lendar.http.models.uf.PostUf;
 import tfg.k_lendar.http.models.uf.UfRequest;
 
@@ -87,9 +93,9 @@ public class SplashActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
+        TaskTruancyPlaceHolderApi taskTruancyPlaceHolderApi = retrofit.create(TaskTruancyPlaceHolderApi.class);
 
-        Call<HomeModules> call = taskTruencyPlaceHolderApi.getAllUfs("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms");
+        Call<HomeModules> call = taskTruancyPlaceHolderApi.getAllUfs("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms");
 
         call.enqueue(new Callback<HomeModules>() {
             @Override
@@ -272,6 +278,69 @@ public class SplashActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<Task> call, Throwable t) {}
+        });
+    }
+
+    public void putEditTruancyService(TruancyRequest truancyRequest){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TruancyPlaceHolderApi truancyPlaceHolderApi = retrofit.create(TruancyPlaceHolderApi.class);
+
+        Call<Truancy> call = truancyPlaceHolderApi.editTruancy("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms",truancyRequest);
+
+        call.enqueue(new Callback<Truancy>() {
+            @Override
+            public void onResponse(Call<Truancy> call, Response<Truancy> response) {
+                if (response.isSuccessful()) {
+                    Truancy truancy = response.body();
+                    Log.d("AQUI", "METHOD PUT");
+                    Log.d("AQUI", "MESSAGE: "+truancy.getMessage());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Truancy> call, Throwable t) {}
+        });
+    }
+
+    public void getTruancyService(TruancyGetRequest truancyGetRequest){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TruancyPlaceHolderApi truancyPlaceHolderApi = retrofit.create(TruancyPlaceHolderApi.class);
+
+        Call<TruancyGetRecieve> call = truancyPlaceHolderApi.getTruancy("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms",truancyGetRequest);
+
+        call.enqueue(new Callback<TruancyGetRecieve>() {
+            @Override
+            public void onResponse(Call<TruancyGetRecieve> call, Response<TruancyGetRecieve> response) {
+                if (response.isSuccessful()) {
+                    TruancyGetRecieve truancyGetRecieve = response.body();
+                    TruancyGet truancyGet = truancyGetRecieve.getBody();
+                    Log.d("AQUI", "METHOD GET");
+                    Log.d("AQUI", "MESSAGE: "+truancyGetRecieve.getMessage());
+                    Log.d("AQUI", "TO STRING: "+truancyGet.toString());
+
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<TruancyGetRecieve> call, Throwable t) {}
         });
     }
 
