@@ -223,7 +223,7 @@ public class SplashActivity extends AppCompatActivity {
 
         TaskPlaceHolderApi taskPlaceHolderApi = retrofit.create(TaskPlaceHolderApi.class);
 
-        Call<Task> call = taskPlaceHolderApi.editTask("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms",taskRequest);
+        Call<Task> call = taskPlaceHolderApi.editTask(id,"Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms",taskRequest);
 
         call.enqueue(new Callback<Task>() {
             @Override
@@ -254,7 +254,7 @@ public class SplashActivity extends AppCompatActivity {
 
         TaskPlaceHolderApi taskPlaceHolderApi = retrofit.create(TaskPlaceHolderApi.class);
 
-        Call<Task> call = taskPlaceHolderApi.getTask("Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms");
+        Call<Task> call = taskPlaceHolderApi.getTask(id,"Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms");
 
         call.enqueue(new Callback<Task>() {
             @Override
