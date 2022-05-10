@@ -214,7 +214,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    public void editPutTaskService(TaskRequest taskRequest){
+    public void editPutTaskService(String id,TaskRequest taskRequest){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.klendar.es/")
@@ -245,7 +245,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    public void getTaskService(){
+    public void getTaskService(String id){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.klendar.es/")
