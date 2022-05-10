@@ -245,4 +245,36 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+    public void getTaskService(){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TaskPlaceHolderApi taskPlaceHolderApi = retrofit.create(TaskPlaceHolderApi.class);
+
+        Call<Task> call = taskPlaceHolderApi.getTask();
+
+        call.enqueue(new Callback<Task>() {
+            @Override
+            public void onResponse(Call<Task> call, Response<Task> response) {
+                if (response.isSuccessful()) {
+                    Task task = response.body();
+                    Log.d("AQUI", "METHOD GET");
+                    Log.d("AQUI", "MESSAGE: "+task.getMessage());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Task> call, Throwable t) {}
+        });
+    }
+
+
+
 }

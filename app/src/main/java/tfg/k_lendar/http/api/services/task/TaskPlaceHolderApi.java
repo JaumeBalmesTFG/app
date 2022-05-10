@@ -2,6 +2,7 @@ package tfg.k_lendar.http.api.services.task;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -17,5 +18,8 @@ public interface TaskPlaceHolderApi {
 
     @PUT("task/{uf_id}") //RUTA asi o task/{task_id}????
     Call<Task> editTask(@Body TaskRequest taskRequest);
+
+    @GET("task/{uf_id}")
+    Call<Task> getTask();
 
 }
