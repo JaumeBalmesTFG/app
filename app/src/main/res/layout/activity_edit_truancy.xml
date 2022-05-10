@@ -17,15 +17,19 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/subjectMenuEditTruancy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-        <com.google.android.material.textfield.TextInputEditText
+        android:hint="Select a Subject">
+
+        <AutoCompleteTextView
+            android:id="@+id/subjectDropDownEditTruancy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select subject"
+            android:layout_marginEnd="20dp"
             />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -37,15 +41,19 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ufMenuEditTruancy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-        <com.google.android.material.textfield.TextInputEditText
+        android:hint="Select a UF">
+
+        <AutoCompleteTextView
+            android:id="@+id/ufDropDownEditTruancy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select UF"
+            android:layout_marginEnd="20dp"
             />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -56,32 +64,44 @@
         android:layout_marginTop="15dp">
     </TextView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:layout_height="wrap_content"
-            android:layout_width="40dp"
-            android:text="+"
-            android:textSize="20dp"></Button>
 
-        <TextView
-            android:layout_height="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/hoursLayoutEditTruancy"
             android:layout_width="wrap_content"
-            android:text="6"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"></TextView>
-
-        <Button
             android:layout_height="wrap_content"
-            android:layout_width="40dp"
-            android:text="-"
-            android:textSize="20dp"></Button>
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/plusButtonEditTruancy"
+                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:text="+"
+                android:textSize="20dp"></Button>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/hoursTextViewEditTruancy"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="6"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"></TextView>
+
+            <Button
+                android:id="@+id/minusButtonEditTruancy"
+                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:text="-"
+                android:textSize="20dp"></Button>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <TextView
         android:layout_marginTop="15dp"
@@ -97,6 +117,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginEnd="20dp">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reasonInputEditTruancy"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             />
@@ -111,21 +132,21 @@
         android:layout_marginEnd="20dp">
 
         <Button
-            android:id="@+id/saveButton"
+            android:id="@+id/saveButtonEditTruancy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="save"
             android:layout_marginEnd="15dp"
             />
         <Button
-            android:id="@+id/removeButton"
+            android:id="@+id/removeButtonEditTruancy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remove"
             style="?attr/materialButtonOutlinedStyle"
             />
         <Button
-            android:id="@+id/cancelButton"
+            android:id="@+id/cancelButtonEditTruancy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"

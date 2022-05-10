@@ -58,7 +58,7 @@ public class EditTaskActivity extends AppCompatActivity {
     TextInputEditText gradeInput;
     Button saveButton, removeButton, cancelButton;
 
-    ArrayAdapter<Subject> subjectAdapter;
+    ArrayAdapter<Modules> subjectAdapter;
     ArrayAdapter<Uf> ufsAdapter;
 
 
@@ -188,7 +188,7 @@ public class EditTaskActivity extends AppCompatActivity {
         RulePlaceHolderApi rulePlaceHolderApi = retrofit.create(RulePlaceHolderApi.class);
 
 
-        Call<ResponseRulesFromUf> call = rulePlaceHolderApi.getRulesFromUf(AuthBearerToken.getAuthBearerToken(getContext()), ufId);
+        Call<ResponseRulesFromUf> call = rulePlaceHolderApi.getRulesFromUf(AuthBearerToken.getAuthBearerToken(context), ufId);
 
         call.enqueue(new Callback<ResponseRulesFromUf>() {
             @Override
@@ -196,7 +196,7 @@ public class EditTaskActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ResponseRulesFromUf responseRulesFromUf = response.body();
                     List<Rule> rules = responseRulesFromUf.getBody();
-                    setRulesInDropdown(rules);
+                   // setRulesInDropdown(rules);
                 } else {
                     ToastError.execute(context, response.toString());
                 }
