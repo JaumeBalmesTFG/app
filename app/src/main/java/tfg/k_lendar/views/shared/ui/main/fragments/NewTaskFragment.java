@@ -184,7 +184,7 @@ public class NewTaskFragment extends Fragment {
     }
 
     public void setUfsInDropdown(Modules module){
-        ufsAdapter = new ArrayAdapter<Uf>(this.getContext(), R.layout.dropdown_item, module.getUfs());
+        ufsAdapter = new ArrayAdapter<>(this.getContext(), R.layout.dropdown_item, module.getUfs());
         ufsDropdown.setAdapter(ufsAdapter);
     }
 
