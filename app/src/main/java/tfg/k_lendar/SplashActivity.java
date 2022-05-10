@@ -43,13 +43,14 @@ public class SplashActivity extends AppCompatActivity {
         String token = sharedPref.getString("token", "");
         Intent intent;
         Log.d("AQUI", "CASDASDS");
-        postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
+        getTruancyService("624f06f1f655ffec45ea93ae",new TruancyGetRequest("624ef85b5adb606bffc6bf5b","Uf java",5,"uf de java","2022-04-08"));
+        /*postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
                 "6273f2aba0cccb5b1687bc29",
                 "ANDRII",
                 9,
                 "EXAMPLE DESCRIPTION",
                 "2022-05-04"
-                ));
+                ));*/
         /*if (!token.equals("")) {
             intent = new Intent(this, NavigationActivity.class);
         } else {
@@ -311,7 +312,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    public void getTruancyService(TruancyGetRequest truancyGetRequest){
+    public void getTruancyService(String id,TruancyGetRequest truancyGetRequest){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.klendar.es/")
