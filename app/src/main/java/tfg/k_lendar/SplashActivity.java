@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         String token = sharedPref.getString("token", "");
         Intent intent;
         Log.d("AQUI", "CASDASDS");
-        getTruancyService("624f06f1f655ffec45ea93ae",new TruancyGetRequest("624ef85b5adb606bffc6bf5b","Uf java",5,"uf de java","2022-04-08"));
+        getTruancyService("624f06f1f655ffec45ea93ae");
         /*postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
                 "6273f2aba0cccb5b1687bc29",
                 "ANDRII",
@@ -312,7 +312,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    public void getTruancyService(String id,TruancyGetRequest truancyGetRequest){
+    public void getTruancyService(String id){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.klendar.es/")
@@ -321,7 +321,7 @@ public class SplashActivity extends AppCompatActivity {
 
         TruancyPlaceHolderApi truancyPlaceHolderApi = retrofit.create(TruancyPlaceHolderApi.class);
 
-        Call<TruancyGetRecieve> call = truancyPlaceHolderApi.getTruancy(id,"Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms",truancyGetRequest);
+        Call<TruancyGetRecieve> call = truancyPlaceHolderApi.getTruancy(id,"Bearer"+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtsZW5kYXJAZ21haWwuY29tIiwiX2lkIjoiNjI3YTc4YjU0M2U5NjQ1MmUxZmNkYmMxIiwiaWF0IjoxNjUyMTkzNDYxfQ.72d4aELj4YrCIEZdDDp0WntH_VbP_5k3qSFUr0u7ZIk");
 
         call.enqueue(new Callback<TruancyGetRecieve>() {
             @Override

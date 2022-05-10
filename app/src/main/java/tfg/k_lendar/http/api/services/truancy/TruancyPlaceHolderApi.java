@@ -18,5 +18,5 @@ public interface TruancyPlaceHolderApi {
     Call<Truancy> editTruancy(@Header("Authorization") String token,@Body TruancyRequest truancyRequest);
 
     @GET("truancy/{id}")
-    Call<TruancyGetRecieve> getTruancy(@Query("id") String id, @Header("Authorization") String token, @Body TruancyGetRequest truancyGetRequest);
+    Call<TruancyGetRecieve> getTruancy(@Query("id") String id, @Header("Authorization") String token);
 }
