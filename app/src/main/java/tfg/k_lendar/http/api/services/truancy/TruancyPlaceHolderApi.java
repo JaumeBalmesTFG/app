@@ -5,6 +5,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 import tfg.k_lendar.http.models.truancy.Truancy;
 import tfg.k_lendar.http.models.truancy.TruancyGet;
 import tfg.k_lendar.http.models.truancy.TruancyGetRecieve;
@@ -16,6 +17,6 @@ public interface TruancyPlaceHolderApi {
     @PUT("truancy/create")
     Call<Truancy> editTruancy(@Header("Authorization") String token,@Body TruancyRequest truancyRequest);
 
-    @GET("truancy/{{id}}")
-    Call<TruancyGetRecieve> getTruancy(@Header("Authorization") String token,@Body TruancyGetRequest truancyGetRequest);
+    @GET("truancy/{id}")
+    Call<TruancyGetRecieve> getTruancy(@Query("id") String id, @Header("Authorization") String token, @Body TruancyGetRequest truancyGetRequest);
 }
