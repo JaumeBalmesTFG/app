@@ -2,6 +2,7 @@ package tfg.k_lendar.http.api.services.task;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -22,5 +23,10 @@ public interface TaskPlaceHolderApi {
 
     @GET("task/{id}")
     Call<Task> getTask(@Query("id") String id,@Header("Authorization") String token);
+
+    @DELETE("task/{id}/delete")
+    Call<Task> deleteTask(@Query("id") String id,@Header("Authorization") String token);
+
+
 
 }

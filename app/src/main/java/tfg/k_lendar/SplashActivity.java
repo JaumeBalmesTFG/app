@@ -278,6 +278,36 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+    public void deleteTaskService(String id){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TaskPlaceHolderApi taskPlaceHolderApi = retrofit.create(TaskPlaceHolderApi.class);
+
+        Call<Task> call = taskPlaceHolderApi.deleteTask(id,"Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pcXVlbGxpYW9AZ21haWwuY29tIiwiX2lkIjoiNjI3M2UzMGRhMGNjY2I1YjE2ODdiOGI3IiwiaWF0IjoxNjUxNzYxOTMzfQ.c12bNy_NW6PLWIUyogLsShT1OFcB8JRltIDD-igxKms");
+
+        call.enqueue(new Callback<Task>() {
+            @Override
+            public void onResponse(Call<Task> call, Response<Task> response) {
+                if (response.isSuccessful()) {
+                    Task task = response.body();
+                    Log.d("AQUI", "METHOD DELETE");
+                    Log.d("AQUI", "MESSAGE: "+task.getMessage());
+                } else {
+                    Toast toast;
+                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Task> call, Throwable t) {}
+        });
+    }
+
 
 
 }
