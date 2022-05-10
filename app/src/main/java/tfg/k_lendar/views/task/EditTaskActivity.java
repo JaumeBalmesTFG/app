@@ -1,12 +1,7 @@
 package tfg.k_lendar.views.task;
 
-import static java.security.AccessController.getContext;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -48,6 +43,9 @@ public class EditTaskActivity extends AppCompatActivity {
     Context context;
     TextInputLayout subjectMenu;
     AutoCompleteTextView subjectDropDown;
+
+    ArrayAdapter<Rule> rulesAdapter;
+    AutoCompleteTextView rulesDropdown;
     TextInputLayout ufMenu;
     AutoCompleteTextView ufDropDown;
     TextInputLayout titleLayout;
@@ -58,7 +56,7 @@ public class EditTaskActivity extends AppCompatActivity {
     TextInputEditText gradeInput;
     Button saveButton, removeButton, cancelButton;
 
-    ArrayAdapter<Subject> subjectAdapter;
+    ArrayAdapter<Modules> subjectAdapter;
     ArrayAdapter<Uf> ufsAdapter;
 
 
@@ -88,6 +86,7 @@ public class EditTaskActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButtonEditTask);
         removeButton = findViewById(R.id.removeButtonEditTask);
         cancelButton = findViewById(R.id.cancelButtonEditTask);
+        rulesDropdown = findViewById(R.id.rulesDropdown);
         context = this;
 
         subjectDropDown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -150,6 +149,11 @@ public class EditTaskActivity extends AppCompatActivity {
         ufDropDown.setAdapter(ufsAdapter);
     }
 
+    public void setRulesInDropdown(List<Rule> rules) {
+        rulesAdapter = new ArrayAdapter<>(context, R.layout.dropdown_item, rules);
+        rulesDropdown.setAdapter(rulesAdapter);
+    }
+
     public void getAllUfsFromModulesService(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.klendar.es/")
@@ -188,7 +192,7 @@ public class EditTaskActivity extends AppCompatActivity {
         RulePlaceHolderApi rulePlaceHolderApi = retrofit.create(RulePlaceHolderApi.class);
 
 
-        Call<ResponseRulesFromUf> call = rulePlaceHolderApi.getRulesFromUf(AuthBearerToken.getAuthBearerToken(getContext()), ufId);
+        Call<ResponseRulesFromUf> call = rulePlaceHolderApi.getRulesFromUf(AuthBearerToken.getAuthBearerToken(this), ufId);
 
         call.enqueue(new Callback<ResponseRulesFromUf>() {
             @Override

@@ -9,170 +9,178 @@
     android:orientation="vertical"
     android:layout_marginStart="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Random Task"
-        android:textSize="40dp"
-        android:layout_marginBottom="20dp">
-    </TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Subject"
-        android:textSize="25dp">
-    </TextView>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/subjectMenuEditTask"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Select a Subject">
-
-        <AutoCompleteTextView
-            android:id="@+id/subjectDropDownEditTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UF"
-        android:textSize="25dp">
-    </TextView>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ufMenuEditTask"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Select a Subject">
-
-        <AutoCompleteTextView
-            android:id="@+id/ufDropDownEditTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="25dp">
-    </TextView>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/titleLayoutEditTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/titleInputEditTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descriptionLayoutEditTask"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Write a description">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/descriptionInputEditTask"
-            android:layout_width="match_parent"
-            android:inputType="textMultiLine"
-            android:lines="4"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/doneSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="Done"
-        android:textSize="15dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Grade"
-        android:textSize="25dp">
-    </TextView>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginEnd="20dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/gradeInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:text="9 / 10"
-            
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="20dp">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/saveButtonEditTask"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save"
-            android:layout_marginEnd="15dp"
-            />
-        <Button
-            android:id="@+id/removeButtonEditTask"
+            android:text="Random Task"
+            android:textSize="40dp"
+            android:layout_marginBottom="20dp">
+        </TextView>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remove"
-            style="?attr/materialButtonOutlinedStyle"
-            />
-        <Button
-            android:id="@+id/cancelButtonEditTask"
+            android:text="Subject"
+            android:textSize="25dp">
+        </TextView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/subjectMenuEditTask"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select a Subject">
+
+            <AutoCompleteTextView
+                android:id="@+id/subjectDropDownEditTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:layout_marginStart="15dp"
-            style="?attr/materialButtonOutlinedStyle"
-            />
+            android:text="UF"
+            android:textSize="25dp">
+        </TextView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ufMenuEditTask"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select a Subject">
+
+            <AutoCompleteTextView
+                android:id="@+id/ufDropDownEditTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="25dp">
+        </TextView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleLayoutEditTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginEnd="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleInputEditTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="25dp"
+            android:layout_marginTop="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionLayoutEditTask"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Write a description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionInputEditTask"
+                android:layout_width="match_parent"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/doneSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Done"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grade"
+            android:textSize="25dp">
+        </TextView>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginEnd="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/gradeInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Nota"
+                android:text=""
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp">
+
+            <Button
+                android:id="@+id/saveButtonEditTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="save"
+                android:layout_marginEnd="15dp"
+                />
+            <Button
+                android:id="@+id/removeButtonEditTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove"
+                style="?attr/materialButtonOutlinedStyle"
+                />
+            <Button
+                android:id="@+id/cancelButtonEditTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_marginStart="15dp"
+                style="?attr/materialButtonOutlinedStyle"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 </ScrollView>
