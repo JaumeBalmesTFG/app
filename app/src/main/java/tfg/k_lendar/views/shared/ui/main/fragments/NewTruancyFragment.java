@@ -188,7 +188,7 @@ public class NewTruancyFragment extends Fragment {
             @Override
             public void onResponse(Call<Truancy> call, Response<Truancy> response) {
                 if (response.isSuccessful()) {
-                    Truancy truancy = response.body();
+                      Truancy truancy = response.body();
                 } else {
                     ToastError.execute(getContext(), response.toString());
                 }
