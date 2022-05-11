@@ -41,6 +41,7 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.shared.TaskTruancyActivity;
 
 public class NewTaskFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -75,6 +76,7 @@ public class NewTaskFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        System.out.println("Desde new task: " + TaskTruancyActivity.date);
         subjectsMenu = view.findViewById(R.id.menuSubjects);
         subjectsDropdown = view.findViewById(R.id.subjectsDropdown);
         ufsMenu = view.findViewById(R.id.menuUfs);

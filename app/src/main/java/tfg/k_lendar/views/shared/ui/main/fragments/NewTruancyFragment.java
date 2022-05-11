@@ -37,6 +37,7 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.http.models.truancy.Truancy;
 import tfg.k_lendar.http.models.truancy.TruancyRequest;
+import tfg.k_lendar.views.shared.TaskTruancyActivity;
 
 public class NewTruancyFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -68,6 +69,7 @@ public class NewTruancyFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        System.out.println("Desde new Truancy: " + TaskTruancyActivity.date);
         subjectsMenu = view.findViewById(R.id.menuSubjectsT);
         subjectsDropdown = view.findViewById(R.id.subjectsDropdownT);
         ufsMenu = view.findViewById(R.id.menuUfsT);

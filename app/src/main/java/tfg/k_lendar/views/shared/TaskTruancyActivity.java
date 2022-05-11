@@ -1,5 +1,6 @@
 package tfg.k_lendar.views.shared;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,6 +17,7 @@ import tfg.k_lendar.views.shared.ui.main.SectionsPagerAdapter;
 
 public class TaskTruancyActivity extends AppCompatActivity {
 
+    public static String date;
     private ActivityTaskTruancyBinding binding;
 
     @Override
@@ -24,7 +26,9 @@ public class TaskTruancyActivity extends AppCompatActivity {
 
         binding = ActivityTaskTruancyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        Intent intent = getIntent();
+        date = intent.getStringExtra("date");
+        System.out.println("Date desde Activity: " + date);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
