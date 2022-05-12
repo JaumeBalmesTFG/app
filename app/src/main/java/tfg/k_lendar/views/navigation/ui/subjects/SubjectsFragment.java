@@ -44,8 +44,9 @@ public class SubjectsFragment extends Fragment {
 
         fabMenu = binding.menuFab;
 
+        /*
         buttonEdit = binding.buttonEdit;
-        points = binding.buttonPoints;
+        points = binding.buttonPoints; */
         close = binding.accionClose;
         add = binding.accionAdd;
         archive = binding.accionArchive;
@@ -53,12 +54,12 @@ public class SubjectsFragment extends Fragment {
 
 
 
-        points.setOnClickListener(new View.OnClickListener() {
+/*        points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fabMenu.expand();
             }
-        });
+        }); */
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,13 +75,13 @@ public class SubjectsFragment extends Fragment {
             }
         });
 
-        final TextView textView = binding.textSubjects;
+        /*final TextView textView = binding.textSubjects;
         subjectsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        }); */
         return root;
     }
 
