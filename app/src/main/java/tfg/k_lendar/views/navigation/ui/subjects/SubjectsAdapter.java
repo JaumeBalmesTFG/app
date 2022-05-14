@@ -7,15 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import tfg.k_lendar.databinding.ItemSubjectRowViewBinding;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHolder> {
 
-    private final Modules[] subjects;
+    private final List<Modules> subjects;
     private final OnItemClickListener listener;
 
-    public SubjectsAdapter(Modules[] modulesList, OnItemClickListener listener) {
+    public SubjectsAdapter(List<Modules> modulesList, OnItemClickListener listener) {
         subjects = modulesList;
         this.listener = listener;
     }
@@ -38,18 +40,18 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.binding.subjectText.setText(subjects[position].getName());
-        holder.binding.buttonPoints.setOnClickListener(close -> listener.onItemClick(subjects[position]));
+        holder.binding.subjectText.setText(subjects.get(position).getName());
+        holder.binding.buttonPoints.setOnClickListener(close -> listener.onItemClick(subjects.get(position)));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
         holder.binding.recyclerUfs.setLayoutManager(layoutManager);
-        UfsAdapter adapter = new UfsAdapter(subjects[position].getUfs());
+        UfsAdapter adapter = new UfsAdapter(subjects.get(position).getUfs());
         holder.binding.recyclerUfs.setAdapter(adapter);
     }
 
     @Override
     public int getItemCount() {
-        return subjects.length;
+        return subjects.size();
     }
 
     public interface OnItemClickListener {

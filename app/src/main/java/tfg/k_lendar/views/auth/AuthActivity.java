@@ -29,7 +29,7 @@ import tfg.k_lendar.views.navigation.NavigationActivity;
 
 public class AuthActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://api.klendar.es/";
+    public static final String BASE_URL = "https://api.klendar.es/";
     private final String REGISTER = "REGISTER";
     private final String LOGIN = "LOGIN";
     private final String TOKEN = "token";
