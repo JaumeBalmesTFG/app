@@ -1,8 +1,6 @@
 package tfg.k_lendar.views.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,22 +8,16 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.button.MaterialButton;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.regex.Pattern;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import tfg.k_lendar.R;
 import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
+import tfg.k_lendar.databinding.ActivityAuthBinding;
+import tfg.k_lendar.http.api.ApiClient;
 import tfg.k_lendar.http.api.requests.auth.AuthRequest;
 import tfg.k_lendar.http.api.requests.auth.LoginRequest;
 import tfg.k_lendar.http.api.requests.auth.RegisterRequest;
@@ -37,89 +29,58 @@ import tfg.k_lendar.views.navigation.NavigationActivity;
 
 public class AuthActivity extends AppCompatActivity {
 
-    MaterialButton authButton;
-    TextInputEditText emailInput;
-    TextInputEditText firstNameInput;
-    TextInputEditText lastNameInput;
-    TextInputEditText passwordInput;
-    TextInputEditText newPasswordInput;
-    TextInputLayout emailLayout;
-    TextInputLayout firstNameLayout;
-    TextInputLayout lastNameLayout;
-    TextInputLayout passwordLayout;
-    TextInputLayout newPasswordLayout;
-    LinearLayoutCompat passwordContainer;
-    TextView actionTextLabel;
+    private static final String BASE_URL = "https://api.klendar.es/";
+    private final String REGISTER = "REGISTER";
+    private final String LOGIN = "LOGIN";
+    private final String TOKEN = "token";
     Intent intent;
+    private ActivityAuthBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
-        intent = new Intent(this, NavigationActivity.class);
-        actionTextLabel = findViewById(R.id.loginSignInText);
-        authButton = findViewById(R.id.nextButton);
-        emailInput = findViewById(R.id.emailInput);
-        TextInputLayout emailLayout = findViewById(R.id.emailLayout);
+        binding = ActivityAuthBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        authButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!validateEmail(String.valueOf(emailInput.getText()))){
-                    // Set error text
-                    emailLayout.setError("Email empty or not valid");
-                    emailInput.addTextChangedListener(new RemoveErrorTextWatcher(emailLayout));
-                    return;
-                }
-                authService(String.valueOf(emailInput.getText()));
+        intent = new Intent(this, NavigationActivity.class);
+
+        binding.nextButton.setOnClickListener(view -> {
+            if (!validateEmail(String.valueOf(binding.emailInput.getText()))) {
+                // Set error text
+                binding.emailLayout.setError("Email empty or not valid");
+                binding.emailInput.addTextChangedListener(new RemoveErrorTextWatcher(binding.emailLayout));
+                return;
             }
+            authService(String.valueOf(binding.emailInput.getText()));
         });
     }
 
 
     private void showLoginForm() {
-        passwordContainer = findViewById(R.id.passwordContainer);
-        passwordLayout = findViewById(R.id.passwordLayout);
-        passwordInput = findViewById(R.id.passwordInput);
-        actionTextLabel.setText("Login");
-        actionTextLabel.setVisibility(View.VISIBLE);
-        passwordContainer.setVisibility(View.VISIBLE);
+        binding.loginSignInText.setText("Login");
+        binding.loginSignInText.setVisibility(View.VISIBLE);
+        binding.passwordContainer.setVisibility(View.VISIBLE);
 
-        authButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateForm("LOGIN", passwordInput)){
-                    loginService(new LoginRequest(String.valueOf(emailInput.getText()), String.valueOf(passwordInput.getText())));
-                }
+        binding.nextButton.setOnClickListener(view -> {
+            if (validateForm(LOGIN, binding.passwordInput)) {
+                loginService(new LoginRequest(String.valueOf(binding.emailInput.getText()), String.valueOf(binding.passwordInput.getText())));
             }
         });
     }
 
     private void showRegisterForm() {
-        LinearLayoutCompat registerLayout = findViewById(R.id.signInContainer);
+        binding.signInContainer.setVisibility(View.VISIBLE);
+        binding.loginSignInText.setVisibility(View.VISIBLE);
+        binding.loginSignInText.setText("Register");
 
-        firstNameInput = findViewById(R.id.firstNameInput);
-        firstNameLayout = findViewById(R.id.firstNameLayout);
-        lastNameInput = findViewById(R.id.lastNameInput);
-        lastNameLayout = findViewById(R.id.lastNameLayout);
-        newPasswordInput = findViewById(R.id.newPasswordInput);
-        newPasswordLayout = findViewById(R.id.newPasswordLayout);
-
-        registerLayout.setVisibility(View.VISIBLE);
-        actionTextLabel.setVisibility(View.VISIBLE);
-        actionTextLabel.setText("Register");
-
-        authButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateForm("REGISTER", newPasswordInput)) {
-                    registerService(new RegisterRequest(
-                        String.valueOf(firstNameInput.getText()),
-                        String.valueOf(lastNameInput.getText()),
-                        String.valueOf(emailInput.getText()),
-                        String.valueOf(newPasswordInput.getText()))
-                    );
-                }
+        binding.nextButton.setOnClickListener(view -> {
+            if (validateForm(REGISTER, binding.newPasswordInput)) {
+                registerService(new RegisterRequest(
+                        String.valueOf(binding.firstNameInput.getText()),
+                        String.valueOf(binding.lastNameInput.getText()),
+                        String.valueOf(binding.emailInput.getText()),
+                        String.valueOf(binding.newPasswordInput.getText()))
+                );
             }
         });
     }
@@ -129,114 +90,98 @@ public class AuthActivity extends AppCompatActivity {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
-    private boolean validateForm(String action, TextInputEditText password){
+
+    private boolean validateForm(String action, TextInputEditText password) {
         boolean isCorrect = true;
-        if (!validateEmail(String.valueOf(emailInput.getText()))){
-            emailLayout.setError("Email not valid");
+        if (!validateEmail(String.valueOf(binding.emailInput.getText()))) {
+            binding.emailLayout.setError("Email not valid");
             isCorrect = false;
         }
-        if (!validatePassword(String.valueOf(password.getText())) && !action.equals("REGISTER")){
-            passwordLayout.setError("Password must have lowercase, uppercase and a number");
-            password.addTextChangedListener(new RemoveErrorTextWatcher(passwordLayout));
+        if (!validatePassword(String.valueOf(password.getText())) && !action.equals(REGISTER)) {
+            binding.passwordLayout.setError("Password must have lowercase, uppercase and a number");
+            password.addTextChangedListener(new RemoveErrorTextWatcher(binding.passwordLayout));
             isCorrect = false;
         }
-        if (!action.equals("REGISTER")) {
+        if (!action.equals(REGISTER)) {
             return isCorrect;
         }
-        if (TextUtils.isEmpty(firstNameInput.getText())){
-            firstNameLayout.setError("First name not valid");
-            firstNameInput.addTextChangedListener(new RemoveErrorTextWatcher(firstNameLayout));
+        if (TextUtils.isEmpty(binding.firstNameInput.getText())) {
+            binding.firstNameLayout.setError("First name not valid");
+            binding.firstNameInput.addTextChangedListener(new RemoveErrorTextWatcher(binding.firstNameLayout));
             isCorrect = false;
         }
-        if (TextUtils.isEmpty(lastNameInput.getText())){
-            lastNameLayout.setError("Last name not valid");
-            lastNameInput.addTextChangedListener(new RemoveErrorTextWatcher(lastNameLayout));
+        if (TextUtils.isEmpty(binding.lastNameInput.getText())) {
+            binding.lastNameLayout.setError("Last name not valid");
+            binding.lastNameInput.addTextChangedListener(new RemoveErrorTextWatcher(binding.lastNameLayout));
             isCorrect = false;
         }
-        if (!validatePassword(String.valueOf(newPasswordInput.getText()))){
-            newPasswordLayout.setError("Password must have lowercase, uppercase and a number");
-            newPasswordInput.addTextChangedListener(new RemoveErrorTextWatcher(newPasswordLayout));
+        if (!validatePassword(String.valueOf(binding.newPasswordInput.getText()))) {
+            binding.newPasswordLayout.setError("Password must have lowercase, uppercase and a number");
+            binding.newPasswordInput.addTextChangedListener(new RemoveErrorTextWatcher(binding.newPasswordLayout));
             isCorrect = false;
         }
         return isCorrect;
     }
+
     private boolean validatePassword(String password) {
         //Pattern pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\\\S+$).{4,}$");
         return !password.equals("");
     }
-    
-    public void authService(String email){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.klendar.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        AuthPlaceHolderApi authPlaceHolderApi = retrofit.create(AuthPlaceHolderApi.class);
-
+    public void authService(String email) {
+        AuthPlaceHolderApi api = ApiClient.getClient(BASE_URL).create(AuthPlaceHolderApi.class);
         AuthRequest authRequest = new AuthRequest(email);
 
-        Call<Auth> call = authPlaceHolderApi.createPost(authRequest);
-
-        call.enqueue(new Callback<Auth>() {
+        api.createPost(authRequest).enqueue(new Callback<Auth>() {
             @Override
             public void onResponse(Call<Auth> call, Response<Auth> response) {
                 if (response.isSuccessful()) {
                     Auth auth = response.body();
-                    switch (auth.getMessage()){
-                        case "LOGIN":
+                    switch (auth.getMessage()) {
+                        case LOGIN:
                             showLoginForm();
                             break;
-                        case "REGISTER":
+                        case REGISTER:
                             showRegisterForm();
                             break;
                     }
                 }
-
             }
+
             @Override
-            public void onFailure(Call<Auth> call, Throwable t) {}
+            public void onFailure(Call<Auth> call, Throwable t) {
+            }
         });
     }
 
-    public void loginService(LoginRequest loginRequest){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.klendar.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    public void loginService(LoginRequest loginRequest) {
+        AuthPlaceHolderApi api = ApiClient.getClient(BASE_URL).create(AuthPlaceHolderApi.class);
 
-        AuthPlaceHolderApi authPlaceHolderApi = retrofit.create(AuthPlaceHolderApi.class);
-        Call<Login> call = authPlaceHolderApi.createPost(loginRequest);
-        call.enqueue(new Callback<Login>() {
+        api.createPost(loginRequest).enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
                 if (response.isSuccessful()) {
                     Login login = response.body();
-                    saveTokenOnSharedPreferences(login.getBody().get("token"));
+                    saveTokenOnSharedPreferences(login.getBody().get(TOKEN));
                     startActivity(intent);
-                }  else {
+                } else {
                     Toast toast;
                     toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
-                    toast.setMargin(50,50);
+                    toast.setMargin(50, 50);
                     toast.show();
                 }
             }
+
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {}
+            public void onFailure(Call<Login> call, Throwable t) {
+            }
         });
     }
 
-    public void registerService(RegisterRequest registerRequest){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.klendar.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    public void registerService(RegisterRequest registerRequest) {
+        AuthPlaceHolderApi api = ApiClient.getClient(BASE_URL).create(AuthPlaceHolderApi.class);
 
-        AuthPlaceHolderApi authPlaceHolderApi = retrofit.create(AuthPlaceHolderApi.class);
-
-        Call<Register> call = authPlaceHolderApi.createPost(registerRequest);
-
-        call.enqueue(new Callback<Register>() {
+        api.createPost(registerRequest).enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {
                 if (response.isSuccessful()) {
@@ -244,21 +189,22 @@ public class AuthActivity extends AppCompatActivity {
                     saveTokenOnSharedPreferences(register.getToken());
                     startActivity(intent);
                 } else {
-                    Toast toast;
-                    toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
-                    toast.setMargin(50,50);
+                    Toast toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                    toast.setMargin(50, 50);
                     toast.show();
                 }
             }
+
             @Override
-            public void onFailure(Call<Register> call, Throwable t) {}
+            public void onFailure(Call<Register> call, Throwable t) {
+            }
         });
     }
 
-    public void saveTokenOnSharedPreferences(String token){
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    public void saveTokenOnSharedPreferences(String token) {
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("token", token);
+        editor.putString(TOKEN, token);
         editor.apply();
     }
 }
