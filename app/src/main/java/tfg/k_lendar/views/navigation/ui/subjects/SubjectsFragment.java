@@ -20,6 +20,7 @@ public class SubjectsFragment extends Fragment {
 
     private SubjectsViewModel subjectsViewModel;
     private SubjectsFragmentBinding binding;
+    private SubjectsAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,12 +34,20 @@ public class SubjectsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
 
+        subjectsViewModel.getAllUfsFromModulesService(getContext());
+        setUpObservers();
         //Set up RV
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects.setLayoutManager(layoutManager);
-        SubjectsAdapter adapter = new SubjectsAdapter(getMockList(), this::openBottomMenuFloating);
-        binding.recyclerSubjects.setAdapter(adapter);
 
+
+    }
+
+    private void setUpObservers() {
+        subjectsViewModel.getList().observe(getViewLifecycleOwner(), modulesList -> {
+            adapter = new SubjectsAdapter(modulesList, this::openBottomMenuFloating);
+            binding.recyclerSubjects.setAdapter(adapter);
+        });
     }
 
     private void openBottomMenuFloating(Modules moduleItemClick) {
