@@ -26,13 +26,13 @@ public class MarksFragment extends Fragment {
         binding = MarksFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textMarks;
+        /*final TextView textView = binding.textMarks;
         marksViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
         return root;
     }
 

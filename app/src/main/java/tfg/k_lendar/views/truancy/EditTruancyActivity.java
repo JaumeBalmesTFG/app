@@ -68,7 +68,7 @@ public class EditTruancyActivity extends AppCompatActivity {
         subjectDropDown = findViewById(R.id.subjectDropDownEditTruancy);
         ufLayout = findViewById(R.id.ufMenuEditTruancy);
         ufDropDown = findViewById(R.id.ufDropDownEditTruancy);
-        hoursLayout = findViewById(R.id.hoursLayoutEditTruancy);
+        //hoursLayout = findViewById(R.id.hoursLayoutEditTruancy);
         plus = findViewById(R.id.plusButtonEditTruancy);
         minus = findViewById(R.id.minusButtonEditTruancy);
         hoursTextView = findViewById(R.id.hoursTextViewEditTruancy);
