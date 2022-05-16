@@ -22,13 +22,13 @@
     <color name="primaryBlue">#2EC4B6</color>
     <color name="secondaryBlue">#CBF3F0</color>
 
-    <color name="subjectColor1">#8DFFA6</color>
-    <color name="subjectColor2">#F2742D</color>
-    <color name="subjectColor3">#7B7AB8</color>
-    <color name="subjectColor4">#F14E4E</color>
-    <color name="subjectColor5">#A9FF66</color>
-    <color name="subjectColor6">#FF45D6</color>
-    <color name="subjectColor7">#15135E</color>
-    <color name="subjectColor8">#C4C4C4</color>
+    <color name="subjectColor1">#009688</color>
+    <color name="subjectColor2">#4CAF4F</color>
+    <color name="subjectColor3">#F44336</color>
+    <color name="subjectColor4">#E91E62</color>
+    <color name="subjectColor5">#00BBD4</color>
+    <color name="subjectColor6">#2194F3</color>
+    <color name="subjectColor7">#4C62E2</color>
+    <color name="subjectColor8">#7E57C2</color>
 
 </resources>
