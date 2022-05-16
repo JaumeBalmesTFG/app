@@ -39,6 +39,7 @@ public class SubjectsViewModel extends ViewModel {
     public void getAllUfsFromModulesService(Context context) {
         TaskTruencyPlaceHolderApi api = ApiClient.getClient(BASE_URL).create(TaskTruencyPlaceHolderApi.class);
 
+        System.out.println(AuthBearerToken.getAuthBearerToken(context));
         api.getAllUfs(AuthBearerToken.getAuthBearerToken(context)).enqueue(new Callback<HomeModules>() {
             @Override
             public void onResponse(Call<HomeModules> call, Response<HomeModules> response) {

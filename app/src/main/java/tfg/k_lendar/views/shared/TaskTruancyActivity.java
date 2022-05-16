@@ -17,6 +17,7 @@ import tfg.k_lendar.views.shared.ui.main.SectionsPagerAdapter;
 public class TaskTruancyActivity extends AppCompatActivity {
 
     private ActivityTaskTruancyBinding binding;
+    public static String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class TaskTruancyActivity extends AppCompatActivity {
 
         binding = ActivityTaskTruancyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        date = getIntent().getStringExtra("date");
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
