@@ -41,6 +41,7 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.shared.TaskTruancyActivity;
 
 public class NewTaskFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -139,7 +140,7 @@ public class NewTaskFragment extends Fragment {
                             selectedRule.getId(),
                             String.valueOf(titleInput.getText()),
                             String.valueOf(descriptionInput.getText()),
-                            "2022-04-04"
+                            TaskTruancyActivity.date
                     );
                     saveTaskService(postTaskRequest);
                 }

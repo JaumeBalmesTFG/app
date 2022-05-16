@@ -37,6 +37,7 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.http.models.truancy.Truancy;
 import tfg.k_lendar.http.models.truancy.TruancyRequest;
+import tfg.k_lendar.views.shared.TaskTruancyActivity;
 
 public class NewTruancyFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -109,7 +110,7 @@ public class NewTruancyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (validateTruancyForm()) {
-                    postTruancyService(new TruancyRequest(selectedModule.getId(), selectedUf.getId(), "04-04-2022",String.valueOf(reasonInput.getText()),Integer.parseInt(String.valueOf(hoursInput.getText()))));
+                    postTruancyService(new TruancyRequest(selectedModule.getId(), selectedUf.getId(), TaskTruancyActivity.date,String.valueOf(reasonInput.getText()),Integer.parseInt(String.valueOf(hoursInput.getText()))));
                 }
             }
         });
