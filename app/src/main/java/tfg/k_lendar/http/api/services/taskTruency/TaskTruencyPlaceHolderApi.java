@@ -5,6 +5,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import tfg.k_lendar.http.api.requests.auth.AuthRequest;
 import tfg.k_lendar.http.models.auth.Auth;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
