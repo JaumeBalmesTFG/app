@@ -29,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.R;
 import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
 import tfg.k_lendar.core.helpers.ToastError;
+import tfg.k_lendar.core.helpers.ToastSuccess;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
 import tfg.k_lendar.http.api.services.truancy.TruancyPlaceHolderApi;
@@ -37,6 +38,7 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.http.models.truancy.Truancy;
 import tfg.k_lendar.http.models.truancy.TruancyRequest;
+import tfg.k_lendar.views.navigation.NavigationActivity;
 import tfg.k_lendar.views.shared.TaskTruancyActivity;
 
 public class NewTruancyFragment extends Fragment {
@@ -189,7 +191,8 @@ public class NewTruancyFragment extends Fragment {
             @Override
             public void onResponse(Call<Truancy> call, Response<Truancy> response) {
                 if (response.isSuccessful()) {
-                      Truancy truancy = response.body();
+                    Truancy truancy = response.body();
+                    ToastSuccess.execute(getContext(), response.message(), NavigationActivity.class);
                 } else {
                     ToastError.execute(getContext(), response.toString());
                 }

@@ -22,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
@@ -37,16 +38,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String token = sharedPref.getString("token", "");
+        String token = AuthBearerToken.getAuthBearerToken(getApplicationContext());
         Intent intent;
-        /*postSaveTaskService(new PostTaskRequest("6273f286a0cccb5b1687bc26",
-                "6273f2aba0cccb5b1687bc29",
-                "ANDRII",
-                9,
-                "EXAMPLE DESCRIPTION",
-                "2022-05-04"
-                ));*/
         if (!token.equals("")) {
             intent = new Intent(this, NavigationActivity.class);
         } else {
