@@ -8,6 +8,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import tfg.k_lendar.http.models.subject.Subject;
+import tfg.k_lendar.http.models.subject.SubjectArchiveRequest;
 import tfg.k_lendar.http.models.subject.SubjectRequest;
 
 public interface SubjectPlaceHolderApi {
@@ -17,6 +18,9 @@ public interface SubjectPlaceHolderApi {
 
     @PUT("module/{id}")
     Call<Subject> editSubject(@Header("Authorization") String token, @Body SubjectRequest subjectRequest,@Path("id") String id);
+
+    @PUT("module/{id}/archive")
+    Call<Subject> archiveSubject(@Header("Authorization") String token, @Body SubjectArchiveRequest subjectArchiveRequest, @Path("id") String id);
 
 
 }
