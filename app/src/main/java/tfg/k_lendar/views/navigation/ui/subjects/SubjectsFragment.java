@@ -40,6 +40,14 @@ public class SubjectsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects.setLayoutManager(layoutManager);
 
+        binding.menuFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+
 
     }
 
