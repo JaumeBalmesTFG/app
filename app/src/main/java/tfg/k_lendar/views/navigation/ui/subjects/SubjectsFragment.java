@@ -1,87 +1,90 @@
 package tfg.k_lendar.views.navigation.ui.subjects;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
-
-import tfg.k_lendar.R;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import java.util.ArrayList;
+import java.util.List;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
+import tfg.k_lendar.http.models.taskTruency.Modules;
+import tfg.k_lendar.http.models.taskTruency.Uf;
 
 public class SubjectsFragment extends Fragment {
 
     private SubjectsViewModel subjectsViewModel;
     private SubjectsFragmentBinding binding;
+    private SubjectsAdapter adapter;
 
-    Button points, buttonEdit;
-    FloatingActionButton close, add, archive, edit;
-    FloatingActionsMenu fabMenu;
-    View view;
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.subjects_fragment, container, false);
-
-
-        subjectsViewModel =
-                new ViewModelProvider(this).get(SubjectsViewModel.class);
-
         binding = SubjectsFragmentBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        return binding.getRoot();
+    }
 
-        fabMenu = binding.menuFab;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
 
-        buttonEdit = binding.buttonEdit;
-        points = binding.buttonPoints;
-        close = binding.accionClose;
-        add = binding.accionAdd;
-        archive = binding.accionArchive;
-        edit = binding.accionEdit;
+        subjectsViewModel.getAllUfsFromModulesService(getContext());
+        setUpObservers();
+        //Set up RV
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        binding.recyclerSubjects.setLayoutManager(layoutManager);
 
 
+    }
 
-        points.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fabMenu.expand();
-            }
+    private void setUpObservers() {
+        subjectsViewModel.getList().observe(getViewLifecycleOwner(), modulesList -> {
+            adapter = new SubjectsAdapter(modulesList, this::openBottomMenuFloating);
+            binding.recyclerSubjects.setAdapter(adapter);
+        });
+    }
+
+    private void openBottomMenuFloating(Modules moduleItemClick) {
+        binding.menuFab.expand();
+
+        //Set up listeners
+        binding.closeButton.setOnClickListener(close -> binding.menuFab.collapse());
+
+        binding.addButton.setOnClickListener(add -> {
+            Toast.makeText(getContext(), "Add button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
+            //TODO ADD BUTTON
         });
 
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fabMenu.collapse();
-            }
+        binding.editButton.setOnClickListener(add -> {
+            Toast.makeText(getContext(), "Edit button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
+            //TODO EDIT BUTTON
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        binding.archiveButton.setOnClickListener(add -> {
+            Toast.makeText(getContext(), "Archive button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
+            //TODO ARCHIVE BUTTON
         });
+    }
 
-        final TextView textView = binding.textSubjects;
-        subjectsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
+    private Modules[] getMockList() {
+        List<Uf> ufList = new ArrayList<>();
+        ufList.add(new Uf("0", "0", "UF1", 2, 2));
+        ufList.add(new Uf("1", "01", "UF2", 6, 4));
+        ufList.add(new Uf("2", "02", "UF3", 4, 6));
+
+        return new Modules[]{
+                new Modules("0", "BD", "GREEN", ufList),
+                new Modules("1", "JAVA", "YELLOW", ufList),
+                new Modules("2", "POO", "RED", ufList),
+                new Modules("3", "SOCKETS", "BLUE", ufList),
+
+        };
     }
 
     @Override
