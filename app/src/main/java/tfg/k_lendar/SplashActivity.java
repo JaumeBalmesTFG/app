@@ -24,11 +24,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
+import tfg.k_lendar.http.api.services.uf.UfPlaceHolderApi;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.http.models.uf.PostUf;
+import tfg.k_lendar.http.models.uf.UfRequest;
 import tfg.k_lendar.views.auth.AuthActivity;
 import tfg.k_lendar.views.navigation.NavigationActivity;
 
