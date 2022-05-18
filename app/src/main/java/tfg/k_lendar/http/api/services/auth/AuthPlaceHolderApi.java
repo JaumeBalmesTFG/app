@@ -1,5 +1,7 @@
 package tfg.k_lendar.http.api.services.auth;
 
+import com.google.gson.JsonObject;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -16,7 +18,7 @@ public interface AuthPlaceHolderApi {
     Call<Auth> createPost(@Body AuthRequest authRequest);
 
     @POST("login")
-    Call<Login> createPost(@Body LoginRequest loginRequest);
+    Call<JsonObject> createPost(@Body LoginRequest loginRequest);
 
     @POST("register")
     Call<Register> createPost(@Body RegisterRequest registerRequest);
