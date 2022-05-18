@@ -31,6 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import tfg.k_lendar.R;
 import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
 import tfg.k_lendar.core.helpers.ToastError;
+import tfg.k_lendar.core.helpers.ToastSuccess;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.rule.RulePlaceHolderApi;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
@@ -41,6 +42,8 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.navigation.NavigationActivity;
+import tfg.k_lendar.views.shared.TaskTruancyActivity;
 
 public class NewTaskFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -139,7 +142,7 @@ public class NewTaskFragment extends Fragment {
                             selectedRule.getId(),
                             String.valueOf(titleInput.getText()),
                             String.valueOf(descriptionInput.getText()),
-                            "2022-04-04"
+                            TaskTruancyActivity.date
                     );
                     saveTaskService(postTaskRequest);
                 }
@@ -267,6 +270,7 @@ public class NewTaskFragment extends Fragment {
             public void onResponse(Call<PostTask> call, Response<PostTask> response) {
                 if (response.isSuccessful()) {
                     PostTask postTask = response.body();
+                    ToastSuccess.execute(getContext(), response.message(), NavigationActivity.class);
                 } else {
                     ToastError.execute(getContext(), response.toString());
                 }
