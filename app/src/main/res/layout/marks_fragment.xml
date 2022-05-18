@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat android:layout_width="match_parent"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/subjectText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Subject 1"
@@ -31,8 +33,9 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ic_arrow_right"
+                android:gravity="center_vertical"
                 android:rotation="-90"
-                android:gravity="center_vertical"></Button>
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"></Button>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -44,62 +47,29 @@
         android:layout_height="wrap_content"/>
 
     <androidx.cardview.widget.CardView
-        android:visibility="invisible"
+        android:visibility="visible"
         android:id="@+id/ufCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ufsRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/outline_book_24"></Button>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="UF-1"
-                android:layout_marginStart="10dp"></TextView>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right|center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9/10"
-                    android:layout_marginEnd="10dp"></TextView>
-
-                <Button
-                    android:id="@+id/secondArrowButton"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/ic_arrow_right"
-                    android:rotation="-90"></Button>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_ufs_row_view2"/>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/taskCard"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -127,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right">
                     <TextView
+                        android:id="@+id/truancysNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="9/10"></TextView>
@@ -147,93 +118,21 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tasksRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-
-                <Button
-                    android:layout_width="10dp"
-                    android:layout_height="20dp"></Button>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Name of task 1"></TextView>
-
-                </LinearLayout>
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="9/10"
-                        android:gravity="right"></TextView>
-
-                </TableLayout>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-
-                <Button
-                    android:layout_width="10dp"
-                    android:layout_height="20dp"></Button>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Name of task 2"></TextView>
-
-                </LinearLayout>
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="9/10"
-                        android:gravity="right"></TextView>
-
-                </TableLayout>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_task_row_view" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
-
-
-
-
-
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
