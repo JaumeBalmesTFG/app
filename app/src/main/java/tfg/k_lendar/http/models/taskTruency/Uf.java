@@ -49,6 +49,12 @@ public class Uf {
 
     @Override
     public String toString() {
-        return name;
+        return "Uf{" +
+                "id='" + id + '\'' +
+                ", moduleId='" + moduleId + '\'' +
+                ", name='" + name + '\'' +
+                ", hours=" + hours +
+                ", truancy_percentage=" + truancy_percentage +
+                '}';
     }
 }
