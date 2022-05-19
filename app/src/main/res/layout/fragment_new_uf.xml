@@ -101,28 +101,28 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rule"
-                android:textSize="12dp"></TextView>
+                android:textSize="18dp"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="Percentatges"
-                android:textSize="12dp"></TextView>
+                android:textSize="18dp"></TextView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Actions"
-                android:textSize="12dp"></TextView>
+                android:textSize="18dp"></TextView>
 
         </RelativeLayout>
 
@@ -139,14 +139,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exams"></TextView>
+                android:text="Exams"
+                android:textSize="16dp"
+                android:layout_marginTop="6dp"></TextView>
 
             <TextView
                 android:id="@+id/percentatgesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="80%"></TextView>
+                android:text="80%"
+                android:textSize="16dp"
+                android:layout_marginTop="6dp"></TextView>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -156,14 +160,14 @@
 
                 <Button
                     android:id="@+id/editButtonExams"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/edit"></Button>
 
                 <Button
                     android:id="@+id/cancelButtonExams"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/trash"></Button>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </RelativeLayout>
@@ -181,13 +185,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Activities"></TextView>
+                android:text="Activities"
+                android:textSize="16dp"
+                android:layout_marginTop="6dp"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="20%"></TextView>
+                android:text="20%"
+                android:textSize="16dp"
+                android:layout_marginTop="6dp"></TextView>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -197,14 +205,14 @@
 
                 <Button
                     android:id="@+id/editButtonActivities"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/edit"></Button>
 
                 <Button
                     android:id="@+id/cancelButtonActivities"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/trash"></Button>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </RelativeLayout>
@@ -264,7 +272,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="right"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp">
 
             <Button
                 android:id="@+id/saveButtonUf"
