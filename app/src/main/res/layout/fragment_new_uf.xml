@@ -36,6 +36,7 @@
                 android:textSize="20dp"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/titleLayoutUf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -237,6 +238,7 @@
                 android:textSize="15dp"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/hoursLayoutUf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -255,6 +257,7 @@
                 android:textSize="15dp"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/truancyLayoutUf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
