@@ -4,18 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import java.util.regex.Pattern;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
+import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.databinding.ActivityAuthBinding;
 import tfg.k_lendar.http.api.ApiClient;
 import tfg.k_lendar.http.api.requests.auth.AuthRequest;
@@ -23,7 +26,6 @@ import tfg.k_lendar.http.api.requests.auth.LoginRequest;
 import tfg.k_lendar.http.api.requests.auth.RegisterRequest;
 import tfg.k_lendar.http.api.services.auth.AuthPlaceHolderApi;
 import tfg.k_lendar.http.models.auth.Auth;
-import tfg.k_lendar.http.models.auth.Login;
 import tfg.k_lendar.http.models.auth.Register;
 import tfg.k_lendar.views.navigation.NavigationActivity;
 
@@ -157,12 +159,13 @@ public class AuthActivity extends AppCompatActivity {
     public void loginService(LoginRequest loginRequest) {
         AuthPlaceHolderApi api = ApiClient.getClient(BASE_URL).create(AuthPlaceHolderApi.class);
 
-        api.createPost(loginRequest).enqueue(new Callback<Login>() {
+        api.createPost(loginRequest).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<Login> call, Response<Login> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.isSuccessful()) {
-                    Login login = response.body();
-                    saveTokenOnSharedPreferences(login.getBody().get(TOKEN));
+                    JsonObject responseBody = response.body().getAsJsonObject("body");
+                    JsonElement token = responseBody.get("token");
+                    saveTokenOnSharedPreferences(token.toString());
                     startActivity(intent);
                 } else {
                     Toast toast;
@@ -173,7 +176,7 @@ public class AuthActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
     }
@@ -202,7 +205,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public void saveTokenOnSharedPreferences(String token) {
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = this.getSharedPreferences("auth", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(TOKEN, token);
         editor.apply();
