@@ -5,13 +5,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Klendar">
+        android:theme="@style/Theme.Klendar"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".views.uf.NewUfActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".views.truancy.EditTruancyActivity"
             android:exported="false" />
@@ -22,27 +31,18 @@
             android:name=".views.shared.TaskTruancyActivity"
             android:exported="true"
             android:label="@string/title_activity_task_truancy"
-            android:theme="@style/Theme.Klendar.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.Klendar.NoActionBar"></activity>
         <activity
             android:name=".views.navigation.NavigationActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight"
             android:exported="true"
-            android:label="@string/title_activity_navigation" >
-        </activity>
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/Theme.MaterialComponents.DayNight"></activity>
         <activity
             android:name=".views.auth.AuthActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
