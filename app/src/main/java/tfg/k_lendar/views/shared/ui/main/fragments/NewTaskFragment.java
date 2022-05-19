@@ -172,11 +172,6 @@ public class NewTaskFragment extends Fragment {
             titleInput.addTextChangedListener(new RemoveErrorTextWatcher(titleLayout));
             return false;
         }
-        if (TextUtils.isEmpty(descriptionInput.getText())) {
-            descriptionLayout.setError("Select a valid title");
-            descriptionInput.addTextChangedListener(new RemoveErrorTextWatcher(descriptionLayout));
-            return false;
-        }
         return true;
     }
 
