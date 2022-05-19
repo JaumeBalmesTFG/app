@@ -55,7 +55,7 @@ public class NewUfActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validateFormAndSaveTask()) {
-                    System.out.println("culo");
+
                 }
             }
         });
