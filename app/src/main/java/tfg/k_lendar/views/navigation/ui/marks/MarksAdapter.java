@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import tfg.k_lendar.databinding.MarksFragmentBinding;
-import tfg.k_lendar.http.models.module.AllModules;
+import tfg.k_lendar.http.models.marks.AllModules;
+import tfg.k_lendar.http.models.marks.ModulesMarks;
 
 public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder> {
 
-    private final List<AllModules> subjects;
+    private final List<ModulesMarks> subjects;
     private final OnItemClickListener listener;
 
-    public MarksAdapter(List<AllModules> subjects, MarksAdapter.OnItemClickListener listener) {
+    public MarksAdapter(List<ModulesMarks> subjects, MarksAdapter.OnItemClickListener listener) {
         this.subjects = subjects;
         this.listener = listener;
     }

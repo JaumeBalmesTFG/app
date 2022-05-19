@@ -10,14 +10,15 @@ import java.util.List;
 
 import tfg.k_lendar.databinding.ItemUfsRowView2Binding;
 import tfg.k_lendar.databinding.ItemUfsRowViewBinding;
+import tfg.k_lendar.http.models.marks.UfMarks;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.views.navigation.ui.subjects.UfsAdapter;
 
 public class UfsAdapterMarks extends RecyclerView.Adapter<UfsAdapterMarks.ViewHolder> {
 
-    private final List<Uf> ufs;
+    private final List<UfMarks> ufs;
 
-    public UfsAdapterMarks(List<Uf> ufsList) {
+    public UfsAdapterMarks(List<UfMarks> ufsList) {
         ufs = ufsList;
     }
 
@@ -40,7 +41,7 @@ public class UfsAdapterMarks extends RecyclerView.Adapter<UfsAdapterMarks.ViewHo
     @Override
     public void onBindViewHolder(UfsAdapterMarks.ViewHolder holder, final int position) {
         holder.binding.ufTitle.setText(ufs.get(position).getName());
-        holder.binding.ufGrade.setText(ufs.get(position).getTruancy_percentage());
+        holder.binding.ufGrade.setText(ufs.get(position).getGlobalUfGrade());
     }
 
     @Override
