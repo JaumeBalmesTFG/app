@@ -39,8 +39,6 @@ public class SubjectsFragment extends Fragment {
         //Set up RV
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects.setLayoutManager(layoutManager);
-
-
     }
 
     private void setUpObservers() {
