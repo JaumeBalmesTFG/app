@@ -1,5 +1,6 @@
 package tfg.k_lendar.views.navigation.ui.subjects;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import java.util.List;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.module.NewEditModuleActivity;
+import tfg.k_lendar.views.uf.NewUfActivity;
 
 public class SubjectsFragment extends Fragment {
 
@@ -58,12 +61,20 @@ public class SubjectsFragment extends Fragment {
 
         binding.addButton.setOnClickListener(add -> {
             Toast.makeText(getContext(), "Add button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
-            //TODO ADD BUTTON
+            Intent intent = new Intent(this.getActivity(), NewUfActivity.class);
+            intent.putExtra("moduleId", moduleItemClick.getId());
+            getContext().startActivity(intent);
         });
 
         binding.editButton.setOnClickListener(add -> {
             Toast.makeText(getContext(), "Edit button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
-            //TODO EDIT BUTTON
+            Intent intent = new Intent(this.getActivity(), NewEditModuleActivity.class);
+            intent.putExtra("id", moduleItemClick.getId());
+            intent.putExtra("title", moduleItemClick.getName());
+            intent.putExtra("color", moduleItemClick.getColor());
+
+            getContext().startActivity(intent);
+
         });
 
         binding.archiveButton.setOnClickListener(add -> {

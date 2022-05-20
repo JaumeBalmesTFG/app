@@ -55,52 +55,68 @@
         android:gravity="center">
 
         <Button
+            android:id="@+id/subjectColor1"
             android:layout_marginEnd="10px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/subjectColor1"
+            android:tag="#009688"
             ></Button>
         <Button
+            android:id="@+id/subjectColor2"
             android:layout_marginStart="10px"
             android:layout_marginEnd="10px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/subjectColor2"></Button>
+            android:backgroundTint="@color/subjectColor2"
+            android:tag="#4CAF4F"></Button>
         <Button
+            android:id="@+id/subjectColor3"
             android:layout_marginStart="10px"
             android:layout_marginEnd="10px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/subjectColor3"></Button>
+            android:backgroundTint="@color/subjectColor3"
+            android:tag="#F44336"></Button>
         <Button
+            android:id="@+id/subjectColor4"
             android:layout_marginStart="10px"
             android:layout_marginEnd="10px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/subjectColor4"></Button>
+            android:backgroundTint="@color/subjectColor4"
+            android:tag="#E91E62"></Button>
         <Button
+            android:id="@+id/subjectColor5"
             android:layout_marginStart="20px"
             android:layout_marginEnd="20px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/subjectColor5"></Button>
+            android:backgroundTint="@color/subjectColor5"
+            android:tag="#00BBD4"></Button>
         <Button
+            android:id="@+id/subjectColor6"
             android:layout_marginStart="10px"
             android:layout_marginEnd="10px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/subjectColor6"></Button>
+            android:backgroundTint="@color/subjectColor6"
+            android:tag="#2194F3"></Button>
         <Button
+            android:id="@+id/subjectColor7"
             android:layout_marginStart="10px"
             android:layout_marginEnd="10px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/subjectColor7"></Button>
+            android:backgroundTint="@color/subjectColor7"
+            android:tag="#4C62E2"></Button>
         <Button
+            android:id="@+id/subjectColor8"
             android:layout_marginStart="10px"
             android:layout_width="100px"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/subjectColor8"></Button>
+            android:backgroundTint="@color/subjectColor8"
+            android:tag="#7E57C2"></Button>
 
     </LinearLayout>
 

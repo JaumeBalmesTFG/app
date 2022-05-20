@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         String token = AuthBearerToken.getAuthBearerToken(this);
         Intent intent;
-        if (!token.equals("")) {
+        if (!token.equals("Bearer ")) {
             intent = new Intent(this, NavigationActivity.class);
         } else {
             intent = new Intent(this, AuthActivity.class);

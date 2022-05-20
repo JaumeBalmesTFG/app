@@ -18,7 +18,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
-import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.databinding.ActivityAuthBinding;
 import tfg.k_lendar.http.api.ApiClient;
 import tfg.k_lendar.http.api.requests.auth.AuthRequest;
