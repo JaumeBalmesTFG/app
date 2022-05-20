@@ -7,7 +7,7 @@ public class AllModules {
     private List<MarksModules> listModules;
 
     public AllModules(List<MarksModules> listModules) {
-        this.listModules = listModules;
+        this.listModules = (List<MarksModules>) listModules;
     }
 
     public List<MarksModules> getBody() {

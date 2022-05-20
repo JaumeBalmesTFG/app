@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import tfg.k_lendar.databinding.ItemSubjectRowView2Binding;
+import tfg.k_lendar.databinding.MarksFragmentBinding;
 import tfg.k_lendar.http.models.marks.MarksModules;
 
 public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
@@ -20,9 +21,9 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemSubjectRowView2Binding binding;
+        private final MarksFragmentBinding binding;
 
-        public ViewHolder(ItemSubjectRowView2Binding binding) {
+        public ViewHolder(MarksFragmentBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -31,13 +32,16 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
     @NonNull
     @Override
     public MarksAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MarksAdapter.ViewHolder(ItemSubjectRowView2Binding.inflate(LayoutInflater.from(parent.getContext()),
+        return new MarksAdapter.ViewHolder(MarksFragmentBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MarksAdapter.ViewHolder holder, int position) {
-        holder.binding.subjectTitle.setText(subjects.get(position).getName());
+        //TODO BIND OTHER DATA HERE
+        MarksAdapter adapter = new MarksAdapter(subjects.get(position).getName());
+        holder.binding.recyclerSubjects2.setAdapter(adapter);
+
     }
 
     @Override

@@ -27,9 +27,6 @@ import tfg.k_lendar.http.models.marks.TasksMarks;
 import tfg.k_lendar.http.models.marks.TruancyMarks;
 import tfg.k_lendar.http.models.marks.UfMarks;
 import tfg.k_lendar.http.models.rule.Rule;
-import tfg.k_lendar.http.models.taskTruency.Modules;
-import tfg.k_lendar.http.models.taskTruency.Uf;
-import tfg.k_lendar.views.navigation.ui.subjects.SubjectsAdapter;
 
 
 public class MarksFragment extends Fragment {
@@ -55,10 +52,13 @@ public class MarksFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         marksViewModel = new ViewModelProvider(this).get(MarksViewModel.class);
+
         marksViewModel.getAllModulesMarksTruanciesTasksGrades(getContext());
         setUpObservers();
+        //SET UP RV
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects2.setLayoutManager(layoutManager);
+
 
         subjectCard = view.findViewById(R.id.subjectCard);
         ufCard = view.findViewById(R.id.ufCard);
