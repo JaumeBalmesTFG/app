@@ -1,5 +1,6 @@
 package tfg.k_lendar.views.shared.ui.main.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,6 +41,7 @@ import tfg.k_lendar.http.models.truancy.Truancy;
 import tfg.k_lendar.http.models.truancy.TruancyRequest;
 import tfg.k_lendar.views.navigation.NavigationActivity;
 import tfg.k_lendar.views.shared.TaskTruancyActivity;
+import tfg.k_lendar.views.task.EditTaskActivity;
 
 public class NewTruancyFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -62,6 +64,7 @@ public class NewTruancyFragment extends Fragment {
     Modules selectedModule;
     Uf selectedUf;
     Button saveButton;
+    Button cancelButton;
 
     @Nullable
     @Override
@@ -83,6 +86,7 @@ public class NewTruancyFragment extends Fragment {
         reasonLayout = view.findViewById(R.id.reasonLayoutT);
         reasonInput = view.findViewById(R.id.reasonInputT);
         saveButton = view.findViewById(R.id.saveButtonT);
+        cancelButton = view.findViewById(R.id.cancelButtonT);
         getAllUfsFromModulesService();
         subjectsDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -114,6 +118,14 @@ public class NewTruancyFragment extends Fragment {
                 if (validateTruancyForm()) {
                     postTruancyService(new TruancyRequest(selectedModule.getId(), selectedUf.getId(), TaskTruancyActivity.date,String.valueOf(reasonInput.getText()),Integer.parseInt(String.valueOf(hoursInput.getText()))));
                 }
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NavigationActivity.class);
+                startActivity(intent);
             }
         });
     }
