@@ -70,21 +70,6 @@ public class SubjectsFragment extends Fragment {
         });
     }
 
-    private Modules[] getMockList() {
-        List<Uf> ufList = new ArrayList<>();
-        ufList.add(new Uf("0", "0", "UF1", 2, 2));
-        ufList.add(new Uf("1", "01", "UF2", 6, 4));
-        ufList.add(new Uf("2", "02", "UF3", 4, 6));
-
-        return new Modules[]{
-                new Modules("0", "BD", "GREEN", ufList),
-                new Modules("1", "JAVA", "YELLOW", ufList),
-                new Modules("2", "POO", "RED", ufList),
-                new Modules("3", "SOCKETS", "BLUE", ufList),
-
-        };
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
