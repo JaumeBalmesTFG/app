@@ -4,19 +4,22 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import tfg.k_lendar.databinding.ItemSubjectRowView2Binding;
 import tfg.k_lendar.databinding.MarksFragmentBinding;
+import tfg.k_lendar.http.models.marks.AllModules;
 import tfg.k_lendar.http.models.marks.MarksModules;
+import tfg.k_lendar.views.navigation.ui.subjects.UfsAdapter;
 
 public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
 
-    private final List<MarksModules> subjects;
+    private final AllModules subjects;
 
-    public MarksAdapter(List<MarksModules> subjects) {
+    public MarksAdapter(AllModules subjects) {
         this.subjects = subjects;
     }
 
@@ -39,7 +42,16 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MarksAdapter.ViewHolder holder, int position) {
         //TODO BIND OTHER DATA HERE
-        MarksAdapter adapter = new MarksAdapter(subjects.get(position).getName());
+        MarksAdapter adapter = new MarksAdapter(subjects);
+        holder.binding.recyclerSubjects2.setAdapter(adapter);
+
+
+        holder.binding.setText(subjects.get(position).getName());
+        holder.binding.buttonPoints.setOnClickListener(close -> listener.onItemClick(subjects.get(position)));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
+        holder.binding.recyclerSubjects2.setLayoutManager(layoutManager);
+        UfsAdapter adapter = new UfsAdapter(subjects.get(position).getUfs());
         holder.binding.recyclerSubjects2.setAdapter(adapter);
 
     }
