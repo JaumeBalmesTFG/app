@@ -1,5 +1,6 @@
 package tfg.k_lendar.views.modals.uf;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import tfg.k_lendar.R;
+import tfg.k_lendar.views.navigation.NavigationActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,8 @@ public class RemoveUfFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button removeButton, cancelButton;
 
     public RemoveUfFragment() {
         // Required empty public constructor
@@ -55,6 +60,18 @@ public class RemoveUfFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        removeButton.findViewById(R.id.removeButtonUfDialog);
+        cancelButton.findViewById(R.id.cancelButtonUfDialog);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NavigationActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

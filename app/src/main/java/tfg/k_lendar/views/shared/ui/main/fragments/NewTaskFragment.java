@@ -1,5 +1,6 @@
 package tfg.k_lendar.views.shared.ui.main.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -44,6 +45,7 @@ import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.views.navigation.NavigationActivity;
 import tfg.k_lendar.views.shared.TaskTruancyActivity;
+import tfg.k_lendar.views.task.EditTaskActivity;
 
 public class NewTaskFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -69,6 +71,7 @@ public class NewTaskFragment extends Fragment {
     Uf selectedUf;
     Rule selectedRule;
     Button saveButton;
+    Button cancelButton;
 
     @Nullable
     @Override
@@ -78,21 +81,22 @@ public class NewTaskFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        subjectsMenu = view.findViewById(R.id.menuSubjects);
-        subjectsDropdown = view.findViewById(R.id.subjectsDropdown);
-        ufsMenu = view.findViewById(R.id.menuUfs);
-        ufsDropdown = view.findViewById(R.id.ufsDropdown);
-        ufsContainer = view.findViewById(R.id.ufsContainer);
-        rulesContainer = view.findViewById(R.id.rulesContainer);
-        rulesMenu = view.findViewById(R.id.menuRules);
-        rulesDropdown = view.findViewById(R.id.rulesDropdown);
+        subjectsMenu = view.findViewById(R.id.menuSubjectsNewTask);
+        subjectsDropdown = view.findViewById(R.id.subjectsDropdownNewTask);
+        ufsMenu = view.findViewById(R.id.menuUfsNewTask);
+        ufsDropdown = view.findViewById(R.id.ufsDropdownNewTask);
+        ufsContainer = view.findViewById(R.id.ufsContainerNewTask);
+        rulesContainer = view.findViewById(R.id.rulesContainerNewTask);
+        rulesMenu = view.findViewById(R.id.menuRulesNewTask);
+        rulesDropdown = view.findViewById(R.id.rulesDropdownNewTask);
 
-        titleContainer = view.findViewById(R.id.titleContainer);
-        titleLayout = view.findViewById(R.id.titleLayout);
-        titleInput = view.findViewById(R.id.titleInput);
-        descriptionLayout = view.findViewById(R.id.descriptionLayout);
-        descriptionInput = view.findViewById(R.id.descriptionInput);
-        saveButton = view.findViewById(R.id.saveButton);
+        titleContainer = view.findViewById(R.id.titleContainerNewTask);
+        titleLayout = view.findViewById(R.id.titleLayoutNewTask);
+        titleInput = view.findViewById(R.id.titleInputNewTask);
+        descriptionLayout = view.findViewById(R.id.descriptionLayoutNewTask);
+        descriptionInput = view.findViewById(R.id.descriptionInputNewTask);
+        saveButton = view.findViewById(R.id.saveButtonNewTask);
+        cancelButton = view.findViewById(R.id.cancelButtonNewTask);
         getAllUfsFromModulesService();
         subjectsDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -146,6 +150,14 @@ public class NewTaskFragment extends Fragment {
                     );
                     saveTaskService(postTaskRequest);
                 }
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NavigationActivity.class);
+                startActivity(intent);
             }
         });
 
