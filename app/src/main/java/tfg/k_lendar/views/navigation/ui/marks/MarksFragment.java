@@ -22,6 +22,7 @@ import java.util.List;
 
 import tfg.k_lendar.R;
 import tfg.k_lendar.databinding.MarksFragmentBinding;
+import tfg.k_lendar.http.models.marks.AllModules;
 import tfg.k_lendar.http.models.marks.MarksModules;
 import tfg.k_lendar.http.models.marks.TasksMarks;
 import tfg.k_lendar.http.models.marks.TruancyMarks;
@@ -108,7 +109,8 @@ public class MarksFragment extends Fragment {
 
     private void setUpObservers() {
         marksViewModel.getList().observe(getViewLifecycleOwner(), modulesList -> {
-            adapter = new MarksAdapter(getMockList());
+            AllModules allModules = new AllModules(getMockList());
+            adapter = new MarksAdapter(allModules);
             binding.recyclerSubjects2.setAdapter(adapter);
         });
     }
