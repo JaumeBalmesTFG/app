@@ -17,5 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="1"
         tools:listitem="@layout/item_subject_row_view2" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>
 
