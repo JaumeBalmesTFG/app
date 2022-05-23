@@ -15,9 +15,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -45,9 +48,10 @@ public class CalendarFragment extends Fragment {
 
     private CalendarViewModel calendarViewModel;
     private CalendarFragmentBinding binding;
-    private Calendar calendar;
+    private Calendar calendar = Calendar.getInstance();
     private CalendarView mCalendarView;
     private List<EventDay> mEventDays = new ArrayList<>();
+    private List<Calendar> mCalendarDays = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,11 +69,10 @@ public class CalendarFragment extends Fragment {
             }
         });
 
-        calendar = Calendar.getInstance();
-
         mCalendarView = (CalendarView) binding.calendarView;
-        mEventDays.add(new EventDay(calendar, R.drawable.outline_book_24, Color.parseColor("#1ADB61")));
-        mCalendarView.setEvents(mEventDays);
+        /*mEventDays.add(new EventDay(calendar, R.drawable.outline_book_24, Color.parseColor("#1ADB61")));
+        mCalendarView.setEvents(mEventDays);*/
+        //mCalendarView.setFirstDayOfWeek(CalendarWeekDay.MONDAY);
         getTasksTruanciesFromCalendar();
 
 
@@ -116,16 +119,12 @@ public class CalendarFragment extends Fragment {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
+                        calendar = Calendar.getInstance();
                         calendar.setTime(date);
-                        EventDay mEventDay = new EventDay(calendar,
+                        mCalendarDays.add(calendar);
+                        mEventDays.add(new EventDay(calendar,
                                     R.drawable.outline_book_24, Color.parseColor(row.get("backgroundColor").getAsString())
-                            );
-                        try {
-                            mCalendarView.setDate(mEventDay.getCalendar());
-                        } catch (OutOfDateRangeException e) {
-                            e.printStackTrace();
-                        }
-                        mEventDays.add(mEventDay);
+                            ));
                     }
                     mCalendarView.setEvents(mEventDays);
                 } else {
