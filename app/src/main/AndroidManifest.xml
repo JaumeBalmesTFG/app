@@ -13,9 +13,11 @@
         android:theme="@style/Theme.Klendar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".views.navigation.ui.subjects.ArchivedSubject"
+            android:exported="false" />
+        <activity
             android:name=".views.uf.NewUfActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".views.truancy.EditTruancyActivity"
             android:exported="false" />
@@ -26,15 +28,24 @@
             android:name=".views.shared.TaskTruancyActivity"
             android:exported="true"
             android:label="@string/title_activity_task_truancy"
-            android:theme="@style/Theme.Klendar.NoActionBar"></activity>
+            android:theme="@style/Theme.Klendar.NoActionBar" />
         <activity
             android:name=".views.navigation.NavigationActivity"
             android:exported="true"
             android:label="@string/title_activity_navigation"
-            android:theme="@style/Theme.MaterialComponents.DayNight"></activity>
+            android:theme="@style/Theme.MaterialComponents.DayNight" />
+        <activity
+        <activity
+          android:name=".views.module.ArchivedModulesActivity"
+          android:exported="true"/>
+
         <activity
             android:name=".views.auth.AuthActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+
+        <activity
+            android:name=".views.module.NewEditModuleActivity"
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -43,6 +54,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.auth.AuthActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

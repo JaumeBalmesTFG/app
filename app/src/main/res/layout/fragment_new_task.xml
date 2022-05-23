@@ -17,14 +17,14 @@
             android:textSize="25dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/menuSubjects"
+            android:id="@+id/menuSubjectsNewTask"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Select a subject">
 
             <AutoCompleteTextView
-                android:id="@+id/subjectsDropdown"
+                android:id="@+id/subjectsDropdownNewTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -32,7 +32,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ufsContainer"
+            android:id="@+id/ufsContainerNewTask"
             android:orientation="vertical"
             android:visibility="invisible"
             android:layout_width="match_parent"
@@ -46,14 +46,14 @@
                 android:layout_marginTop="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menuUfs"
+                android:id="@+id/menuUfsNewTask"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Select an UF">
 
                 <AutoCompleteTextView
-                    android:id="@+id/ufsDropdown"
+                    android:id="@+id/ufsDropdownNewTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -62,7 +62,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/rulesContainer"
+            android:id="@+id/rulesContainerNewTask"
             android:visibility="invisible"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -76,14 +76,14 @@
                 android:layout_marginTop="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menuRules"
+                android:id="@+id/menuRulesNewTask"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Select a Rule">
 
                 <AutoCompleteTextView
-                    android:id="@+id/rulesDropdown"
+                    android:id="@+id/rulesDropdownNewTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -96,7 +96,7 @@
             android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/titleContainer"
+            android:id="@+id/titleContainerNewTask"
             android:orientation="vertical">
 
             <TextView
@@ -107,13 +107,13 @@
                 android:textSize="25dp"
                 android:layout_marginTop="20dp"/>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/titleLayout"
+                android:id="@+id/titleLayoutNewTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginEnd="20dp">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/titleInput"
+                    android:id="@+id/titleInputNewTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Write a title..."
@@ -129,14 +129,14 @@
                 android:layout_marginTop="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/descriptionLayout"
+            android:id="@+id/descriptionLayoutNewTask"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Write a description">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/descriptionInput"
+                android:id="@+id/descriptionInputNewTask"
                 android:layout_width="match_parent"
                 android:inputType="textMultiLine"
                 android:lines="4"
@@ -154,7 +154,7 @@
             android:layout_gravity="right">
 
             <Button
-                android:id="@+id/saveButton"
+                android:id="@+id/saveButtonNewTask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="save"
@@ -162,7 +162,7 @@
                 />
 
             <Button
-                android:id="@+id/cancelButton"
+                android:id="@+id/cancelButtonNewTask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
