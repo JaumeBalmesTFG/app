@@ -37,6 +37,10 @@
         <activity
             android:name=".views.auth.AuthActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".views.module.NewEditModuleActivity"
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
