@@ -3,9 +3,13 @@ package tfg.k_lendar.views.module;
 import static tfg.k_lendar.views.auth.AuthActivity.BASE_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -20,15 +24,26 @@ import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.ApiClient;
 import tfg.k_lendar.http.api.services.module.ModulePlaceHolderApi;
 import tfg.k_lendar.http.models.taskTruency.Modules;
+import tfg.k_lendar.views.navigation.ui.subjects.archived.ListAdapter;
 
 public class ArchivedModulesActivity extends AppCompatActivity {
 
     List<Modules> archivedModules = new ArrayList<>();
+    ListAdapter listAdapter;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archived_subject);
+         recyclerView = findViewById(R.id.recyclerViewArchived);
         getAllArchivedModules(this);
+
+    }
+
+
+    public void init() {
+
+
 
     }
 
@@ -51,6 +66,11 @@ public class ArchivedModulesActivity extends AppCompatActivity {
                         archivedModules.add(module);
                     }
                     System.out.println(archivedModules);
+                    listAdapter = new ListAdapter(archivedModules,context);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    recyclerView.setAdapter(listAdapter);
+
                     //TODO Llamar aqui a la función que ejecute el RecyclerView,
                     //TODO dentro de archivedModules estan todos los modulos
                 } else {
