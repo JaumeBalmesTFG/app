@@ -52,7 +52,6 @@ public class SubjectsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects.setLayoutManager(layoutManager);
         fab = binding.fabButton;
-        //fab.findViewById(R.id.fabButton);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
