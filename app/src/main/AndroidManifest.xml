@@ -35,7 +35,19 @@
             android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.MaterialComponents.DayNight" />
         <activity
-            android:name=".views.module.ArchivedModulesActivity"
+        <activity
+          android:name=".views.module.ArchivedModulesActivity"
+          android:exported="true"/>
+
+        <activity
+            android:name=".views.auth.AuthActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".views.module.NewEditModuleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
