@@ -40,13 +40,6 @@ public class ArchivedModulesActivity extends AppCompatActivity {
 
     }
 
-
-    public void init() {
-
-
-
-    }
-
     public void getAllArchivedModules(Context context) {
         ModulePlaceHolderApi api = ApiClient.getClient(BASE_URL).create(ModulePlaceHolderApi.class);
         api.getAllArchivedModules(AuthBearerToken.getAuthBearerToken(context)).enqueue(new Callback<JsonObject>() {

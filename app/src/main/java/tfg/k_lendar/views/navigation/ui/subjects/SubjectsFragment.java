@@ -2,7 +2,6 @@ package tfg.k_lendar.views.navigation.ui.subjects;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +16,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import tfg.k_lendar.R;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.views.module.NewEditModuleActivity;
-import tfg.k_lendar.views.navigation.NavigationActivity;
-import tfg.k_lendar.views.task.EditTaskActivity;
 import tfg.k_lendar.views.uf.NewUfActivity;
 
 public class SubjectsFragment extends Fragment {
@@ -45,7 +40,6 @@ public class SubjectsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
-
         subjectsViewModel.getAllUfsFromModulesService(getContext());
         setUpObservers();
         //Set up RV

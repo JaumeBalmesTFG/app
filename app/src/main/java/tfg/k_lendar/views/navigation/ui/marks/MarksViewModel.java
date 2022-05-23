@@ -43,11 +43,9 @@ public class MarksViewModel extends ViewModel {
             @Override
             public void onResponse(Call<AllModules> call, Response<AllModules> response) {
                 if (response.isSuccessful()) {
-                    System.out.println(response.toString());
                     List<MarksModules> modules = (List<MarksModules>) response.body().getBody();
                     setList(modules);
                     ToastSuccess.execute(context,"modules/all is successful", NavigationActivity.class);
-                    System.out.println("!SUCCESS!");
                 } else {
                     ToastError.execute(context, response.toString());
                 }

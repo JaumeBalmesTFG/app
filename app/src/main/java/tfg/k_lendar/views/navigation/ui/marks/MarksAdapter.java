@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+
 import tfg.k_lendar.databinding.ItemSubjectRowView2Binding;
 import tfg.k_lendar.http.models.marks.MarksModules;
 
@@ -29,7 +30,7 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
     @NonNull
     @Override
     public MarksAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MarksAdapter.ViewHolder(ItemSubjectRowView2Binding.inflate(LayoutInflater.from(parent.getContext()),
+        return new ViewHolder(ItemSubjectRowView2Binding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false));
     }
 
@@ -37,10 +38,10 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull MarksAdapter.ViewHolder holder, int position) {
         holder.binding.subjectName.setText(subjects.get(position).getName());
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
-        holder.binding.recyclerUfs2.setLayoutManager(layoutManager);
-        UfsAdapter2 adapter = new UfsAdapter2(subjects.get(position).getUfs());
-        holder.binding.recyclerUfs2.setAdapter(adapter);
+       LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
+       holder.binding.recyclerUfs2.setLayoutManager(layoutManager);
+       UfsAdapter2 adapter = new UfsAdapter2(subjects.get(position).getUfs());
+       holder.binding.recyclerUfs2.setAdapter(adapter);
     }
 
     @Override

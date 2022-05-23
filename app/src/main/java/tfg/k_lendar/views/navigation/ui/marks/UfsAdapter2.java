@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import tfg.k_lendar.databinding.ItemUfsRowView2Binding;
 import tfg.k_lendar.http.models.marks.UfMarks;
-import tfg.k_lendar.views.navigation.ui.subjects.UfsAdapter;
 
 public class UfsAdapter2 extends RecyclerView.Adapter<UfsAdapter2.ViewHolder> {
 
