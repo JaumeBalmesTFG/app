@@ -2,6 +2,7 @@ package tfg.k_lendar.views.navigation.ui.subjects;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import tfg.k_lendar.R;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.views.module.NewEditModuleActivity;
+import tfg.k_lendar.views.navigation.NavigationActivity;
+import tfg.k_lendar.views.task.EditTaskActivity;
 import tfg.k_lendar.views.uf.NewUfActivity;
 
 public class SubjectsFragment extends Fragment {
@@ -24,6 +32,7 @@ public class SubjectsFragment extends Fragment {
     private SubjectsViewModel subjectsViewModel;
     private SubjectsFragmentBinding binding;
     private SubjectsAdapter adapter;
+    FloatingActionButton fab;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,8 +51,16 @@ public class SubjectsFragment extends Fragment {
         //Set up RV
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects.setLayoutManager(layoutManager);
+        fab = binding.fabButton;
+        //fab.findViewById(R.id.fabButton);
 
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), NewEditModuleActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpObservers() {
