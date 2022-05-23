@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -16,6 +17,9 @@ public interface ModulePlaceHolderApi {
 
     @PUT("module/{moduleId}")
     Call<JsonObject> updateModule(@Header("Authorization") String token, @Path("moduleId") String moduleId, @Body JsonObject jsonObject);
+
+    @GET("module/all/archived")
+    Call<JsonObject> getAllArchivedModules(@Header("Authorization") String token);
 
 }
 
