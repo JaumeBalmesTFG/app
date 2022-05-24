@@ -21,5 +21,8 @@ public interface ModulePlaceHolderApi {
     @GET("module/all/archived")
     Call<JsonObject> getAllArchivedModules(@Header("Authorization") String token);
 
+    @PUT("module/{moduleId}/archive")
+    Call<JsonObject> archiveUnarchiveModule(@Header("Authorization") String token, @Path("moduleId") String moduleId);
+
 }
 
