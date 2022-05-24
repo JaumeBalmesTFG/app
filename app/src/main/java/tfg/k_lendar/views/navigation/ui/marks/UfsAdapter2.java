@@ -1,6 +1,9 @@
 package tfg.k_lendar.views.navigation.ui.marks;
 
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +42,22 @@ public class UfsAdapter2 extends RecyclerView.Adapter<UfsAdapter2.ViewHolder> {
         holder.binding.ufMark.setText(ufs.get(position).getGlobalUfGrade());
         holder.binding.truancysMark.setText(String.valueOf(ufs.get(position).getTotalTruancies()));
         holder.binding.progressBar.setProgress(ufs.get(position).getTruancy_percentage());
+        holder.binding.arrowButtonUf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.binding.taskCard.getVisibility() == View.VISIBLE){
+                    //TransitionManager.beginDelayedTransition(subjectCard, new AutoTransition());
+                    holder.binding.taskCard.setVisibility(View.INVISIBLE);
+                    holder.binding.arrowButtonUf.setRotation(270);
+                }
+                else {
+                    TransitionManager.beginDelayedTransition(holder.binding.ufCard, new AutoTransition());
+                    holder.binding.taskCard.setVisibility(View.VISIBLE);
+                    holder.binding.arrowButtonUf.setRotation(-270);
+
+                }
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
         holder.binding.recyclerTasks2.setLayoutManager(layoutManager);

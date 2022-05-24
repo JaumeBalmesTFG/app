@@ -1,5 +1,7 @@
 package tfg.k_lendar.views.navigation.ui.marks;
 
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,17 +44,17 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
         holder.binding.arrowButtonSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (ufCard.getVisibility()==View.VISIBLE){
-//                    TransitionManager.beginDelayedTransition(subjectCard, new AutoTransition());
-//                    ufCard.setVisibility(View.INVISIBLE);
-//                    taskCard.setVisibility(View.INVISIBLE);
-//                    arrowButton.setRotation(270);
-//                }
-//                else {
-//                    TransitionManager.beginDelayedTransition(ufCard, new AutoTransition());
-//                    ufCard.setVisibility(View.VISIBLE);
-//                    arrowButton.setRotation(-270);
-//                }
+                if (holder.binding.subjectCard.getVisibility() == View.VISIBLE){
+                    //TransitionManager.beginDelayedTransition(holder.binding.subjectCard, new AutoTransition());
+                    holder.binding.ufsCard.setVisibility(View.INVISIBLE);
+                    //holder.binding.taskCard.setVisibility(View.INVISIBLE);
+                    holder.binding.arrowButtonSubject.setRotation(270);
+                }
+                else {
+                    TransitionManager.beginDelayedTransition(holder.binding.subjectCard, new AutoTransition());
+                    holder.binding.ufsCard.setVisibility(View.VISIBLE);
+                    holder.binding.arrowButtonSubject.setRotation(-270);
+                }
             }
         });
 

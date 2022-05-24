@@ -25,14 +25,14 @@
             <Button
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/outline_book_24"></Button>
+                android:background="@drawable/outline_book_24"/>
 
             <TextView
                 android:id="@+id/ufName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UF-1"
-                android:layout_marginStart="10dp"></TextView>
+                android:layout_marginStart="10dp"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -44,19 +44,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="9/10"
-                    android:layout_marginEnd="10dp"></TextView>
+                    android:layout_marginEnd="10dp"/>
 
                 <Button
                     android:id="@+id/arrowButtonUf"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/ic_arrow_right"
-                    android:rotation="90"></Button>
+                    android:rotation="90"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     </androidx.cardview.widget.CardView>
 
@@ -83,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Truancys"
-                    android:layout_marginBottom="5dp"></TextView>
+                    android:layout_marginBottom="5dp"/>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -93,7 +92,7 @@
                         android:id="@+id/truancysMark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9/10"></TextView>
+                        android:text="9/10"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
