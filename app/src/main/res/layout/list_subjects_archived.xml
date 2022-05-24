@@ -15,16 +15,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Programacion 33"
+            android:layout_marginLeft="20dp"
             android:textSize="25dp"></TextView>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginEnd="10dp">
+            android:gravity="right"
+            android:layout_marginEnd="20dp">
 
             <Button
                 android:id="@+id/archiveSubjectButton"
+
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/outline_archive_24"></Button>
