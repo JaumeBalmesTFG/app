@@ -8,6 +8,28 @@
     tools:context=".views.navigation.ui.subjects.SubjectsFragment"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/createSubjectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Subject"
+            android:layout_marginRight="20dp"/>
+
+        <Button
+            android:id="@+id/archivedSubjectsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Archived Subjects"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_Subjects"
@@ -21,17 +43,6 @@
         tools:itemCount="6"
         tools:listitem="@layout/item_subject_row_view" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom"
-        app:fabCustomSize="45dp"
-        android:layout_marginLeft="15dp"
-        android:backgroundTint="@color/primaryOrange"
-        android:clickable="true"
-        android:src="@drawable/outline_add_24"
-        android:translationY="-100dp" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/menuFab"
@@ -41,7 +52,7 @@
         android:layout_marginEnd="4dp"
         android:background="#00ffffff"
         android:backgroundTint="#00ffffff"
-        android:translationY="70dp"
+        android:translationY="-370dp"
         app:fab_addButtonColorNormal="@android:color/transparent"
         app:fab_addButtonSize="normal"
         app:fab_labelStyle="@style/Etiquetas"
