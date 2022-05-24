@@ -96,7 +96,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 if (response.isSuccessful()) {
                     if (response.code() == 200) {
                         ToastError.execute(context, "Module " + module.getName() + " unarchived successfully");
-                        //archivedModulesActivity.getAllArchivedModules(archivedModulesActivity, context);
+                        archivedModulesActivity.finish();
                     } else {
                         ToastError.execute(context, "An error ocurred, try again later");
                     }

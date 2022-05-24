@@ -71,8 +71,6 @@ public class ArchivedModulesActivity extends AppCompatActivity {
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(listAdapter);
 
-                    //TODO Llamar aqui a la función que ejecute el RecyclerView,
-                    //TODO dentro de archivedModules estan todos los modulos
                 } else {
                     System.out.println(response);
                     ToastError.execute(context, response.toString());

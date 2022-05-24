@@ -152,4 +152,12 @@ public class SubjectsFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        subjectsViewModel.getAllUfsFromModulesService(getContext());
+
+    }
 }
