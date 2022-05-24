@@ -22,6 +22,7 @@ import tfg.k_lendar.R;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.module.ArchivedModulesActivity;
 import tfg.k_lendar.views.module.NewEditModuleActivity;
 import tfg.k_lendar.views.navigation.NavigationActivity;
 import tfg.k_lendar.views.task.EditTaskActivity;
@@ -33,6 +34,7 @@ public class SubjectsFragment extends Fragment {
     private SubjectsFragmentBinding binding;
     private SubjectsAdapter adapter;
     FloatingActionButton fab;
+    Intent intent;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,13 +53,29 @@ public class SubjectsFragment extends Fragment {
         //Set up RV
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects.setLayoutManager(layoutManager);
-        fab = binding.fabButton;
+        /*fab = binding.fabButton;
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), NewEditModuleActivity.class);
                 startActivity(intent);
+            }
+        });*/
+
+        binding.archivedSubjectsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getActivity(), ArchivedModulesActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
+
+        binding.createSubjectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getActivity(), NewEditModuleActivity.class);
+                getContext().startActivity(intent);
             }
         });
     }

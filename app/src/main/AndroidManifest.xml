@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Klendar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".views.navigation.ui.subjects.ArchivedSubject"
+            android:name=".views.module.ArchivedModulesActivity"
             android:exported="false" />
         <activity
             android:name=".views.uf.NewUfActivity"
