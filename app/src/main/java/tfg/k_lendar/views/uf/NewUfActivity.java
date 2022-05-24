@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.TextUtils;
@@ -88,7 +89,7 @@ public class NewUfActivity extends AppCompatActivity {
                 Button deleteButton = new Button(NewUfActivity.this);
                 LinearLayoutCompat buttonsLayout = new LinearLayoutCompat(NewUfActivity.this);
 
-                LinearLayoutCompat.LayoutParams dimensions = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT);
+                LinearLayoutCompat.LayoutParams dimensions = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT, Gravity.CENTER_VERTICAL);
                 LinearLayoutCompat.LayoutParams dimensions2 = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT);
                 LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT);
 
@@ -103,10 +104,8 @@ public class NewUfActivity extends AppCompatActivity {
                 ruleName.setText("name");
                 rulePercentatge.setText("percentatge");
                 rulePercentatge.setGravity(Gravity.CENTER_HORIZONTAL);
-                deleteButton.setBackgroundResource(R.drawable.edit);
                 deleteButton.setBackgroundResource(R.drawable.trash);
-                deleteButton.setWidth(15);
-                deleteButton.setHeight(15);
+                editButton.setBackgroundResource(R.drawable.edit);
                 buttonsLayout.setGravity(Gravity.RIGHT);
 
                 newLayout.addView(ruleName);
@@ -114,9 +113,14 @@ public class NewUfActivity extends AppCompatActivity {
                 buttonsLayout.addView(editButton);
                 buttonsLayout.addView(deleteButton);
                 newLayout.addView(buttonsLayout);
+                deleteButton.getLayoutParams().width=150;
+                deleteButton.getLayoutParams().height=150;
+                editButton.getLayoutParams().width=150;
+                editButton.getLayoutParams().height=150;
 
 
                 rulesLayout.addView(newLayout);
+
 
 
             }
