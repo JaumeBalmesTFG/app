@@ -138,6 +138,7 @@ public class SubjectsFragment extends Fragment {
                     if (response.code() == 200) {
                         ToastError.execute(context,"Module " + module.getName() + " archived successfully");
                         subjectsViewModel.getAllUfsFromModulesService(context);
+                        binding.menuFab.collapse();
 
                     } else {
                         ToastError.execute(context, "An error ocurred, try again later");

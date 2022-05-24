@@ -42,6 +42,7 @@ public class SubjectsViewModel extends ViewModel {
             @Override
             public void onResponse(Call<HomeModules> call, Response<HomeModules> response) {
                 if (response.isSuccessful()) {
+                    System.out.println("ES CORRECTO");
                     HomeModules homeModules = response.body();
                     List<Modules> modules = homeModules.getBody();
                     setList(modules);
