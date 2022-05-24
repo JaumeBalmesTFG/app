@@ -127,51 +127,10 @@
 
         </RelativeLayout>
 
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Exams"
-                android:textSize="16dp"
-                android:layout_marginTop="6dp"></TextView>
-
-            <TextView
-                android:id="@+id/percentatgesText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="80%"
-                android:textSize="16dp"
-                android:layout_marginTop="6dp"></TextView>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right">
-
-
-                <Button
-                    android:id="@+id/editButtonExams"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/edit"></Button>
-
-                <Button
-                    android:id="@+id/cancelButtonExams"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/trash"></Button>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </RelativeLayout>
+        <Button
+            android:id="@+id/addRule"
+            android:layout_width="30dp"
+            android:layout_height="30dp"></Button>
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
@@ -179,44 +138,60 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Activities"
-                android:textSize="16dp"
-                android:layout_marginTop="6dp"></TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="20%"
-                android:textSize="16dp"
-                android:layout_marginTop="6dp"></TextView>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/rulesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-                <Button
-                    android:id="@+id/editButtonActivities"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/edit"></Button>
 
-                <Button
-                    android:id="@+id/cancelButtonActivities"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/trash"></Button>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </RelativeLayout>
+                <!-- <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Exams"
+                        android:textSize="16dp"
+                        android:layout_marginTop="6dp"></TextView>
+
+                    <TextView
+                        android:id="@+id/percentatgesText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="80%"
+                        android:textSize="16dp"
+                        android:layout_marginTop="6dp"></TextView>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right">
+
+
+                        <Button
+                            android:id="@+id/editButtonExams"
+                            android:layout_width="80px"
+                            android:layout_height="80px"
+                            android:background="@drawable/edit"></Button>
+
+                        <Button
+                            android:id="@+id/cancelButtonExams"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/trash"></Button>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </RelativeLayout> -->
+
+
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
