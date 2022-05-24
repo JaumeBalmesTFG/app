@@ -37,7 +37,7 @@ public class UfsAdapter2 extends RecyclerView.Adapter<UfsAdapter2.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.binding.ufName.setText(ufs.get(position).getName());
         holder.binding.ufMark.setText(ufs.get(position).getGlobalUfGrade());
-        holder.binding.truancysMark.setText(ufs.get(position).getTotalTruancies());
+        holder.binding.truancysMark.setText(String.valueOf(ufs.get(position).getTotalTruancies()));
         holder.binding.progressBar.setProgress(ufs.get(position).getTruancy_percentage());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());

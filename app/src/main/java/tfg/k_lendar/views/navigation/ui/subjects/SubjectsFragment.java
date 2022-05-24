@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
+import tfg.k_lendar.http.models.taskTruency.Module;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.views.module.ArchivedModulesActivity;
@@ -32,8 +33,7 @@ public class SubjectsFragment extends Fragment {
     Intent intent;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = SubjectsFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -111,19 +111,17 @@ public class SubjectsFragment extends Fragment {
         });
     }
 
-    private Modules[] getMockList() {
+    private List<Modules> getMockList() {
         List<Uf> ufList = new ArrayList<>();
         ufList.add(new Uf("0", "0", "UF1", 2, 2));
         ufList.add(new Uf("1", "01", "UF2", 6, 4));
         ufList.add(new Uf("2", "02", "UF3", 4, 6));
-
-        return new Modules[]{
-                new Modules("0", "BD", "GREEN", ufList),
-                new Modules("1", "JAVA", "YELLOW", ufList),
-                new Modules("2", "POO", "RED", ufList),
-                new Modules("3", "SOCKETS", "BLUE", ufList),
-
-        };
+        List<Modules> modules= new ArrayList<>();
+        modules.add(new Modules("0", "BD", "GREEN", ufList));
+        modules.add(new Modules("1", "JAVA", "YELLOW", ufList));
+        modules.add(new Modules("2", "POO", "RED", ufList));
+        modules.add(new Modules("3", "SOCKETS", "BLUE", ufList));
+        return modules;
     }
 
     @Override

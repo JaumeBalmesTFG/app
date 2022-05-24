@@ -2,9 +2,13 @@ package tfg.k_lendar.views.navigation.ui.marks;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
+import java.util.Optional;
+
 import tfg.k_lendar.databinding.ItemTasksRowView2Binding;
 import tfg.k_lendar.http.models.marks.TasksMarks;
 
@@ -34,8 +38,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.binding.taskName.setText(tasks.get(position).getName());
-        holder.binding.taskMark.setText(tasks.get(position).getGrade());
+        holder.binding.taskName.setText(tasks.get(position).getName() != null ? tasks.get(position).getName() : "!");
+        holder.binding.taskMark.setText(String.valueOf(tasks.get(position).getGrade() != null ? tasks.get(position).getGrade() : 0));
     }
 
     @Override

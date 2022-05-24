@@ -16,12 +16,12 @@ public class TasksMarks {
     private String name;
 
     @SerializedName("grade")
-    private int grade;
+    private Integer grade;
 
     @SerializedName("rule")
     private Rule rule;
 
-    public TasksMarks(String id, String ruleId, String name, int grade, Rule rule) {
+    public TasksMarks(String id, String ruleId, String name, Integer grade, Rule rule) {
         this.id = id;
         this.ruleId = ruleId;
         this.name = name;
@@ -41,7 +41,7 @@ public class TasksMarks {
         return name;
     }
 
-    public int getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 

@@ -1,6 +1,7 @@
 package tfg.k_lendar.views.navigation.ui.marks;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
     private final List<MarksModules> subjects;
 
     public MarksAdapter(List<MarksModules> subjects) {
+
         this.subjects = subjects;
     }
 
@@ -37,6 +39,22 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MarksAdapter.ViewHolder holder, int position) {
         holder.binding.subjectName.setText(subjects.get(position).getName());
+        holder.binding.arrowButtonSubject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if (ufCard.getVisibility()==View.VISIBLE){
+//                    TransitionManager.beginDelayedTransition(subjectCard, new AutoTransition());
+//                    ufCard.setVisibility(View.INVISIBLE);
+//                    taskCard.setVisibility(View.INVISIBLE);
+//                    arrowButton.setRotation(270);
+//                }
+//                else {
+//                    TransitionManager.beginDelayedTransition(ufCard, new AutoTransition());
+//                    ufCard.setVisibility(View.VISIBLE);
+//                    arrowButton.setRotation(-270);
+//                }
+            }
+        });
 
        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
        holder.binding.recyclerUfs2.setLayoutManager(layoutManager);

@@ -19,9 +19,9 @@ public class MarksModules {
     private List<UfMarks> ufs;
 
     @SerializedName("globalModuleGrade")
-    private int globalModuleGrade;
+    private Integer globalModuleGrade;
 
-    public MarksModules(String id, String name, String color, List<UfMarks> ufs, int globalModuleGrade) {
+    public MarksModules(String id, String name, String color, List<UfMarks> ufs, Integer globalModuleGrade) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -45,7 +45,7 @@ public class MarksModules {
         return ufs;
     }
 
-    public int getGlobalModuleGrade() {
+    public Integer getGlobalModuleGrade() {
         return globalModuleGrade;
     }
 
