@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Klendar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".views.navigation.ui.subjects.ArchivedSubject"
+            android:name=".views.module.ArchivedModulesActivity"
             android:exported="false" />
         <activity
             android:name=".views.uf.NewUfActivity"
@@ -34,9 +34,6 @@
             android:exported="true"
             android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.MaterialComponents.DayNight" />
-        <activity
-          android:name=".views.module.ArchivedModulesActivity"
-          android:exported="true"/>
 
         <activity
             android:name=".views.auth.AuthActivity"
