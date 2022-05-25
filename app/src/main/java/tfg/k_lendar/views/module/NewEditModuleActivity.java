@@ -38,6 +38,7 @@ public class NewEditModuleActivity extends AppCompatActivity {
         setContentView(R.layout.new_edit_subject_dialog);
         TextInputEditText nameInput = findViewById(R.id.nameInput);
         Button saveButton = findViewById(R.id.saveButton);
+        Button cancelButton = findViewById(R.id.cancelButton);
         List<Button> buttons = new ArrayList<>(
                 Arrays.asList(
                         findViewById(R.id.subjectColor1),
@@ -81,6 +82,13 @@ public class NewEditModuleActivity extends AppCompatActivity {
                 createOrSaveModuleService(
                     data, id, action
                 );
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
