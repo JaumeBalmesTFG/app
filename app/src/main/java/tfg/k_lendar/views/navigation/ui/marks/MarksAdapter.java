@@ -44,8 +44,12 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
         holder.binding.arrowButtonSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.binding.subjectCard.getVisibility() == View.VISIBLE){
-                    //TransitionManager.beginDelayedTransition(holder.binding.subjectCard, new AutoTransition());
+
+
+
+
+                if (holder.binding.ufsCard.getVisibility() == View.VISIBLE){
+                    TransitionManager.beginDelayedTransition(holder.binding.subjectCard, new AutoTransition());
                     holder.binding.ufsCard.setVisibility(View.INVISIBLE);
                     //holder.binding.taskCard.setVisibility(View.INVISIBLE);
                     holder.binding.arrowButtonSubject.setRotation(270);
@@ -55,6 +59,12 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
                     holder.binding.ufsCard.setVisibility(View.VISIBLE);
                     holder.binding.arrowButtonSubject.setRotation(-270);
                 }
+
+
+
+
+
+
             }
         });
 

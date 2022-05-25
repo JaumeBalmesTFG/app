@@ -37,8 +37,7 @@ public class MarksFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         marksViewModel = new ViewModelProvider(this).get(MarksViewModel.class);
-        //marksViewModel.getAllModulesMarksTruanciesTasksGrades(getContext());
-        marksViewModel.setList(getMockList());
+        marksViewModel.getAllModulesMarksTruanciesTasksGrades(getContext());
         setUpObservers();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerSubjects2.setLayoutManager(layoutManager);
@@ -49,6 +48,12 @@ public class MarksFragment extends Fragment {
             adapter = new MarksAdapter(modulesList);
             binding.recyclerSubjects2.setAdapter(adapter);
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private List<MarksModules> getMockList() {
@@ -69,11 +74,5 @@ public class MarksFragment extends Fragment {
         modules.add(new MarksModules("62867a1befe70164a6fb7804", "RADOSTb", "#1ADB61", ufs, null));
 
         return modules;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }
