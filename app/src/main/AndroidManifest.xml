@@ -21,7 +21,8 @@
         </activity>
         <activity
             android:name=".views.truancy.EditTruancyActivity"
-            android:exported="false" />
+            android:exported="true" >
+        </activity>
         <activity
             android:name=".views.task.EditTaskActivity"
             android:exported="false" />
@@ -29,17 +30,20 @@
             android:name=".views.shared.TaskTruancyActivity"
             android:exported="true"
             android:label="@string/title_activity_task_truancy"
-            android:theme="@style/Theme.Klendar.NoActionBar" />
+            android:theme="@style/Theme.Klendar.NoActionBar" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".views.navigation.NavigationActivity"
             android:exported="true"
             android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.MaterialComponents.DayNight" />
-
-        <!--<activity
-          android:name=".views.module.ArchivedModulesActivity"
-          android:exported="true"/>-->
-
+      
         <activity
             android:name=".views.module.NewEditModuleActivity"
             android:exported="true" />
