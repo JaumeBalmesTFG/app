@@ -167,7 +167,6 @@ public class NewUfActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 editingRule = Integer.parseInt(view.getTag().toString());
-                System.out.println(rulesList.size());
                 Rule rule = rulesList.get(editingRule);
                 nameInput.setText(rule.getTitle());
                 percentatgeInput.setText(String.valueOf(rule.getPercentage()));
@@ -178,11 +177,8 @@ public class NewUfActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(rulesList.size());
                 int position = Integer.parseInt(view.getTag().toString());
-                System.out.println(position);
                 rulesList.remove(position);
-                System.out.println("VIEWS SIZE " + views.size());
                 views.get(position).removeAllViews();
                 views.remove(position);
                 updateTags(position);
@@ -192,13 +188,8 @@ public class NewUfActivity extends AppCompatActivity {
         rulesLayout.addView(newLayout);
     }
 
-    /*private int getRulesSize() {
-        return (rulesList.size() - 1) > -1 ? rulesList.size() : 0;
-    } */
-
     private void updateTags(int position) {
         for ( int i = position; i <= rulesList.size(); i++) {
-            System.out.println("LENGTH " + rulesList.size());
             deleteButtons.get(i).setTag(Integer.parseInt(deleteButtons.get(i).getTag().toString()) - 1);
             editButtons.get(i).setTag(Integer.parseInt(editButtons.get(i).getTag().toString()) - 1);
         }
