@@ -61,24 +61,28 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:layout_height="wrap_content"
-            android:layout_width="40dp"
-            android:text="+"
-            android:textSize="20dp"></Button>
-
-        <TextView
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            android:text="6"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"></TextView>
-
-        <Button
+            android:id="@+id/minusEditTruancy"
             android:layout_height="wrap_content"
             android:layout_width="40dp"
             android:text="-"
+            android:textSize="20dp"></Button>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/hoursTextViewEditTruancy"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="0"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:inputType="number"></com.google.android.material.textfield.TextInputEditText>
+
+        <Button
+            android:id="@+id/plusEditTruancy"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:text="+"
             android:textSize="20dp"></Button>
 
     </LinearLayout>

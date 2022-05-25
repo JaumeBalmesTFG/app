@@ -36,11 +36,18 @@ public class ArchivedModulesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archived_subject);
          recyclerView = findViewById(R.id.recyclerViewArchived);
-        getAllArchivedModules(this);
+        getAllArchivedModules(this, this);
 
     }
 
-    public void getAllArchivedModules(Context context) {
+
+    public void init() {
+
+
+
+    }
+
+    public void getAllArchivedModules(ArchivedModulesActivity archivedModulesActivity, Context context) {
         ModulePlaceHolderApi api = ApiClient.getClient(BASE_URL).create(ModulePlaceHolderApi.class);
         api.getAllArchivedModules(AuthBearerToken.getAuthBearerToken(context)).enqueue(new Callback<JsonObject>() {
             @Override
@@ -59,13 +66,11 @@ public class ArchivedModulesActivity extends AppCompatActivity {
                         archivedModules.add(module);
                     }
                     System.out.println(archivedModules);
-                    listAdapter = new ListAdapter(archivedModules,context);
+                    listAdapter = new ListAdapter(archivedModules,context, archivedModulesActivity);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     recyclerView.setAdapter(listAdapter);
 
-                    //TODO Llamar aqui a la función que ejecute el RecyclerView,
-                    //TODO dentro de archivedModules estan todos los modulos
                 } else {
                     System.out.println(response);
                     ToastError.execute(context, response.toString());

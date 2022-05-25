@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="10dp">
+        android:background="@color/primaryBlue"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
         <TextView
-            android:id="@+id/subjectTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Programacion 33"
-            android:layout_marginLeft="20dp"
-            android:textSize="25dp"></TextView>
+            android:text="Nom Task / Data Truancy"
+            android:textSize="20dp"
+            android:layout_marginStart="5dp"></TextView>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -26,16 +29,13 @@
             android:layout_marginEnd="20dp">
 
             <Button
-                android:id="@+id/archiveSubjectButton"
-
+                android:id="@+id/editTaskTruancy"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/outline_archive_24"></Button>
+                android:background="@drawable/edit"></Button>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>

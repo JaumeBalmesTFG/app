@@ -1,11 +1,11 @@
 package tfg.k_lendar.views.navigation.ui.subjects;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,13 +13,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import tfg.k_lendar.core.helpers.ToastError;
+import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.databinding.SubjectsFragmentBinding;
-import tfg.k_lendar.http.models.taskTruency.Module;
+import tfg.k_lendar.http.api.services.module.ModulePlaceHolderApi;
 import tfg.k_lendar.http.models.taskTruency.Modules;
-import tfg.k_lendar.http.models.taskTruency.Uf;
 import tfg.k_lendar.views.module.ArchivedModulesActivity;
 import tfg.k_lendar.views.module.NewEditModuleActivity;
 import tfg.k_lendar.views.uf.NewUfActivity;
@@ -33,7 +38,8 @@ public class SubjectsFragment extends Fragment {
     Intent intent;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         binding = SubjectsFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -42,6 +48,7 @@ public class SubjectsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
+
         subjectsViewModel.getAllUfsFromModulesService(getContext());
         setUpObservers();
         //Set up RV
@@ -88,14 +95,12 @@ public class SubjectsFragment extends Fragment {
         binding.closeButton.setOnClickListener(close -> binding.menuFab.collapse());
 
         binding.addButton.setOnClickListener(add -> {
-            Toast.makeText(getContext(), "Add button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this.getActivity(), NewUfActivity.class);
             intent.putExtra("moduleId", moduleItemClick.getId());
             getContext().startActivity(intent);
         });
 
         binding.editButton.setOnClickListener(add -> {
-            Toast.makeText(getContext(), "Edit button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this.getActivity(), NewEditModuleActivity.class);
             intent.putExtra("id", moduleItemClick.getId());
             intent.putExtra("title", moduleItemClick.getName());
@@ -106,27 +111,54 @@ public class SubjectsFragment extends Fragment {
         });
 
         binding.archiveButton.setOnClickListener(add -> {
-            Toast.makeText(getContext(), "Archive button: " + moduleItemClick.getName(), Toast.LENGTH_SHORT).show();
-            //TODO ARCHIVE BUTTON
+            archiveSubject(getContext(), moduleItemClick, adapter);
         });
-    }
-
-    private List<Modules> getMockList() {
-        List<Uf> ufList = new ArrayList<>();
-        ufList.add(new Uf("0", "0", "UF1", 2, 2));
-        ufList.add(new Uf("1", "01", "UF2", 6, 4));
-        ufList.add(new Uf("2", "02", "UF3", 4, 6));
-        List<Modules> modules= new ArrayList<>();
-        modules.add(new Modules("0", "BD", "GREEN", ufList));
-        modules.add(new Modules("1", "JAVA", "YELLOW", ufList));
-        modules.add(new Modules("2", "POO", "RED", ufList));
-        modules.add(new Modules("3", "SOCKETS", "BLUE", ufList));
-        return modules;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void archiveSubject(Context context, Modules module, SubjectsAdapter adapter){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ModulePlaceHolderApi ModulePlaceHolderApi = retrofit.create(ModulePlaceHolderApi.class);
+        Call<JsonObject> call = ModulePlaceHolderApi.archiveUnarchiveModule(AuthBearerToken.getAuthBearerToken(context), module.getId());
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
+                        ToastError.execute(context,"Module " + module.getName() + " archived successfully");
+                        subjectsViewModel.getAllUfsFromModulesService(context);
+                        binding.menuFab.collapse();
+
+                    } else {
+                        ToastError.execute(context, "An error ocurred, try again later");
+                    }
+                } else {
+                    ToastError.execute(context, "An error ocurred, try again later");
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ToastError.execute(context, "An error ocurred, try again later");
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        subjectsViewModel.getAllUfsFromModulesService(getContext());
+
     }
 }
