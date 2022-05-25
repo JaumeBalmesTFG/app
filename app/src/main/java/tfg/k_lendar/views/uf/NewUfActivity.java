@@ -29,14 +29,14 @@ public class NewUfActivity extends AppCompatActivity {
 
     Button saveButton, cancelButton, addRule;
     TextInputEditText titleInput, nameInput, percentatgeInput, hoursInput, truancyInput;
-    TextInputLayout titleLayout, hoursLayout, truancyLayout;
+    TextInputLayout titleLayout, hoursLayout, truancyLayout, nameLayout, percentatgeLayout;
     LinearLayoutCompat rulesLayout;
     List<Rule> rulesList = new ArrayList<>();
    List<RelativeLayout> views = new ArrayList<>();
     List<Button> editButtons = new ArrayList<>();
     List<Button> deleteButtons = new ArrayList<>();
-    int editingRule;
-    boolean isEditing;
+    int editingRule, editingPercentage;
+    boolean isEditing, correctPercentage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,9 @@ public class NewUfActivity extends AppCompatActivity {
         titleLayout = findViewById(R.id.titleLayoutUf);
         titleInput = findViewById(R.id.titleInputUf);
         nameInput = findViewById(R.id.nameInputUf);
+        nameLayout = findViewById(R.id.nameLayout);
         percentatgeInput = findViewById(R.id.percentatgesInputUf);
+        percentatgeLayout = findViewById(R.id.percentatgesLayout);
         hoursLayout = findViewById(R.id.hoursLayoutUf);
         hoursInput = findViewById(R.id.hoursInputUf);
         truancyLayout = findViewById(R.id.truancyLayoutUf);
@@ -68,8 +70,7 @@ public class NewUfActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validateFormAndSaveTask()) {
-
+                if (validateFormAndSaveUf()) {
                 }
             }
         });
@@ -77,13 +78,51 @@ public class NewUfActivity extends AppCompatActivity {
         addRule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createCustomRule();
+
+                if (validateRules()) {
+                    createCustomRule();
+                }
             }
         });
 
     }
 
-    private boolean validateFormAndSaveTask() {
+    private boolean validatePercentage(View view){
+
+        editingPercentage = Integer.parseInt(view.getTag().toString());
+        Rule rule = rulesList.get(editingPercentage);
+        percentatgeInput.setText(String.valueOf(rule.getPercentage()));
+        int count = 0;
+        for (int i = 0; i < rulesList.size(); i++){
+            count += rulesList.get(i).getPercentage();
+        }
+
+        return count == 100;
+
+        /*
+        editingRule = Integer.parseInt(view.getTag().toString());
+                Rule rule = rulesList.get(editingRule);
+                nameInput.setText(rule.getTitle());
+                percentatgeInput.setText(String.valueOf(rule.getPercentage()));
+                isEditing = true;
+         */
+    }
+
+    private boolean validateRules() {
+        if (TextUtils.isEmpty(nameInput.getText())) {
+            nameLayout.setError("The name is required");
+            nameInput.addTextChangedListener(new RemoveErrorTextWatcher(nameLayout));
+            return false;
+        }
+        if (TextUtils.isEmpty(percentatgeInput.getText())) {
+            percentatgeLayout.setError("The percentage is required");
+            percentatgeInput.addTextChangedListener(new RemoveErrorTextWatcher(percentatgeLayout));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateFormAndSaveUf() {
         if (TextUtils.isEmpty(titleInput.getText())) {
             titleLayout.setError("The title is required");
             titleInput.addTextChangedListener(new RemoveErrorTextWatcher(titleLayout));
