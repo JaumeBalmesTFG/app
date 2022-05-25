@@ -23,6 +23,7 @@
             android:layout_marginBottom="5dp">
 
             <Button
+                android:id="@+id/bookButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/outline_book_24"/>
@@ -61,7 +62,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/taskCard"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

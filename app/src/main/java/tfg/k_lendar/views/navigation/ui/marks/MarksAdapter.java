@@ -5,15 +5,19 @@ import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 import tfg.k_lendar.databinding.ItemSubjectRowView2Binding;
 import tfg.k_lendar.http.models.marks.MarksModules;
 
-public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
+public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder> {
 
     private final List<MarksModules> subjects;
 
@@ -44,34 +48,28 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.ViewHolder>{
         holder.binding.arrowButtonSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-                if (holder.binding.ufsCard.getVisibility() == View.VISIBLE){
+                if (holder.binding.ufsCard.getVisibility() == View.VISIBLE) {
                     TransitionManager.beginDelayedTransition(holder.binding.subjectCard, new AutoTransition());
-                    holder.binding.ufsCard.setVisibility(View.INVISIBLE);
-                    //holder.binding.taskCard.setVisibility(View.INVISIBLE);
+                    holder.binding.ufsCard.setVisibility(View.GONE);
+                    if (holder.binding.recyclerUfs2.getChildCount() > 0) {
+                        for (int i = 0; i < holder.binding.recyclerUfs2.getChildCount(); i++) {
+                            ((LinearLayoutCompat) holder.binding.recyclerUfs2.getChildAt(i)).getChildAt(1).setVisibility(View.GONE);
+                            ((LinearLayoutCompat) ((LinearLayoutCompat) ((CardView) ((LinearLayoutCompat) holder.binding.recyclerUfs2.getChildAt(i)).getChildAt(0)).getChildAt(0)).getChildAt(2)).getChildAt(1).setRotation(270);
+                        }
+                    }
                     holder.binding.arrowButtonSubject.setRotation(270);
-                }
-                else {
+                } else {
                     TransitionManager.beginDelayedTransition(holder.binding.subjectCard, new AutoTransition());
                     holder.binding.ufsCard.setVisibility(View.VISIBLE);
                     holder.binding.arrowButtonSubject.setRotation(-270);
                 }
-
-
-
-
-
-
             }
         });
 
-       LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
-       holder.binding.recyclerUfs2.setLayoutManager(layoutManager);
-       UfsAdapter2 adapter = new UfsAdapter2(subjects.get(position).getUfs());
-       holder.binding.recyclerUfs2.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
+        holder.binding.recyclerUfs2.setLayoutManager(layoutManager);
+        UfsAdapter2 adapter = new UfsAdapter2(subjects.get(position).getUfs());
+        holder.binding.recyclerUfs2.setAdapter(adapter);
     }
 
     @Override
