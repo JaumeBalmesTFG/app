@@ -52,7 +52,6 @@ public class NewTruancyFragment extends Fragment {
     TextInputLayout ufsMenu;
 
     LinearLayoutCompat inputsLayout;
-
     LinearLayoutCompat hoursContainer;
 
     LinearLayoutCompat ufsContainer;
@@ -65,6 +64,8 @@ public class NewTruancyFragment extends Fragment {
     Uf selectedUf;
     Button saveButton;
     Button cancelButton;
+    Button minusButton;
+    Button plusButton;
 
     @Nullable
     @Override
@@ -80,13 +81,14 @@ public class NewTruancyFragment extends Fragment {
         ufsDropdown = view.findViewById(R.id.ufsDropdownT);
         ufsContainer = view.findViewById(R.id.ufsContainerT);
         inputsLayout = view.findViewById(R.id.inputsLayoutT);
-        hoursContainer = view.findViewById(R.id.hoursContainerT);
-        hoursLayout = view.findViewById(R.id.hoursLayoutT);
         hoursInput = view.findViewById(R.id.hoursInputT);
+        hoursContainer = view.findViewById(R.id.hoursContainerT);
         reasonLayout = view.findViewById(R.id.reasonLayoutT);
         reasonInput = view.findViewById(R.id.reasonInputT);
         saveButton = view.findViewById(R.id.saveButtonT);
         cancelButton = view.findViewById(R.id.cancelButtonT);
+        minusButton = view.findViewById(R.id.minusNewTruancy);
+        plusButton = view.findViewById(R.id.plusNewTruancy);
         getAllUfsFromModulesService();
         subjectsDropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -126,6 +128,34 @@ public class NewTruancyFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), NavigationActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value= hoursInput.getText().toString();
+                int finalValue = Integer.parseInt(value);
+                String fv = String.valueOf(finalValue);
+                if (finalValue<1){
+                    finalValue=0;
+                    hoursInput.setText(fv);
+                } else {
+                    finalValue--;
+                    fv = String.valueOf(finalValue);
+                    hoursInput.setText(fv);
+                }
+            }
+        });
+
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value = hoursInput.getText().toString();
+                int finalValue = Integer.parseInt(value);
+                finalValue++;
+                String fv = String.valueOf(finalValue);
+                hoursInput.setText(fv);
             }
         });
     }

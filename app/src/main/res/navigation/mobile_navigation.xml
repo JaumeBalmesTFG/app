@@ -20,6 +20,6 @@
     <fragment
         android:id="@+id/navigation_marks"
         android:name="tfg.k_lendar.views.navigation.ui.marks.MarksFragment"
-        android:label="NOTIFICATIONS"
+        android:label="GRADES"
         tools:layout="@layout/marks_fragment" />
 </navigation>
