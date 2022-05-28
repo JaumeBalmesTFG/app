@@ -2,6 +2,8 @@ package tfg.k_lendar.http.models.marks;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigDecimal;
+
 import tfg.k_lendar.http.models.rule.Rule;
 
 public class TasksMarks {
@@ -16,12 +18,12 @@ public class TasksMarks {
     private String name;
 
     @SerializedName("grade")
-    private Integer grade;
+    private Grade grade;
 
     @SerializedName("rule")
     private Rule rule;
 
-    public TasksMarks(String id, String ruleId, String name, Integer grade, Rule rule) {
+    public TasksMarks(String id, String ruleId, String name, Grade grade, Rule rule) {
         this.id = id;
         this.ruleId = ruleId;
         this.name = name;
@@ -41,7 +43,7 @@ public class TasksMarks {
         return name;
     }
 
-    public Integer getGrade() {
+    public Grade getGrade() {
         return grade;
     }
 

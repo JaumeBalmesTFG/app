@@ -2,10 +2,6 @@ package tfg.k_lendar.http.models.taskTruency;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 public class PostTaskRequest {
 
     @SerializedName("moduleId")
@@ -19,9 +15,6 @@ public class PostTaskRequest {
 
     @SerializedName("name")
     private String name;
-
-    @SerializedName("grade")
-    private int grade;
 
     @SerializedName("description")
     private String description;
@@ -48,10 +41,6 @@ public class PostTaskRequest {
 
     public String getName() {
         return name;
-    }
-
-    public int getGrade() {
-        return grade;
     }
 
     public String getDescription() {
