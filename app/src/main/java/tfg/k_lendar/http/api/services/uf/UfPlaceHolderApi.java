@@ -18,8 +18,7 @@ public interface UfPlaceHolderApi {
     @PUT("uf/{ufId}")
     Call<JsonObject> updateUf(@Header("Authorization") String token, @Path("ufId") String ufId, @Body JsonObject jsonObject);
 
-    @DELETE("uf/{ufId}")
+    @DELETE("uf/{ufId}/delete")
     Call<JsonObject> deleteUf(@Header("Authorization") String token, @Path("ufId") String ufId);
 
 }
-

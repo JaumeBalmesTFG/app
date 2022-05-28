@@ -53,6 +53,11 @@
             android:name=".views.auth.AuthActivity"
             android:exported="true" >
         </activity>
+        <activity
+            android:name=".views.auth.AuthActivity"
+            android:exported="true" >
+
+        </activity>
 
     </application>
 
