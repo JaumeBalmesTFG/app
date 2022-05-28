@@ -43,6 +43,7 @@ import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.databinding.CalendarFragmentBinding;
 import tfg.k_lendar.http.api.services.calendar.CalendarPlaceHolderApi;
 import tfg.k_lendar.views.shared.TaskTruancyActivity;
+import tfg.k_lendar.views.shared.TodayTaskTruancyActivity;
 
 public class CalendarFragment extends Fragment {
 
@@ -84,7 +85,7 @@ public class CalendarFragment extends Fragment {
                 Calendar clickedDayCalendar = eventDay.getCalendar();String strdate = null;
                 SimpleDateFormat formatDate = new SimpleDateFormat("MM/dd/yyyy");
                 strdate = formatDate.format(clickedDayCalendar.getTime());
-                Intent intent = new Intent(getContext(), TaskTruancyActivity.class);
+                Intent intent = new Intent(getContext(), TodayTaskTruancyActivity.class);
                 intent.putExtra("date", strdate);
                 getContext().startActivity(intent);
             }
