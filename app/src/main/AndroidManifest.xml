@@ -43,7 +43,6 @@
             android:exported="true"
             android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.MaterialComponents.DayNight" />
-      
         <activity
             android:name=".views.module.NewEditModuleActivity"
             android:exported="true" />
