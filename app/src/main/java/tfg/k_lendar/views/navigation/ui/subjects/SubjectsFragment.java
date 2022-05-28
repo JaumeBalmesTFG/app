@@ -83,7 +83,7 @@ public class SubjectsFragment extends Fragment {
 
     private void setUpObservers() {
         subjectsViewModel.getList().observe(getViewLifecycleOwner(), modulesList -> {
-            adapter = new SubjectsAdapter(modulesList, this::openBottomMenuFloating);
+            adapter = new SubjectsAdapter(modulesList, this::openBottomMenuFloating, getContext());
             binding.recyclerSubjects.setAdapter(adapter);
         });
     }

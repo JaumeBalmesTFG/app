@@ -1,5 +1,6 @@
 package tfg.k_lendar.views.navigation.ui.subjects;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -16,10 +17,12 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
 
     private final List<Modules> subjects;
     private final OnItemClickListener listener;
+    private Context context;
 
-    public SubjectsAdapter(List<Modules> modulesList, OnItemClickListener listener) {
+    public SubjectsAdapter(List<Modules> modulesList, OnItemClickListener listener, Context context) {
         subjects = modulesList;
         this.listener = listener;
+        this.context = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,7 +48,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHo
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemView.getContext());
         holder.binding.recyclerUfs.setLayoutManager(layoutManager);
-        UfsAdapter adapter = new UfsAdapter(subjects.get(position).getUfs());
+        UfsAdapter adapter = new UfsAdapter(subjects.get(position).getUfs(), context);
         holder.binding.recyclerUfs.setAdapter(adapter);
     }
 
