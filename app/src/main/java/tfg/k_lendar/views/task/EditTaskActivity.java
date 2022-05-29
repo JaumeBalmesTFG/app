@@ -123,6 +123,7 @@ public class EditTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EditTaskActivity.this, NavigationActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
