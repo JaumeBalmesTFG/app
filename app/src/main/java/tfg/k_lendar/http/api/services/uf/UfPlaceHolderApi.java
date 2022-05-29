@@ -15,7 +15,7 @@ public interface UfPlaceHolderApi {
     @POST("uf/create")
     Call<JsonObject> createUf(@Header("Authorization") String token, @Body JsonObject jsonObject);
 
-    @PUT("uf/{ufId}")
+    @PUT("uf/{ufId}/edit")
     Call<JsonObject> updateUf(@Header("Authorization") String token, @Path("ufId") String ufId, @Body JsonObject jsonObject);
 
     @DELETE("uf/{ufId}/delete")

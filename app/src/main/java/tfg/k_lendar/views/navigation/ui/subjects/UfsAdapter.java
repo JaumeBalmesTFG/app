@@ -1,6 +1,7 @@
 package tfg.k_lendar.views.navigation.ui.subjects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -23,6 +24,7 @@ import tfg.k_lendar.http.api.services.module.ModulePlaceHolderApi;
 import tfg.k_lendar.http.api.services.uf.UfPlaceHolderApi;
 import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.uf.NewUfActivity;
 
 public class UfsAdapter extends RecyclerView.Adapter<UfsAdapter.ViewHolder> {
 
@@ -54,10 +56,14 @@ public class UfsAdapter extends RecyclerView.Adapter<UfsAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.binding.ufText.setText(ufs.get(position).getName());
         holder.binding.buttonEdit.setOnClickListener(onEdit -> {
-            //TODO starIntentToEdit()
-            /* Intent intent = new Intent(this, UfEditor.class);
-               intent.putExtra(EXTRA_MESSAGE, "message");
-               startActivity(intent); */
+            Intent intent = new Intent(context, NewUfActivity.class);
+            intent.putExtra("moduleId", ufs.get(position).getModuleId());
+            intent.putExtra("ufId", ufs.get(position).getId());
+            intent.putExtra("name", ufs.get(position).getName());
+            intent.putExtra("hours", String.valueOf(ufs.get(position).getHours()));
+            intent.putExtra("truancyPercentage", String.valueOf(ufs.get(position).getTruancy_percentage()));
+            intent.putExtra("action", "update");
+           context.startActivity(intent);
 
         });
         holder.binding.buttonDelete.setOnClickListener(onDelete -> {
