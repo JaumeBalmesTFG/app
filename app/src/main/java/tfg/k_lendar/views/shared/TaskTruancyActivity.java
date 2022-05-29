@@ -27,7 +27,7 @@ public class TaskTruancyActivity extends AppCompatActivity {
 
         binding = ActivityTaskTruancyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        date = getIntent().getStringExtra("date");
+        date = TodayTaskTruancyActivity.calendarDate;
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
