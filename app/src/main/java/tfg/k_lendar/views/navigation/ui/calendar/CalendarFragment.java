@@ -71,9 +71,6 @@ public class CalendarFragment extends Fragment {
         });
 
         mCalendarView = (CalendarView) binding.calendarView;
-        /*mEventDays.add(new EventDay(calendar, R.drawable.outline_book_24, Color.parseColor("#1ADB61")));
-        mCalendarView.setEvents(mEventDays);*/
-        //mCalendarView.setFirstDayOfWeek(CalendarWeekDay.MONDAY);
         getTasksTruanciesFromCalendar();
 
 
@@ -124,7 +121,7 @@ public class CalendarFragment extends Fragment {
                         calendar.setTime(date);
                         mCalendarDays.add(calendar);
                         mEventDays.add(new EventDay(calendar,
-                                    R.drawable.outline_book_24, Color.parseColor(row.get("backgroundColor").getAsString())
+                                    R.drawable.klendar_circle, Color.parseColor(row.get("backgroundColor").getAsString())
                             ));
                     }
                     mCalendarView.setEvents(mEventDays);

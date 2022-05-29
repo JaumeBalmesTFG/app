@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="6"
+        tools:itemCount="3"
         tools:listitem="@layout/item_ufs_row_view" />
 
     <com.google.android.material.divider.MaterialDivider
