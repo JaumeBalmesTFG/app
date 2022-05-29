@@ -32,12 +32,20 @@ public class EditTruancyActivity extends AppCompatActivity {
         minusButton = findViewById(R.id.minusEditTruancy);
         plusButton = findViewById(R.id.plusEditTruancy);
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditTruancyActivity.this, NavigationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EditTruancyActivity.this, NavigationActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -48,7 +56,7 @@ public class EditTruancyActivity extends AppCompatActivity {
                 int finalValue = Integer.parseInt(value);
                 String fv = String.valueOf(finalValue);
                 if (finalValue<1){
-                    finalValue=0;
+                    finalValue=1;
                     hoursInput.setText(fv);
                 } else {
                     finalValue--;

@@ -42,6 +42,7 @@ import tfg.k_lendar.http.models.truancy.TruancyRequest;
 import tfg.k_lendar.views.navigation.NavigationActivity;
 import tfg.k_lendar.views.shared.TaskTruancyActivity;
 import tfg.k_lendar.views.task.EditTaskActivity;
+import tfg.k_lendar.views.truancy.EditTruancyActivity;
 
 public class NewTruancyFragment extends Fragment {
     ArrayAdapter<Modules> subjectsAdapter;
@@ -120,6 +121,8 @@ public class NewTruancyFragment extends Fragment {
                 if (validateTruancyForm()) {
                     postTruancyService(new TruancyRequest(selectedModule.getId(), selectedUf.getId(), TaskTruancyActivity.date,String.valueOf(reasonInput.getText()),Integer.parseInt(String.valueOf(hoursInput.getText()))));
                 }
+                Intent intent = new Intent(getContext(), NavigationActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -138,7 +141,7 @@ public class NewTruancyFragment extends Fragment {
                 int finalValue = Integer.parseInt(value);
                 String fv = String.valueOf(finalValue);
                 if (finalValue<1){
-                    finalValue=0;
+                    finalValue=1;
                     hoursInput.setText(fv);
                 } else {
                     finalValue--;
