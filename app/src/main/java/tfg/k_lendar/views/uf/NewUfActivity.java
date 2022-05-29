@@ -3,6 +3,7 @@ package tfg.k_lendar.views.uf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,6 +38,7 @@ import tfg.k_lendar.core.helpers.ToastSuccess;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.rule.RulePlaceHolderApi;
 import tfg.k_lendar.http.api.services.uf.UfPlaceHolderApi;
+import tfg.k_lendar.http.models.rule.ResponseRulesFromUf;
 import tfg.k_lendar.http.models.rule.Rule;
 import tfg.k_lendar.views.module.NewEditModuleActivity;
 import tfg.k_lendar.views.navigation.NavigationActivity;
@@ -53,10 +55,13 @@ public class NewUfActivity extends AppCompatActivity {
     List<Button> deleteButtons = new ArrayList<>();
     int editingRule, editingPercentage;
     boolean isEditing, correctPercentage;
-    String action = "create";
+    String action;
     String moduleId = "62924d9f8b4a83e390f0df51";
     JsonArray lastRules = new JsonArray();
     String ufId;
+    String name;
+    String hours;
+    String truancyPercentage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,21 @@ public class NewUfActivity extends AppCompatActivity {
         truancyInput = findViewById(R.id.truancyInputUf);
         addRule = findViewById(R.id.addRule);
         rulesLayout = findViewById(R.id.rulesLayout);
+
+        moduleId = getIntent().getStringExtra("moduleId") != null ? getIntent().getStringExtra("moduleId") : "";
+        ufId = getIntent().getStringExtra("ufId") != null ? getIntent().getStringExtra("ufId") : "";
+        action = getIntent().getStringExtra("action") != null ? getIntent().getStringExtra("action") : "create";
+        name = getIntent().getStringExtra("name") != null ? getIntent().getStringExtra("name") : "";
+        hours = getIntent().getStringExtra("hours") != null ? getIntent().getStringExtra("hours") : "";
+        truancyPercentage = getIntent().getStringExtra("truancyPercentage") != null ? getIntent().getStringExtra("truancyPercentage") : "";
+
+        if (action.equals("update")) {
+            System.out.println("UPDATE");
+            titleInput.setText(name);
+            hoursInput.setText(String.valueOf(hours));
+            truancyInput.setText(String.valueOf(truancyPercentage));
+            getAllRulesService(ufId, getApplicationContext());
+        }
 
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -293,7 +313,9 @@ public class NewUfActivity extends AppCompatActivity {
                     JsonObject jsonObject = response.body();
                     System.out.println(jsonObject);
                     Log.d("DAVID", jsonObject.toString());
-                    ufId = jsonObject.get("body").getAsJsonObject().get("_id").getAsString();
+                    if (ufId.equals("")) {
+                        ufId = jsonObject.get("body").getAsJsonObject().get("_id").getAsString();
+                    }
                     JsonArray rules = new JsonArray();
                     for (int i = 0; i < rulesList.size(); i++) {
                         JsonObject rule = new JsonObject();
@@ -370,7 +392,7 @@ public class NewUfActivity extends AppCompatActivity {
 
         RulePlaceHolderApi RulePlaceHolderApi = retrofit.create(RulePlaceHolderApi.class);
 
-        Call<JsonObject> call = RulePlaceHolderApi.deleteTask(AuthBearerToken.getAuthBearerToken(getApplicationContext()), object, object.get("_id").getAsString());
+        Call<JsonObject> call = RulePlaceHolderApi.deleteTask(AuthBearerToken.getAuthBearerToken(getApplicationContext()), object, object.get("id").getAsString());
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -399,9 +421,119 @@ public class NewUfActivity extends AppCompatActivity {
         uf.addProperty("truancy_percentage", Integer.parseInt(String.valueOf(truancyInput.getText())));
 
         createOrSaveUfService(
-                uf, action.equals("update") ? uf.get("id").getAsString() : "",
+                uf, action.equals("update") ? ufId : "",
                 action
         );
+    }
+
+    public void getAllRulesService(String ufId, Context context){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.klendar.es/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RulePlaceHolderApi rulePlaceHolderApi = retrofit.create(RulePlaceHolderApi.class);
+
+
+        Call<ResponseRulesFromUf> call = rulePlaceHolderApi.getRulesFromUf(AuthBearerToken.getAuthBearerToken(context), ufId);
+
+        call.enqueue(new Callback<ResponseRulesFromUf>() {
+            @Override
+            public void onResponse(Call<ResponseRulesFromUf> call, Response<ResponseRulesFromUf> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("SUCCESS");
+                    ResponseRulesFromUf responseRulesFromUf = response.body();
+                    List<Rule> rules = responseRulesFromUf.getBody();
+                    for (int i = 0; i < rules.size(); i++) {
+                        createSingleRule(rules.get(i));
+                    }
+                } else {
+                    ToastError.execute(context, response.toString());
+                    System.out.println("OOOPS");
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseRulesFromUf> call, Throwable t) {
+                ToastError.execute(context, t.getMessage());
+                System.out.println("FAIL");
+            }
+        });
+    }
+
+    private void createSingleRule(Rule rule) {
+        rulesList.add(rule);
+        JsonObject lastRule = new JsonObject();
+        lastRule.add("id", new JsonParser().parse(rule.getId()));
+        lastRule.add("ufId", new JsonParser().parse(ufId));
+        lastRule.add("title", new JsonParser().parse(rule.getId()));
+        lastRule.addProperty("percentage", rule.getPercentage());
+        lastRules.add(lastRule);
+        nameInput.setText("");
+        percentatgeInput.setText("");
+
+        RelativeLayout newLayout = new RelativeLayout(NewUfActivity.this);
+
+        views.add(newLayout);
+        TextView ruleName = new TextView(NewUfActivity.this);
+        TextView rulePercentatge = new TextView(NewUfActivity.this);
+        Button editButton = new Button(NewUfActivity.this);
+        editButtons.add(editButton);
+        Button deleteButton = new Button(NewUfActivity.this);
+        deleteButtons.add(deleteButton);
+
+        LinearLayoutCompat buttonsLayout = new LinearLayoutCompat(NewUfActivity.this);
+
+        LinearLayoutCompat.LayoutParams dimensions = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT, Gravity.CENTER_VERTICAL);
+        LinearLayoutCompat.LayoutParams dimensions2 = new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.MATCH_PARENT);
+
+        newLayout.setLayoutParams(dimensions);
+        ruleName.setLayoutParams(parms);
+        rulePercentatge.setLayoutParams(parms);
+        buttonsLayout.setLayoutParams(dimensions2);
+
+        ruleName.setText(rule.getTitle());
+        rulePercentatge.setText(String.valueOf(rule.getPercentage()));
+        rulePercentatge.setGravity(Gravity.CENTER_HORIZONTAL);
+        deleteButton.setBackgroundResource(R.drawable.trash);
+        editButton.setBackgroundResource(R.drawable.edit);
+        deleteButton.setTag(rulesList.size());
+        editButton.setTag(rulesList.size());
+        buttonsLayout.setGravity(Gravity.RIGHT);
+
+        newLayout.addView(ruleName);
+        newLayout.addView(rulePercentatge);
+        buttonsLayout.addView(editButton);
+        buttonsLayout.addView(deleteButton);
+        newLayout.addView(buttonsLayout);
+        deleteButton.getLayoutParams().width=150;
+        deleteButton.getLayoutParams().height=150;
+        editButton.getLayoutParams().width=150;
+        editButton.getLayoutParams().height=150;
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editingRule = Integer.parseInt(view.getTag().toString());
+                Rule rule = rulesList.get(editingRule);
+                nameInput.setText(rule.getTitle());
+                percentatgeInput.setText(String.valueOf(rule.getPercentage()));
+                isEditing = true;
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = Integer.parseInt(view.getTag().toString());
+                rulesList.remove(position);
+                views.get(position).removeAllViews();
+                views.remove(position);
+                updateTags(position);
+            }
+        });
+
+        rulesLayout.addView(newLayout);
     }
 }
 
