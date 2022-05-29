@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Optional;
 
 import tfg.k_lendar.databinding.ItemTasksRowView2Binding;
 import tfg.k_lendar.http.models.marks.TasksMarks;
@@ -39,7 +38,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.binding.taskName.setText(tasks.get(position).getName() != null ? tasks.get(position).getName() : "!");
-        holder.binding.taskMark.setText(String.valueOf(tasks.get(position).getGrade() != null ? tasks.get(position).getGrade() : 0));
+        holder.binding.taskMark.setText(String.valueOf(tasks.get(position).getGrade() != null ? tasks.get(position).getGrade().getNumberDecimal() : 0));
     }
 
     @Override
