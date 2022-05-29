@@ -1,6 +1,7 @@
 package tfg.k_lendar.views.shared;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import tfg.k_lendar.core.helpers.ToastError;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.http.api.services.module.ModulePlaceHolderApi;
 import tfg.k_lendar.http.models.helper.TaskTruancySimple;
+import tfg.k_lendar.views.task.EditTaskActivity;
+import tfg.k_lendar.views.truancy.EditTruancyActivity;
+import tfg.k_lendar.views.uf.NewUfActivity;
 
 public class TodaySimpleAdapter extends RecyclerView.Adapter<TodaySimpleAdapter.ViewHolder> {
 
@@ -43,17 +47,31 @@ public class TodaySimpleAdapter extends RecyclerView.Adapter<TodaySimpleAdapter.
 
     @Override
     public TodaySimpleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = mInflater.inflate(R.layout.list_subjects_archived, null);
+        View view = mInflater.inflate(R.layout.item_task_truancy, parent, false);
         return new TodaySimpleAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final TodaySimpleAdapter.ViewHolder holder, final int position){
-        holder.titleSubject.setText(mData.get(position).getName());
-        holder.archiveSubjectButton.setOnClickListener(new View.OnClickListener() {
+        holder.taskTruancyName.setText(mData.get(position).getTitle());
+        holder.editTaskTruancy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                unarchiveSubject(mData.get(position));
+                Intent intent;
+                if (mData.get(position).getElementType().equals("task")) {
+                    intent = new Intent(todayTaskTruancyActivity, EditTaskActivity.class);
+
+                    intent.putExtra("taskName", mData.get(position).getTitle());
+                    intent.putExtra("taskId", mData.get(position).getElementId());
+                    intent.putExtra("ufId", mData.get(position).getUfId());
+                    intent.putExtra("moduleId", mData.get(position).getModuleId());
+                    intent.putExtra("ruleId", mData.get(position).getRuleId());
+
+                } else {
+                    intent = new Intent(todayTaskTruancyActivity, EditTruancyActivity.class);
+                }
+
+                todayTaskTruancyActivity.startActivity(intent);
             }
         });
     }
@@ -61,13 +79,13 @@ public class TodaySimpleAdapter extends RecyclerView.Adapter<TodaySimpleAdapter.
     public void setItems(List<TaskTruancySimple> items) { mData = items; }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView titleSubject;
-        Button archiveSubjectButton;
+        TextView taskTruancyName;
+        Button editTaskTruancy;
 
         public ViewHolder(View itemView){
             super (itemView);
-            titleSubject = itemView.findViewById(R.id.subjectTitle);
-            archiveSubjectButton = itemView.findViewById(R.id.archiveSubjectButton);
+            taskTruancyName = itemView.findViewById(R.id.taskTruancyName);
+            editTaskTruancy = itemView.findViewById(R.id.editTaskTruancy);
         }
     }
 
@@ -79,15 +97,14 @@ public class TodaySimpleAdapter extends RecyclerView.Adapter<TodaySimpleAdapter.
                 .build();
 
         ModulePlaceHolderApi ModulePlaceHolderApi = retrofit.create(ModulePlaceHolderApi.class);
-        Call<JsonObject> call = ModulePlaceHolderApi.archiveUnarchiveModule(AuthBearerToken.getAuthBearerToken(context), module.getId());
+        Call<JsonObject> call = ModulePlaceHolderApi.archiveUnarchiveModule(AuthBearerToken.getAuthBearerToken(context), module.getElementId());
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.isSuccessful()) {
                     if (response.code() == 200) {
-                        ToastError.execute(context, "Module " + module.getName() + " unarchived successfully");
-                        todayTaskTruancyActivity.finish();
+                        //todayTaskTruancyActivity.finish();
                     } else {
                         ToastError.execute(context, "An error ocurred, try again later");
                     }
