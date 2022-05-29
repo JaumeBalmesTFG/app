@@ -69,6 +69,10 @@ public class TodaySimpleAdapter extends RecyclerView.Adapter<TodaySimpleAdapter.
 
                 } else {
                     intent = new Intent(todayTaskTruancyActivity, EditTruancyActivity.class);
+                    intent.putExtra("truancyName", mData.get(position).getTitle());
+                    intent.putExtra("truancyId", mData.get(position).getElementId());
+                    intent.putExtra("ufId", mData.get(position).getUfId());
+                    intent.putExtra("moduleId", mData.get(position).getModuleId());
                 }
 
                 todayTaskTruancyActivity.startActivity(intent);
