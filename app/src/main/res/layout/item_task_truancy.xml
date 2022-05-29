@@ -8,13 +8,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@color/primaryBlue"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp">
 
         <TextView
+            android:id="@+id/taskTruancyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nom Task / Data Truancy"
@@ -29,6 +29,8 @@
             android:layout_marginEnd="20dp">
 
             <Button
+                android:layout_gravity="right"
+                android:gravity="right"
                 android:id="@+id/editTaskTruancy"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -37,5 +39,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -23,6 +23,8 @@ public class TaskTruancyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        int intent = getIntent().getExtras().getInt("frgToLoad");
+
         binding = ActivityTaskTruancyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         date = getIntent().getStringExtra("date");
@@ -31,6 +33,8 @@ public class TaskTruancyActivity extends AppCompatActivity {
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
+        viewPager.setCurrentItem(intent, true);
+
         tabs.setupWithViewPager(viewPager);
     }
 }
