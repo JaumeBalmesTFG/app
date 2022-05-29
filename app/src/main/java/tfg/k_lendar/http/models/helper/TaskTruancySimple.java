@@ -8,23 +8,35 @@ public class TaskTruancySimple {
     String ruleId;
     String elementId;
 
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    String dueDate;
+
     /* Task constructor */
-    public TaskTruancySimple(String elementType, String title, String moduleId, String ufId, String ruleId, String elementId) {
+    public TaskTruancySimple(String elementType, String title, String moduleId, String ufId, String ruleId, String elementId, String dueDate) {
         this.elementType = elementType;
         this.title = title;
         this.moduleId = moduleId;
         this.ufId = ufId;
         this.ruleId = ruleId;
         this.elementId = elementId;
+        this.dueDate = dueDate;
     }
 
     /* Truancy constructor */
-    public TaskTruancySimple(String elementType, String title, String moduleId, String ufId, String elementId) {
+    public TaskTruancySimple(String elementType, String title, String moduleId, String ufId, String elementId, String dueDate) {
         this.elementType = elementType;
         this.title = title;
         this.moduleId = moduleId;
         this.ufId = ufId;
         this.elementId = elementId;
+        this.dueDate = dueDate;
     }
 
     public String getElementType() {

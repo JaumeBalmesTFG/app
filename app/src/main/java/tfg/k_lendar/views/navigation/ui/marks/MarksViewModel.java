@@ -45,7 +45,6 @@ public class MarksViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     List<MarksModules> modules = response.body();
                     setList(modules);
-                    Toast.makeText(context, "modules/all is successful", Toast.LENGTH_SHORT).show();
                 } else {
                     ToastError.execute(context, response.toString());
                 }

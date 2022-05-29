@@ -81,9 +81,12 @@ public class CalendarFragment extends Fragment {
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();String strdate = null;
                 SimpleDateFormat formatDate = new SimpleDateFormat("MM/dd/yyyy");
+                SimpleDateFormat formattedDate = new SimpleDateFormat("dd/MM/yyyy");
                 strdate = formatDate.format(clickedDayCalendar.getTime());
+                String strDateFormatted = formattedDate.format(clickedDayCalendar.getTime());
                 Intent intent = new Intent(getContext(), TodayTaskTruancyActivity.class);
                 intent.putExtra("date", strdate);
+                intent.putExtra("dueDate", strDateFormatted);
                 getContext().startActivity(intent);
             }
         });

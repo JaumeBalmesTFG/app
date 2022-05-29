@@ -11,6 +11,7 @@
         android:theme="@style/Theme.Klendar.AppBarOverlay">
 
         <TextView
+            android:id="@+id/dateSelected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="13 / 4 / 2022"

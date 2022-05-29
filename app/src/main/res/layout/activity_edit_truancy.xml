@@ -44,6 +44,7 @@
             android:hint="Select an UF">
 
             <AutoCompleteTextView
+                android:textAppearance="?android:attr/textAppearanceListItem"
                 android:id="@+id/ufsDropdownT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

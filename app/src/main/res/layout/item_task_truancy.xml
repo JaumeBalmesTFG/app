@@ -14,12 +14,18 @@
         android:layout_marginEnd="10dp">
 
         <TextView
+            android:id="@+id/dueDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
             android:id="@+id/taskTruancyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nom Task / Data Truancy"
             android:textSize="20dp"
             android:layout_marginStart="5dp"></TextView>
+
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

@@ -91,10 +91,10 @@ public class UfsAdapter extends RecyclerView.Adapter<UfsAdapter.ViewHolder> {
 
 
                     } else {
-                        ToastError.execute(context, "An error ocurred, try again later");
+                        ToastError.execute(context, "To delete this uf, first, delete all attached tasks and truancies");
                     }
                 } else {
-                    ToastError.execute(context, "An error ocurred, try again later");
+                    ToastError.execute(context, "To delete this uf, first, delete all attached tasks and truancies");
                 }
             }
             @Override

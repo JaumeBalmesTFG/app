@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
@@ -61,6 +62,7 @@ public class EditTaskActivity extends AppCompatActivity {
     AutoCompleteTextView ufsDropdown;
     AutoCompleteTextView rulesDropdown;
     TextInputLayout ufsMenu;
+    TextView taskNameTitle;
 
     TextInputLayout rulesMenu;
     LinearLayoutCompat rulesContainer;
@@ -89,6 +91,8 @@ public class EditTaskActivity extends AppCompatActivity {
         ufId = getIntent().getStringExtra("ufId");
         ruleId = getIntent().getStringExtra("ruleId");
 
+        taskNameTitle = findViewById(R.id.taskTitle);
+        taskNameTitle.setText(name);
         subjectsMenu = findViewById(R.id.menuSubjectsNewTask);
         subjectsDropdown = findViewById(R.id.subjectsDropdownNewTask);
         ufsMenu = findViewById(R.id.menuUfsNewTask);
@@ -141,7 +145,6 @@ public class EditTaskActivity extends AppCompatActivity {
                 Object item = parent.getItemAtPosition(position);
                 if (item instanceof Modules) {
                     selectedModule = (Modules) item;
-                    ufsContainer.setVisibility(View.VISIBLE);
                     setUfsInDropdown(selectedModule);
                 }
             }
@@ -239,11 +242,11 @@ public class EditTaskActivity extends AppCompatActivity {
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getId().equals(moduleId)) {
                 System.out.println("FUNCIONA");
-                subjectsDropdown.setText(modules.get(i).getName());
-                subjectsDropdown.showDropDown();
+                subjectsDropdown.setText(modules.get(i).getName(), false);
+                /*subjectsDropdown.showDropDown();
                 subjectsDropdown.setSelection(i);
                 subjectsDropdown.setListSelection(i);
-                subjectsDropdown.performCompletion();
+                subjectsDropdown.performCompletion();*/
                 setUfsInDropdown(modules.get(i));
                 break;
             }

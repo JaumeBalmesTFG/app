@@ -54,6 +54,7 @@ public class TodaySimpleAdapter extends RecyclerView.Adapter<TodaySimpleAdapter.
     @Override
     public void onBindViewHolder(final TodaySimpleAdapter.ViewHolder holder, final int position){
         holder.taskTruancyName.setText(mData.get(position).getTitle());
+        holder.dueDate.setText(mData.get(position).getDueDate());
         holder.editTaskTruancy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,45 +84,14 @@ public class TodaySimpleAdapter extends RecyclerView.Adapter<TodaySimpleAdapter.
     public void setItems(List<TaskTruancySimple> items) { mData = items; }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView taskTruancyName;
+        TextView taskTruancyName, dueDate;
         Button editTaskTruancy;
 
         public ViewHolder(View itemView){
             super (itemView);
             taskTruancyName = itemView.findViewById(R.id.taskTruancyName);
             editTaskTruancy = itemView.findViewById(R.id.editTaskTruancy);
+            dueDate = itemView.findViewById(R.id.dueDate);
         }
     }
-
-    public void unarchiveSubject(TaskTruancySimple module){
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.klendar.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ModulePlaceHolderApi ModulePlaceHolderApi = retrofit.create(ModulePlaceHolderApi.class);
-        Call<JsonObject> call = ModulePlaceHolderApi.archiveUnarchiveModule(AuthBearerToken.getAuthBearerToken(context), module.getElementId());
-
-        call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.isSuccessful()) {
-                    if (response.code() == 200) {
-                        //todayTaskTruancyActivity.finish();
-                    } else {
-                        ToastError.execute(context, "An error ocurred, try again later");
-                    }
-                } else {
-                    ToastError.execute(context, "An error ocurred, try again later");
-                }
-            }
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                ToastError.execute(context, "An error ocurred, try again later");
-            }
-        });
-    }
-
-
 }

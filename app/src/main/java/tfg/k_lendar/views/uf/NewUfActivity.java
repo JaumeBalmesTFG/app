@@ -312,7 +312,6 @@ public class NewUfActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     JsonObject jsonObject = response.body();
                     System.out.println(jsonObject);
-                    Log.d("DAVID", jsonObject.toString());
                     if (ufId.equals("")) {
                         ufId = jsonObject.get("body").getAsJsonObject().get("_id").getAsString();
                     }
@@ -324,7 +323,6 @@ public class NewUfActivity extends AppCompatActivity {
                         rule.addProperty("percentage", Integer.parseInt(String.valueOf(rulesList.get(i).getPercentage())));
                         rules.add(rule);
                     }
-                    Log.d("DAVID", rules.toString());
 
                     for (int i = 0; i < rules.size(); i++) {
                         createRule(rules.get(i).getAsJsonObject());
@@ -334,8 +332,9 @@ public class NewUfActivity extends AppCompatActivity {
                             deleteRule(lastRules.get(i).getAsJsonObject());
                         }
                     }
-                    //ToastSuccess.execute(NewUfActivity.this, response.message(), NavigationActivity.class);
-                    ToastError.execute(NewUfActivity.this, response.toString());
+                    ToastError.execute(NewUfActivity.this,"Uf saved successfully");
+                    Intent intent = new Intent(NewUfActivity.this, NavigationActivity.class);
+                    startActivity(intent);
                 } else {
                     Log.d("DAVID", response.toString());
                     ToastError.execute(NewUfActivity.this, response.toString());
@@ -367,18 +366,14 @@ public class NewUfActivity extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.isSuccessful()) {
                     JsonObject jsonObject = response.body();
-                    //ToastSuccess.execute(NewUfActivity.this, response.message(), NavigationActivity.class);
-                    Log.d("DAVID", response.toString());
                     ToastError.execute(NewUfActivity.this, response.message());
                 } else {
                     ToastError.execute(NewUfActivity.this, response.toString());
-                    Log.d("DAVID", response.toString());
                 }
             }
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 ToastError.execute(NewUfActivity.this, t.getMessage());
-                Log.d("DAVID", t.getMessage());
             }
         });
     }

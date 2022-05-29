@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.EventDay;
 import com.google.gson.JsonArray;
@@ -49,7 +50,9 @@ public class TodayTaskTruancyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_truancy_today);
         calendarDate = getIntent().getStringExtra("date");
-        System.out.println("FECHA: " + calendarDate);
+        String formattedDate = getIntent().getStringExtra("dueDate");
+        TextView date = findViewById(R.id.dateSelected);
+        date.setText(formattedDate);
         recyclerView = findViewById(R.id.recyclerViewTaskTruancy);
         createTask = findViewById(R.id.createNewTask);
         createTruancy = findViewById(R.id.createNewTruancy);
@@ -72,7 +75,7 @@ public class TodayTaskTruancyActivity extends AppCompatActivity {
             }
         });
 
-        getTasksTruanciesFromToday(calendarDate,this.getApplicationContext(), this);
+        getTasksTruanciesFromToday(formattedDate,this.getApplicationContext(), this);
 
     }
 
@@ -95,12 +98,10 @@ public class TodayTaskTruancyActivity extends AppCompatActivity {
                     JsonArray array = body.getAsJsonArray("body");
                     for (int i = 0; i < array.size(); i++) {
                         JsonObject row = array.get(i).getAsJsonObject();
-
-                        System.out.println(row);
                         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                        Date date = null;
 
                         if (row.get("elementType").getAsString().equals("task")) {
+                            System.out.println(row);
                             simpleTaskTruancy.add(
                                     new TaskTruancySimple(
                                             row.get("elementType").getAsString(),
@@ -108,7 +109,10 @@ public class TodayTaskTruancyActivity extends AppCompatActivity {
                                             row.get("moduleId").getAsString(),
                                             row.get("ufId").getAsString(),
                                             row.get("ruleId").getAsString(),
-                                            row.get("elementId").getAsString()
+                                            row.get("elementId").getAsString(),
+                                            row.get("date").getAsString().
+                                            substring(0, row.get("date").getAsString().indexOf("T"))
+
                                     )
                             );
                         } else {
@@ -118,18 +122,11 @@ public class TodayTaskTruancyActivity extends AppCompatActivity {
                                             row.get("title").getAsString(),
                                             row.get("moduleId").getAsString(),
                                             row.get("ufId").getAsString(),
-                                            row.get("elementId").getAsString()
+                                            row.get("elementId").getAsString(),
+                                            row.get("date").getAsString().
+                                            substring(0, row.get("date").getAsString().indexOf("T"))
                                     )
                             );
-                        }
-
-
-                        try {
-                            date = formatter.parse(row.get("date").getAsString());
-                            System.out.println(date);
-                            System.out.println(date.equals(calendarDate));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
                         }
                     }
                 todaySimpleAdapter = new TodaySimpleAdapter(simpleTaskTruancy,context, todayTaskTruancyActivity);
