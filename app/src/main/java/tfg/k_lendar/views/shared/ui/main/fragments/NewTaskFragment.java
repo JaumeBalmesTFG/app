@@ -1,5 +1,8 @@
 package tfg.k_lendar.views.shared.ui.main.fragments;
 
+import static tfg.k_lendar.views.auth.AuthActivity.BASE_URL;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -34,8 +37,11 @@ import tfg.k_lendar.core.helpers.RemoveErrorTextWatcher;
 import tfg.k_lendar.core.helpers.ToastError;
 import tfg.k_lendar.core.helpers.ToastSuccess;
 import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
+import tfg.k_lendar.http.api.ApiClient;
+import tfg.k_lendar.http.api.services.marks.MarksPlaceHolderApi;
 import tfg.k_lendar.http.api.services.rule.RulePlaceHolderApi;
 import tfg.k_lendar.http.api.services.taskTruency.TaskTruencyPlaceHolderApi;
+import tfg.k_lendar.http.models.marks.MarksModules;
 import tfg.k_lendar.http.models.rule.ResponseRulesFromUf;
 import tfg.k_lendar.http.models.rule.Rule;
 import tfg.k_lendar.http.models.taskTruency.HomeModules;
@@ -148,7 +154,7 @@ public class NewTaskFragment extends Fragment {
                             String.valueOf(descriptionInput.getText()),
                             TaskTruancyActivity.date
                     );
-                    saveTaskService(postTaskRequest);
+                    saveTaskService(postTaskRequest,getContext());
                 }
             }
         });
@@ -261,23 +267,16 @@ public class NewTaskFragment extends Fragment {
         });
     }
 
-    public void saveTaskService(PostTaskRequest postTaskRequest){
+    public void saveTaskService(PostTaskRequest postTaskRequest, Context context){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.klendar.es/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        TaskTruencyPlaceHolderApi api = ApiClient.getClient(BASE_URL).create(TaskTruencyPlaceHolderApi.class);
 
-        TaskTruencyPlaceHolderApi taskTruencyPlaceHolderApi = retrofit.create(TaskTruencyPlaceHolderApi.class);
-
-        Call<PostTask> call = taskTruencyPlaceHolderApi.postUf(AuthBearerToken.getAuthBearerToken(getContext()), postTaskRequest);
-
-        call.enqueue(new Callback<PostTask>() {
+        api.postUf(AuthBearerToken.getAuthBearerToken(context),postTaskRequest).enqueue(new Callback<PostTask>() {
             @Override
             public void onResponse(Call<PostTask> call, Response<PostTask> response) {
                 if (response.isSuccessful()) {
                     PostTask postTask = response.body();
-                    ToastSuccess.execute(getContext(), response.message(), NavigationActivity.class);
+                    ToastSuccess.execute(getContext(), postTask.getMessage(), NavigationActivity.class);
                 } else {
                     ToastError.execute(getContext(), response.toString());
                 }

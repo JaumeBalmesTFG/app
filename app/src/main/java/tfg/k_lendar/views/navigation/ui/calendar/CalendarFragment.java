@@ -43,6 +43,7 @@ import tfg.k_lendar.core.sharedpreferences.AuthBearerToken;
 import tfg.k_lendar.databinding.CalendarFragmentBinding;
 import tfg.k_lendar.http.api.services.calendar.CalendarPlaceHolderApi;
 import tfg.k_lendar.views.shared.TaskTruancyActivity;
+import tfg.k_lendar.views.shared.TodayTaskTruancyActivity;
 
 public class CalendarFragment extends Fragment {
 
@@ -70,9 +71,6 @@ public class CalendarFragment extends Fragment {
         });
 
         mCalendarView = (CalendarView) binding.calendarView;
-        /*mEventDays.add(new EventDay(calendar, R.drawable.outline_book_24, Color.parseColor("#1ADB61")));
-        mCalendarView.setEvents(mEventDays);*/
-        //mCalendarView.setFirstDayOfWeek(CalendarWeekDay.MONDAY);
         getTasksTruanciesFromCalendar();
 
 
@@ -84,7 +82,7 @@ public class CalendarFragment extends Fragment {
                 Calendar clickedDayCalendar = eventDay.getCalendar();String strdate = null;
                 SimpleDateFormat formatDate = new SimpleDateFormat("MM/dd/yyyy");
                 strdate = formatDate.format(clickedDayCalendar.getTime());
-                Intent intent = new Intent(getContext(), TaskTruancyActivity.class);
+                Intent intent = new Intent(getContext(), TodayTaskTruancyActivity.class);
                 intent.putExtra("date", strdate);
                 getContext().startActivity(intent);
             }
@@ -123,7 +121,7 @@ public class CalendarFragment extends Fragment {
                         calendar.setTime(date);
                         mCalendarDays.add(calendar);
                         mEventDays.add(new EventDay(calendar,
-                                    R.drawable.outline_book_24, Color.parseColor(row.get("backgroundColor").getAsString())
+                                    R.drawable.klendar_circle, Color.parseColor(row.get("backgroundColor").getAsString())
                             ));
                     }
                     mCalendarView.setEvents(mEventDays);

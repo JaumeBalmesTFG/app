@@ -21,16 +21,47 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/createNewTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE TASK"
+            android:layout_marginEnd="10dp"></Button>
+
+        <Button
+            android:id="@+id/createNewTruancy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE TRUANCY"
+            android:layout_marginStart="10dp"></Button>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewArchived"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_task_truancy">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTaskTruancy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_task_truancy">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -39,18 +70,6 @@
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CREATE SUBJECT"
-            android:layout_marginEnd="10dp"></Button>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CREATE TRUANCY"
-            android:layout_marginStart="10dp"></Button>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
