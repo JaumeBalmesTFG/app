@@ -42,6 +42,7 @@ import tfg.k_lendar.http.models.taskTruency.Modules;
 import tfg.k_lendar.http.models.taskTruency.PostTask;
 import tfg.k_lendar.http.models.taskTruency.PostTaskRequest;
 import tfg.k_lendar.http.models.taskTruency.Uf;
+import tfg.k_lendar.views.auth.AuthActivity;
 import tfg.k_lendar.views.navigation.NavigationActivity;
 import tfg.k_lendar.views.shared.TaskTruancyActivity;
 import tfg.k_lendar.views.shared.TodayTaskTruancyActivity;
@@ -122,6 +123,13 @@ public class EditTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(EditTaskActivity.this, NavigationActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteTask(id, getApplicationContext());
             }
         });
 
@@ -207,6 +215,12 @@ public class EditTaskActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(titleInput.getText())) {
             titleLayout.setError("Select a valid title");
             titleInput.addTextChangedListener(new RemoveErrorTextWatcher(titleLayout));
+            return false;
+        }
+
+        if (isDone.isChecked() && TextUtils.isEmpty(gradeInput.getText()) || isDone.isChecked() && Integer.parseInt(String.valueOf(gradeInput.getText())) > 10) {
+            gradeLayout.setError("Set a grade higher than 0 and less or equal to 10");
+            gradeInput.addTextChangedListener(new RemoveErrorTextWatcher(gradeLayout));
             return false;
         }
         return true;
@@ -364,11 +378,41 @@ public class EditTaskActivity extends AppCompatActivity {
 
                     JsonObject postTask = response.body();
                     JsonObject task = postTask.get("body").getAsJsonObject();
-                    grade = task.get("grade").getAsJsonObject().get("$numberDecimal").getAsString();
+                    if (!(task.get("grade").isJsonNull())) {
+                        grade = task.get("grade").getAsJsonObject().get("$numberDecimal").getAsString();
+                        gradeInput.setText(grade);
+                    }
+
                     description = task.get("description").getAsString();
-                    gradeInput.setText(grade);
+
                     descriptionInput.setText(description);
                     getAllUfsFromModulesService();
+
+                } else {
+                    ToastError.execute(getApplicationContext(), response.toString());
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ToastError.execute(getApplicationContext(), t.getMessage());
+            }
+        });
+    }
+
+
+    public void deleteTask(String taskId, Context context){
+
+        TaskTruencyPlaceHolderApi api = ApiClient.getClient(BASE_URL).create(TaskTruencyPlaceHolderApi.class);
+
+        api.deleteTask(AuthBearerToken.getAuthBearerToken(context), taskId).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+
+                    JsonObject postTask = response.body();
+                    ToastError.execute(getApplicationContext(), response.toString());
+                    Intent intent = new Intent(context, NavigationActivity.class);
+                    startActivity(intent);
 
                 } else {
                     ToastError.execute(getApplicationContext(), response.toString());
